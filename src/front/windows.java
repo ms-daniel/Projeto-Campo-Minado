@@ -1,13 +1,12 @@
 package front;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Window extends JFrame {
+public class windows extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +17,7 @@ public class Window extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Window frame = new Window();
+					windows frame = new windows();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +29,7 @@ public class Window extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Window() {
+	public windows() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
