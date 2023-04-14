@@ -1,8 +1,10 @@
 package back;
 
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
-public class getIcon {
+public class ImagesChange {
 	/**
 	 * Fazer o carregamendo de uma imagem como icone
 	 * 
@@ -21,5 +23,24 @@ public class getIcon {
 	 */
 	public ImageIcon getIcon (String FolderName){
 		return new ImageIcon(getClass().getClassLoader().getResource(FolderName));
+	}
+	/**
+	 * Metodo para redimensionar imagem
+	 * 
+	 * @param icon: icone de origem, pode ser obtido atraves de .getIcon()
+	 * @param width: largura
+	 * @param height; altura
+	 * @return
+	 */
+	public ImageIcon Resize(ImageIcon icon, int width, int height) {
+		Image image = icon.getImage();
+
+        // Redimensiona a imagem
+        Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        // Cria um novo ImageIcon com a imagem redimensionada
+        ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
+		
+		return resizedImageIcon;
 	}
 }
