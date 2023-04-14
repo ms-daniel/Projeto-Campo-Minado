@@ -16,6 +16,9 @@ import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.SwingConstants;
+
+import assets.getIcon;
+
 import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.Cursor;
@@ -27,6 +30,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class testPanel extends JPanel implements KeyListener {
+	private getIcon get = new getIcon();
+	
 	private JLabel image = new JLabel();
 	private JButton leftButton;
 	private JButton rightButton;
@@ -45,7 +50,7 @@ public class testPanel extends JPanel implements KeyListener {
 		
 		image.setHorizontalAlignment(SwingConstants.CENTER);
 		image.setAlignmentX(Component.CENTER_ALIGNMENT);
-		image.setIcon(getIcon("character/lufy-1.png"));
+		image.setIcon(get.getIcon("lufy-1", "character/", ".png"));
 		image.setBounds(213, 128, 182, 252);
 		
 		
@@ -58,7 +63,7 @@ public class testPanel extends JPanel implements KeyListener {
 		leftButton.setBounds(new Rectangle(253, 391, 35, 35));
 		leftButton.setMargin(new Insets(0, 0, 0, 0));
 		leftButton.setToolTipText("left");
-		leftButton.setIcon(getIcon("character/next-left.png"));
+		leftButton.setIcon(get.getIcon("next-left", "character/", ".png"));
 		
 		
 		rightButton = new JButton("");
@@ -70,7 +75,7 @@ public class testPanel extends JPanel implements KeyListener {
 		rightButton.setMargin(new Insets(0, 0, 0, 0));
 		rightButton.setBounds(new Rectangle(324, 391, 35, 35));
 		rightButton.setBorder(null);
-		rightButton.setIcon(getIcon("character/next-right.png"));
+		rightButton.setIcon(get.getIcon("next-right", "character/", ".png"));
 		
 		add(rightButton);
 		add(image);
@@ -93,7 +98,7 @@ public class testPanel extends JPanel implements KeyListener {
 				else
 					atual = 4;
 				
-				image.setIcon(getIcon("character/" + name + atual + ext));
+				image.setIcon(get.getIcon(name + atual, "character/", ".png"));
 				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
 			}
 		});
@@ -106,7 +111,7 @@ public class testPanel extends JPanel implements KeyListener {
 				else
 					atual = 1;
 			
-				image.setIcon(getIcon("character/" + name + atual + ext));
+				image.setIcon(get.getIcon(name + atual, "character/", ".png"));
 				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
 			}
 		});
@@ -127,7 +132,7 @@ public class testPanel extends JPanel implements KeyListener {
 			else
 				atual = 1;
 		
-			image.setIcon(getIcon("character/" + name + atual + ext));
+			image.setIcon(get.getIcon(name + atual, "character/", ".png"));
         }
         
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -136,7 +141,7 @@ public class testPanel extends JPanel implements KeyListener {
 			else
 				atual = 4;
 			
-			image.setIcon(getIcon("character/" + name + atual + ext));
+			image.setIcon(get.getIcon(name + atual, "character/", ".png"));
         }
     }
 
@@ -144,13 +149,4 @@ public class testPanel extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         // Implemente o método keyReleased se necessário
     }
-    
-    /*
-     * Faz o upload de um icone e retorna um imageicon
-     * Param:
-     * String name: nome do arquivo
-     */
-	private ImageIcon getIcon(String name) {
-		return new ImageIcon(getClass().getClassLoader().getResource(name));
-	}
 }
