@@ -18,7 +18,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.SwingConstants;
 
 import assets.Character;
-import back.getIcon;
+import back.ImagesChange;
 
 import javax.swing.JButton;
 import java.awt.Insets;
@@ -31,11 +31,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class testPanel extends JPanel implements KeyListener {
-	private getIcon get = new getIcon();
+	private ImagesChange get = new ImagesChange();
 	
 	private Character character;
 	private JButton leftButton;
 	private JButton rightButton;
+	private JButton playButton;
 	private String name = "lufy-";
 	private String ext = ".png";
 	private int atual = 1;
@@ -49,7 +50,7 @@ public class testPanel extends JPanel implements KeyListener {
 		setBounds(new Rectangle(0, 0, 500, 500));
 		setLayout(null);
 		
-		character = new Character("Luffy", "character/" + "lufy-1" + ".png");
+		character = new Character("Luffy", "character/luffy/" + "lufy-1" + ".png");
 		character.Locale(213, 128);
 		
 		leftButton = new JButton("");
@@ -61,7 +62,7 @@ public class testPanel extends JPanel implements KeyListener {
 		leftButton.setBounds(new Rectangle(253, 391, 35, 35));
 		leftButton.setMargin(new Insets(0, 0, 0, 0));
 		leftButton.setToolTipText("left");
-		leftButton.setIcon(get.getIcon("character/", "next-left", ".png"));
+		leftButton.setIcon(get.getIcon("icons/", "next-left", ".png"));
 		
 		
 		rightButton = new JButton("");
@@ -73,15 +74,29 @@ public class testPanel extends JPanel implements KeyListener {
 		rightButton.setMargin(new Insets(0, 0, 0, 0));
 		rightButton.setBounds(new Rectangle(324, 391, 35, 35));
 		rightButton.setBorder(null);
-		rightButton.setIcon(get.getIcon("character/", "next-right", ".png"));
+		rightButton.setIcon(get.getIcon("icons/", "next-right", ".png"));
+		
+		playButton = new JButton("");
+		playButton.setToolTipText("play");
+		playButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		playButton.setMargin(new Insets(0, 0, 0, 0));
+		playButton.setFocusPainted(false);
+		playButton.setContentAreaFilled(false);
+		playButton.setBounds(new Rectangle(324, 391, 35, 35));
+		playButton.setBorderPainted(false);
+		playButton.setBorder(null);
+		playButton.setBounds(287, 391, 35, 35);
+		playButton.setIcon(get.getIcon("icons/", "play", ".png"));
 		
 		add(rightButton);
 		add(character);
 		add(leftButton);
+		add(playButton);
 		
 		//permite que seja identificada teclas pressionadas no panel
 		addKeyListener(this);
 		setFocusable(true); //so funciona com essa opcao ativada
+
 		//
 		
 		effects();
@@ -96,7 +111,7 @@ public class testPanel extends JPanel implements KeyListener {
 				else
 					atual = 4;
 				
-				character.setIcon(get.getIcon("character/", name + atual, ".png"));
+				character.setIcon(get.getIcon("character/luffy/", name + atual, ".png"));
 				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
 			}
 		});
@@ -109,8 +124,15 @@ public class testPanel extends JPanel implements KeyListener {
 				else
 					atual = 1;
 			
-				character.setIcon(get.getIcon("character/", name + atual, ".png"));
+				character.setIcon(get.getIcon("character/luffy/", name + atual, ".png"));
 				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
+			}
+		});
+		
+		playButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				character.Move();
 			}
 		});
 	}
@@ -130,7 +152,7 @@ public class testPanel extends JPanel implements KeyListener {
 			else
 				atual = 1;
 		
-        	character.setIcon(get.getIcon("character/", name + atual, ".png"));
+        	character.setIcon(get.getIcon("character/luffy/", name + atual, ".png"));
         }
         
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -139,7 +161,7 @@ public class testPanel extends JPanel implements KeyListener {
 			else
 				atual = 4;
 			
-        	character.setIcon(get.getIcon("character/", name + atual, ".png"));
+        	character.setIcon(get.getIcon("character/luffy/", name + atual, ".png"));
         }
     }
 
