@@ -21,10 +21,13 @@ import java.awt.Insets;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class testPanel extends JPanel {
-
-	private JLabel image;
+public class testPanel extends JPanel implements KeyListener {
+	private JLabel image = new JLabel();
 	private JButton leftButton;
 	private JButton rightButton;
 	private String name = "lufy-";
@@ -35,13 +38,14 @@ public class testPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public testPanel() {
+		
+		setBackground(new Color(223, 223, 223));
 		setBounds(new Rectangle(0, 0, 500, 500));
 		setLayout(null);
 		
-		JLabel image = new JLabel();
 		image.setHorizontalAlignment(SwingConstants.CENTER);
 		image.setAlignmentX(Component.CENTER_ALIGNMENT);
-		image.setIcon(getIcon("lufy-1.png"));
+		image.setIcon(getIcon("character/lufy-1.png"));
 		image.setBounds(213, 128, 182, 252);
 		
 		
@@ -54,7 +58,7 @@ public class testPanel extends JPanel {
 		leftButton.setBounds(new Rectangle(253, 391, 35, 35));
 		leftButton.setMargin(new Insets(0, 0, 0, 0));
 		leftButton.setToolTipText("left");
-		leftButton.setIcon(getIcon("next-left.png"));
+		leftButton.setIcon(getIcon("character/next-left.png"));
 		
 		
 		rightButton = new JButton("");
@@ -66,16 +70,21 @@ public class testPanel extends JPanel {
 		rightButton.setMargin(new Insets(0, 0, 0, 0));
 		rightButton.setBounds(new Rectangle(324, 391, 35, 35));
 		rightButton.setBorder(null);
-		rightButton.setIcon(getIcon("next-right.png"));
+		rightButton.setIcon(getIcon("character/next-right.png"));
 		
 		add(rightButton);
 		add(image);
 		add(leftButton);
 		
-		effects(image);
+		//permite que seja identificada teclas pressionadas no panel
+		addKeyListener(this);
+		setFocusable(true); //so funciona com essa opcao ativada
+		//
+		
+		effects();
 	}
 	
-	private void effects(JLabel image) {
+	private void effects() {
 		leftButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -84,7 +93,8 @@ public class testPanel extends JPanel {
 				else
 					atual = 4;
 				
-				image.setIcon(getIcon(name + atual + ext));
+				image.setIcon(getIcon("character/" + name + atual + ext));
+				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
 			}
 		});
 		
@@ -96,11 +106,50 @@ public class testPanel extends JPanel {
 				else
 					atual = 1;
 			
-				image.setIcon(getIcon(name + atual + ext));
+				image.setIcon(getIcon("character/" + name + atual + ext));
+				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
 			}
 		});
 	}
 	
+	@Override
+    public void keyTyped(KeyEvent e) {
+        // Implemente o método keyTyped se necessário
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // Verifique se a tecla pressionada é a tecla desejada
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            // Abra a caixa de diálogo quando a tecla F1 for pressionada
+        	if(atual < 4)
+				atual++;
+			else
+				atual = 1;
+		
+			image.setIcon(getIcon("character/" + name + atual + ext));
+        }
+        
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+        	if(atual > 1)
+				atual--;
+			else
+				atual = 4;
+			
+			image.setIcon(getIcon("character/" + name + atual + ext));
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Implemente o método keyReleased se necessário
+    }
+    
+    /*
+     * Faz o upload de um icone e retorna um imageicon
+     * Param:
+     * String name: nome do arquivo
+     */
 	private ImageIcon getIcon(String name) {
 		return new ImageIcon(getClass().getClassLoader().getResource(name));
 	}
