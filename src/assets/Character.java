@@ -2,16 +2,18 @@ package assets;
 
 import java.awt.Component;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import back.getIcon;
+import back.ImagesChange;
 
 public class Character extends JLabel{
-	private getIcon get = new getIcon();
+	private ImagesChange get = new ImagesChange();
 	
 	private String name;
-	private String skin;
+	private String skinLocal;
+	private ImageIcon skin;
 	
 	private int posX;
 	private int posY;
@@ -27,17 +29,54 @@ public class Character extends JLabel{
 	 */
 	public Character(String name, String FolderSkin) {
 		this.name = name;
-		this.skin = FolderSkin;
+		this.skinLocal = FolderSkin;
 		
 		setBounds(0, 0, 182, 252);
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setAlignmentX(Component.CENTER_ALIGNMENT);
-		setIcon(get.getIcon(FolderSkin));
+		this.skin = get.getIcon(FolderSkin);
+		setIcon(skin);
 	}
 	
 	public void Locale(int x, int y) {
 		this.posX = x;
 		this.posY = y;
 		setLocation(x, y);
+	}
+	
+	public void Move() {
+		String first = "lufy-1-1";
+		String second = "lufy-1-2";
+		String stop = "lufy-1";
+		
+		for(int i = 0; i < 100; i++) {
+			if(i%2 != 0)
+				this.skin = get.getIcon("character/luffy/" + first + ".png");
+			else
+				this.skin = get.getIcon("character/luffy/" + second + ".png");
+			
+			setIcon(skin);
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		this.skin = get.getIcon("character/luffy/" + stop + ".png");
+	}
+	
+	public void Resize(int width, int height) {
+		skin = get.Resize(skin, width, height);
+		setIcon(skin);
+	}
+	
+	public int GetSkinWidth() {
+		return skin.getIconWidth();
+	}
+	
+	public int GetSkinHeight() {
+		return skin.getIconHeight();
 	}
 }
