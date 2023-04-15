@@ -31,11 +31,11 @@ public class ServerConnection extends Thread {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             DataOutputStream outToClient = new DataOutputStream(connection.getOutputStream());
 
-            System.out.println("Chegou aqui com 2 " + connectedPlayers + " " + id);
-            // String nmArquivo = inFromClient.readLine();
             while (true) {
                 if (play) {
-                    outToClient.writeBytes("Meu id: " + id + " Id do outro jogador: " + otherPlayer.GetId() + "\n");
+                    String jogada = inFromClient.readLine();
+                    outToClient.writeBytes("Meu id: " + id + " Minha jogada " + jogada + " Id do outro jogador: "
+                            + otherPlayer.GetId() + "\n");
                     setPlay();
                     otherPlayer.setPlay();
                 } /*
