@@ -8,17 +8,22 @@ import javax.swing.SwingConstants;
 
 import back.ImagesChange;
 
-public class Character extends JLabel{
+public class Character extends Thread{
 	private ImagesChange get = new ImagesChange();
+	private JLabel label;
 	
 	private String name;
 	private String skinLocal;
+	private String nameSkin;
 	private ImageIcon skin;
+	
+	private boolean pause = false;
+	private boolean move = false;
+	private char direction;
+	private int position;
 	
 	private int posX;
 	private int posY;
-	
-	private int frame;
 	
 	/**
 	 * constructor para instaciar um personagem/character
@@ -27,58 +32,77 @@ public class Character extends JLabel{
 	 * @param x: posicao x inicial
 	 * @param y: posicao y inicial
 	 */
-	public Character(String name, String FolderSkin) {
+	public Character(String name, String FolderSkin, JLabel label) {
+		this.label = label;
 		this.name = name;
 		this.skinLocal = FolderSkin;
+		SetSkinNamePosition(FolderSkin);
 		
-		setBounds(0, 0, 182, 252);
-		setHorizontalAlignment(SwingConstants.CENTER);
-		setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.label.setBounds(0, 0, 182, 252);
+		this.label.setHorizontalAlignment(SwingConstants.CENTER);
+		this.label.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.skin = get.getIcon(FolderSkin);
-		setIcon(skin);
+		this.label.setIcon(skin);
+	}
+	
+	@Override
+	public void run() {
+		while(!pause) { // Verifica se o pause foi ativado
+			synchronized (this) {} //apenas para poder continuar executando a thread
+			if(move){
+				Move(this.direction, this.position);
+			}
+			
+		}
+		
 	}
 	
 	public void Locale(int x, int y) {
 		this.posX = x;
 		this.posY = y;
-		setLocation(x, y);
+		this.label.setLocation(x, y);
 	}
 	
-	public void Move() {
-		String first = "lufy-1-1";
-		String second = "lufy-1-2";
-		String stop = "lufy-1";
-
-        // Criação da thread
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-            	for(int i = 0; i < 100; i++) {
-        			if(i%2 != 0)
-        				skin = get.getIcon("character/luffy/" + first + ".png");
-        			else
-        				skin = get.getIcon("character/luffy/" + second + ".png");
-        			
-        			setIcon(skin);
-        			try {
-        				Thread.sleep(300);
-        			} catch (InterruptedException e) {
-        				// TODO Auto-generated catch block
-        				e.printStackTrace();
-        			}
-        		}
-        		
-        		skin = get.getIcon("character/luffy/" + stop + ".png");
-        		setIcon(skin);
-            }
-        }).start();
+	public void Move(char direction, int position) {
+		this.nameSkin = this.nameSkin.replaceAll("\\d+", "") + position;
 		
+		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 1 + ".png");
+		this.label.setIcon(skin);
 		
+		WaitAFeelTime(100);
+		
+		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 2 + ".png");
+		this.label.setIcon(skin);
+		
+		WaitAFeelTime(100);
+		
+		skin = get.getIcon("character/luffy/" + nameSkin + ".png");
+		this.label.setIcon(skin);
+		this.move = false;
+	}
+	
+	public synchronized void MoveTo(char direction, int position) {
+		this.move = true;
+		this.direction = direction;
+		this.position = position;
+		this.notify();
 	}
 	
 	public void Resize(int width, int height) {
 		skin = get.Resize(skin, width, height);
-		setIcon(skin);
+		this.label.setIcon(skin);
+	}
+	
+	public void Pause(boolean pause) {
+		this.pause = pause;
+	}
+	
+	private void SetSkinNamePosition(String Folder) {
+		String[] partes = Folder.split("/");
+		
+		partes = partes[partes.length-1].split("\\.");
+		
+		this.nameSkin = partes[0];
 	}
 	
 	public int GetSkinWidth() {
@@ -88,4 +112,19 @@ public class Character extends JLabel{
 	public int GetSkinHeight() {
 		return skin.getIconHeight();
 	}
+	
+	/**
+	 * espera um tempo antes da proxima ação
+	 * @param time: milissegundos
+	 * @throws InterruptedException 
+	 */
+	public void WaitAFeelTime(long time){
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
