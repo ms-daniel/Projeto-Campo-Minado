@@ -11,6 +11,8 @@ import config.Config;
 public class Server {
     private static ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
     private static boolean setedFirst = false;
+    private static ServerConnection firstPlayer;
+    private static ServerConnection secondPlayer;
 
     public static void main(String[] args) throws IOException {
         ServerSocket server = new ServerSocket(Config.port);
@@ -18,15 +20,32 @@ public class Server {
             while (true) {
                 Socket SocketConnection = server.accept();
                 if (SocketConnection.isConnected() && (connections.size() + 1) <= Config.connectionsNumber) {
-                    ServerConnection connection = new ServerConnection(SocketConnection, WillPlayFirst(),
+                    ServerConnection connection = new ServerConnection((connections.size() + 1), SocketConnection,
+                            WillPlayFirst(),
                             "Moyses");
-                    connection.start();
                     connections.add(connection);
+                    System.out.println(connections.size() + "º" + " jogador conectado");
+                    if (connections.size() == 1) {
+                        firstPlayer = connection;
+                    } else if (connections.size() == 2) {
+                        secondPlayer = connection;
+                    }
+                    if (connections.size() == Config.connectionsNumber) {
+                        int invertCount = 1;
+                        for (int i = 0; i < connections.size(); i++) {
+                            if (connections.size() == invertCount) {
+                                invertCount = 0;
+                            }
+                            connections.get(i).otherPlayer = connections.get(invertCount++);
+                            connections.get(i).start();
+                        }
+                    }
+
                 } else {
                     for (ServerConnection c : connections) {
                         if (!c.isAlive()) {
-                            System.out.println("Removendo");
                             connections.remove(c);
+                            System.out.println(connections.size());
                         }
                     }
                     if (connections.size() != 0) {

@@ -15,12 +15,11 @@ public class Test {
         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        outToServer.writeBytes("Command test" + "\n");
-        String res = inFromServer.readLine();
-        System.out.println(res);
+        // outToServer.writeBytes("Command test" + "\n");
         while (true) {
-
+            String res = inFromServer.readLine();
+            System.out.println(res);
         }
-        // clientSocket.close();
+        //clientSocket.close();
     }
 }
