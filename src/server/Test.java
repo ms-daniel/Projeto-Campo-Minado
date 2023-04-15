@@ -15,12 +15,17 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
 
+        System.out.println("Conectando... Aguarde " + Config.connectionsNumber + " jogadores conectar.");
         makeConnection();
+        sandPlay("Conectado");
+
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
         String play = "";
+        System.out.print("Digite seu nome: ");
         while (play != "sair") {
             play = inFromUser.readLine();
             sandPlay(play);
+            System.out.print("Digite a sua jogada: ");
         }
         closeConnection();
     }
