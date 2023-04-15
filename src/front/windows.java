@@ -30,6 +30,7 @@ public class windows extends JFrame {
 	 * Create the frame.
 	 */
 	public windows() {
+		setTitle("Campo Minado");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 		contentPane = new testPanel();
