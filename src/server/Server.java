@@ -18,15 +18,26 @@ public class Server {
             while (true) {
                 Socket SocketConnection = server.accept();
                 if (SocketConnection.isConnected() && (connections.size() + 1) <= Config.connectionsNumber) {
-                    ServerConnection connection = new ServerConnection(SocketConnection, WillPlayFirst(),
-                            "Moyses");
-                    connection.start();
+                    ServerConnection connection = new ServerConnection((connections.size() + 1), SocketConnection,
+                            WillPlayFirst());
                     connections.add(connection);
+                    System.out.println(connections.size() + "º" + " jogador conectado");
+                    if (connections.size() == Config.connectionsNumber) {
+                        int invertCount = 1;
+                        for (int i = 0; i < connections.size(); i++) {
+                            if (connections.size() == invertCount) {
+                                invertCount = 0;
+                            }
+                            connections.get(i).otherPlayer = connections.get(invertCount++);
+                            connections.get(i).start();
+                        }
+                    }
+
                 } else {
                     for (ServerConnection c : connections) {
                         if (!c.isAlive()) {
-                            System.out.println("Removendo");
                             connections.remove(c);
+                            System.out.println(connections.size());
                         }
                     }
                     if (connections.size() != 0) {

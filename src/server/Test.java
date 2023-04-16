@@ -9,18 +9,41 @@ import java.net.Socket;
 import config.Config;
 
 public class Test {
+    private static Socket clientSocket;
+    private static DataOutputStream outToServer;
+    private static BufferedReader inFromServer;
+
     public static void main(String[] args) throws IOException {
-        Socket clientSocket = new Socket(Config.ip, Config.port);
 
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        System.out.println("Conectando... Aguarde " + Config.connectionsNumber + " jogadores conectar.");
+        makeConnection();
+        sandPlay("Conectado");
 
-        outToServer.writeBytes("Command test" + "\n");
+        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+        String play = "";
+        System.out.print("Digite seu nome: ");
+        while (play != "sair") {
+            play = inFromUser.readLine();
+            sandPlay(play);
+            System.out.print("Digite a sua jogada: ");
+        }
+        closeConnection();
+    }
+
+    public static void makeConnection() throws IOException {
+        clientSocket = new Socket(Config.ip, Config.port);
+        outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    }
+
+    public static void sandPlay(String play) throws IOException {
+        outToServer.writeBytes(play + "\n");
         String res = inFromServer.readLine();
         System.out.println(res);
-        while (true) {
 
-        }
-        // clientSocket.close();
+    }
+
+    private static void closeConnection() throws IOException {
+        clientSocket.close();
     }
 }
