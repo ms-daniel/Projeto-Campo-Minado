@@ -71,45 +71,8 @@ public class testPanel extends JPanel implements KeyListener {
 		
 		add(arrowkeyslabel);
 
-		//
-		//effects();
 	}
 	
-	/*private void effects() {
-		leftButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if(atual > 1)
-					atual--;
-				else
-					atual = 4;
-				
-				labelCharacter.setIcon(get.getIcon("character/luffy/", name + atual, ".png"));
-				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
-			}
-		});
-		
-		rightButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if(atual < 4)
-					atual++;
-				else
-					atual = 1;
-			
-				character.setIcon(get.getIcon("character/luffy/", name + atual, ".png"));
-				requestFocus(); //da o foco ao painel/janela dps q pressionar o botao
-			}
-		});
-		
-		playButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				//character.Move();
-			}
-		});
-	}
-	*/
 	@Override
     public void keyTyped(KeyEvent e) {
         // Implemente o método keyTyped se necessário
