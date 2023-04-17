@@ -81,17 +81,21 @@ public class testPanel extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // Verifique se a tecla pressionada é a tecla desejada
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if ((e.getKeyCode() == KeyEvent.VK_RIGHT) ||
+        		(e.getKeyCode() == KeyEvent.VK_D )) {
         	character.MoveTo('R', 2);
         	
-        }else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+        }else if((e.getKeyCode() == KeyEvent.VK_LEFT) ||
+        		(e.getKeyCode() == KeyEvent.VK_A)) {
         	character.MoveTo('L', 4);
 
-        }else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+        }else if((e.getKeyCode() == KeyEvent.VK_DOWN) ||
+        		(e.getKeyCode() == KeyEvent.VK_S)) {
         	character.MoveTo('D', 1);
       
         }
-        else if(e.getKeyCode() == KeyEvent.VK_UP) {
+        else if((e.getKeyCode() == KeyEvent.VK_UP) ||
+			(e.getKeyCode() == KeyEvent.VK_W)) {
         	character.MoveTo('T', 3);
         }
     }
