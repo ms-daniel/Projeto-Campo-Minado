@@ -20,26 +20,20 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Conectando... Aguarde " + Config.connectionsNumber + " jogadores conectar.");
+        System.out.println("Conectando... Aguarde");
         makeConnection();
-        sandPlay("Conectado");
+        System.out.println(sandPlayAndRecive("Conectando..."));
 
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
         String play = "";
-        String res = "";
         System.out.print("Digite seu nome: ");
         play = inFromUser.readLine();
-        res = sandPlay(play);
+        System.out.println(sandPlayAndRecive(play));
         while (play != "sair") {
-            if (res.split(";")[1].equals("1")) {
-                System.out.print("Digite a sua jogada: ");
-                play = inFromUser.readLine();
-                res = sandPlay(play);
-            } else {
-                /* Receber Multicast aqui */
-                System.out.println("Recebendo multicast");
-                receberMatriz();
-            }
+            System.out.print("Digite a sua jogada: ");
+            play = inFromUser.readLine();
+            sandPlay(play);
+            receberMatriz();
         }
         closeConnection();
     }
@@ -54,12 +48,14 @@ public class Test {
         receberCast.joinGroup(grp);
     }
 
-    public static String sandPlay(String play) throws IOException {
+    public static String sandPlayAndRecive(String play) throws IOException {
         outToServer.writeBytes(play + "\n");
         String res = inFromServer.readLine();
-        System.out.println(res);
         return res;
+    }
 
+    public static void sandPlay(String play) throws IOException {
+        outToServer.writeBytes(play + "\n");
     }
 
     private static void closeConnection() throws IOException {
