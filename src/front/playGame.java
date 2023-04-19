@@ -30,7 +30,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class testPanel extends JPanel implements KeyListener {
+public class playGame extends JPanel implements KeyListener {
 	private ImagesChange get = new ImagesChange();
 	
 	private Character character;
@@ -45,10 +45,10 @@ public class testPanel extends JPanel implements KeyListener {
 	/**
 	 * Create the panel.
 	 */
-	public testPanel() {
+	public playGame() {
 		
 		setBackground(new Color(223, 223, 223));
-		setBounds(new Rectangle(0, 0, 500, 500));
+		setBounds(new Rectangle(0, 0, 600, 600));
 		setLayout(null);
 		
 		labelCharacter = new JLabel();
@@ -70,6 +70,11 @@ public class testPanel extends JPanel implements KeyListener {
 		setFocusable(true); //so funciona com essa opcao ativada
 		
 		add(arrowkeyslabel);
+		
+		JLabel map = new JLabel();
+		map.setBounds(0, -900, 1500, 1500);
+		map.setIcon(get.getIcon("maps/map 1/", "map 1", ".jpg"));
+		//add(map);
 
 	}
 	
