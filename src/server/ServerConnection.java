@@ -33,14 +33,11 @@ public class ServerConnection extends Thread {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             DataOutputStream outToClient = new DataOutputStream(connection.getOutputStream());
 
-            if(inFromClient.readLine() != null){
-                makeMulticastConnection();
-                outToClient.writeBytes("Conectado" + "\n");
-            }
+            
             name = inFromClient.readLine();
             makeMulticastConnection();
             outToClient.writeBytes(toString() + "\n");
-        
+            
             while (true) {
                 jogada = inFromClient.readLine();
                 /* Criar Thread para Manipular Matriz  Aqui e enviar multicast */

@@ -22,18 +22,19 @@ public class Test {
 
         System.out.println("Conectando... Aguarde");
         makeConnection();
-        System.out.println(sandPlayAndRecive("Conectando..."));
-
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-        String play = "";
         System.out.print("Digite seu nome: ");
-        play = inFromUser.readLine();
-        System.out.println(sandPlayAndRecive(play));
+        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(sandPlayAndRecive(inFromUser.readLine()));
+
+        String play = "";
+    
+        ThreadMatriz board = new ThreadMatriz();
+        board.start();
+
         while (play != "sair") {
             System.out.print("Digite a sua jogada: ");
             play = inFromUser.readLine();
             sandPlay(play);
-            receberMatriz();
         }
         closeConnection();
     }
@@ -42,10 +43,6 @@ public class Test {
         clientSocket = new Socket(Config.ip, Config.port);
         outToServer = new DataOutputStream(clientSocket.getOutputStream());
         inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-        receberCast = new MulticastSocket(Config.multicastPort);
-        grp = InetAddress.getByName(Config.multicastIp);
-        receberCast.joinGroup(grp);
     }
 
     public static String sandPlayAndRecive(String play) throws IOException {
@@ -60,18 +57,5 @@ public class Test {
 
     private static void closeConnection() throws IOException {
         clientSocket.close();
-    }
-
-    private static boolean receberMatriz() throws IOException {
-        byte rec[] = new byte[256];
-        DatagramPacket pkg = new DatagramPacket(rec, rec.length);
-        String pkgValue;
-        receberCast.receive(pkg);
-        if (pkg.getData().length > 0) {
-            pkgValue = new String(pkg.getData(), 0, pkg.getLength());
-            System.out.println(pkgValue);
-            return false;
-        }
-        return true;
     }
 }
