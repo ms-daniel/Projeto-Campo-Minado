@@ -9,6 +9,7 @@ import config.Config;
 
 public class Server {
     private static ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
+    private static int board[][] = new int[Config.boardLength][Config.boardLength]; 
 
     public static void main(String[] args) throws IOException {
         ServerSocket server = new ServerSocket(Config.port);
@@ -16,7 +17,7 @@ public class Server {
             while (true) {
                 Socket SocketConnection = server.accept();
                 if (SocketConnection.isConnected() && (connections.size() + 1) <= Config.connectionsNumber) {
-                    ServerConnection connection = new ServerConnection((connections.size() + 1), SocketConnection);
+                    ServerConnection connection = new ServerConnection((connections.size() + 1), SocketConnection, board);
                     connections.add(connection);
                     System.out.println(connections.size() + "º" + " jogador conectado");
                     if (connections.size() == Config.connectionsNumber) {

@@ -27,7 +27,6 @@ public class Test {
         board.start();
 
         while (play != "sair") {
-            System.out.print("Digite a sua jogada: ");
             play = inFromUser.readLine();
             sandPlay(play);
         }

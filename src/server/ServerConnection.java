@@ -17,15 +17,17 @@ public class ServerConnection extends Thread {
     private Socket connection;
     private String jogada;
     private int id;
+    private int[][] board;
 
     public ServerConnection otherPlayer;
 
     private InetAddress addr;
     private DatagramSocket enviarCast;
 
-    public ServerConnection(int id, Socket connection) {
+    public ServerConnection(int id, Socket connection, int[][] board) {
         this.id = id;
         this.connection = connection;
+        this.board = board;
     }
 
     public void run() {
@@ -40,7 +42,6 @@ public class ServerConnection extends Thread {
             
             while (true) {
                 jogada = inFromClient.readLine();
-                /* Criar Thread para Manipular Matriz  Aqui e enviar multicast */
                 sandMulticast();
             }
 
@@ -65,7 +66,7 @@ public class ServerConnection extends Thread {
 
     private void sandMulticast() throws IOException {
         byte[] b = new byte[256];
-        b = jogada.getBytes();
+        b = board.toString().getBytes();
         DatagramPacket pkg;
         pkg = new DatagramPacket(b, b.length, addr, Config.multicastPort);
         enviarCast.send(pkg);
