@@ -69,12 +69,12 @@ public class Character extends Thread{
 		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 1 + ".png");
 		this.label.setIcon(skin);
 		
-		WaitAFeelTime(100);
+		WaitAFeelTime(250);
 		
 		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 2 + ".png");
 		this.label.setIcon(skin);
 		
-		WaitAFeelTime(100);
+		WaitAFeelTime(250);
 		
 		skin = get.getIcon("character/luffy/" + nameSkin + ".png");
 		this.label.setIcon(skin);
@@ -85,7 +85,7 @@ public class Character extends Thread{
 		this.move = true;
 		this.direction = direction;
 		this.position = position;
-		this.notify();
+		//this.notify();
 	}
 	
 	public void Resize(int width, int height) {
