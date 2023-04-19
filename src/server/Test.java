@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
 import java.net.Socket;
 
 import config.Config;
@@ -15,8 +12,6 @@ public class Test {
     private static Socket clientSocket;
     private static DataOutputStream outToServer;
     private static BufferedReader inFromServer;
-    private static MulticastSocket receberCast;
-    private static InetAddress grp;
 
     public static void main(String[] args) throws IOException {
 
