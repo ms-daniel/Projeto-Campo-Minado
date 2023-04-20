@@ -22,7 +22,7 @@ public class Test {
         System.out.println(sandPlayAndRecive(inFromUser.readLine()));
 
         String play = "";
-    
+
         ThreadMatriz board = new ThreadMatriz();
         board.start();
 

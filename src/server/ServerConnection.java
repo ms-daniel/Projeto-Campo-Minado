@@ -16,7 +16,6 @@ public class ServerConnection extends Thread {
 
     private Socket connection;
     private String jogada;
-    private int id;
     private int[][] board;
 
     private Player player;
@@ -27,8 +26,7 @@ public class ServerConnection extends Thread {
     private InetAddress addr;
     private DatagramSocket enviarCast;
 
-    public ServerConnection(int id, Socket connection, int[][] board, Player player, ArrayList<Player> players) {
-        this.id = id;
+    public ServerConnection(Socket connection, int[][] board, Player player, ArrayList<Player> players) {
         this.connection = connection;
         this.board = board;
         this.player = player;
@@ -42,7 +40,7 @@ public class ServerConnection extends Thread {
 
             player.SetName(inFromClient.readLine());
             makeMulticastConnection();
-            outToClient.writeBytes(player.toString() + "\n");
+            outToClient.writeBytes(getAllBombs() + "\n");
 
             while (true) {
                 jogada = inFromClient.readLine();
@@ -56,10 +54,6 @@ public class ServerConnection extends Thread {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-    public int GetId() {
-        return this.id;
     }
 
     private void makeMulticastConnection() throws IOException {
@@ -79,6 +73,19 @@ public class ServerConnection extends Thread {
         String data = "";
         for (Player i : players) {
             data += i.toString();
+        }
+        return data;
+    }
+
+    private String getAllBombs() {
+        String data = "";
+        for (int l = 0; l < Config.boardLength; l++) {
+            for (int c = 0; c < Config.boardLength; c++) {
+                if (board[l][c] == 2) {
+                    data += String.valueOf(l) + ";";
+                    data += String.valueOf(c) + "|";
+                }
+            }
         }
         return data;
     }
