@@ -84,8 +84,6 @@ public class playGame extends JPanel implements KeyListener {
 		arrowkeyslabel.setToolTipText("keys");
 		arrowkeyslabel.setIcon(get.getIcon("icons/", "arrowskeys", ".png"));
 		arrowkeyslabel.setBounds(0, 450, 155, 100);
-		
-		add(labelCharacter);
 
 		
 		//permite que seja identificada teclas pressionadas no panel
@@ -96,15 +94,17 @@ public class playGame extends JPanel implements KeyListener {
 		
 		mapT = new JLabel();
 		mapT.setBounds(10, -1782, 3000, 3000);
-		mapT.setIcon(get.getIcon("maps/map 1/", "guias HOR", ".png"));
-		//add(mapT);
+		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
+		add(mapT);
+		
+		add(labelCharacter);
 		
 		map = new JLabel();
 		map.setBounds(10, -1782, 3000, 3000);
 		map.setIcon(get.getIcon("maps/map 1/", "map 1", ".jpg"));
 		add(map);
 
-		mapsMove = new MapMove(map);
+		mapsMove = new MapMove(map, mapT);
 		//mapThread = new Thread(mapsMove);
 	}
 	
