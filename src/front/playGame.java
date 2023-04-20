@@ -21,6 +21,7 @@ import javax.swing.Timer;
 import assets.Character;
 import back.ImagesChange;
 import back.MapMove;
+import config.Config;
 
 import javax.swing.JButton;
 import java.awt.Insets;
@@ -55,6 +56,7 @@ public class playGame extends JPanel implements KeyListener {
 	private Timer timer;
 	
 	private int atual = 1;
+	private int[][] matrizMap = Config.matrizMap1;
 	
 	/**
 	 * Create the panel.
@@ -71,7 +73,7 @@ public class playGame extends JPanel implements KeyListener {
 		
 		
 		setBackground(new Color(0, 0, 0));
-		setBounds(new Rectangle(0, 0, 600, 600));
+		setBounds(new Rectangle(0, 0, 630, 630));
 		setLayout(null);
 		
 		labelCharacter = new JLabel();
@@ -93,19 +95,18 @@ public class playGame extends JPanel implements KeyListener {
 		add(arrowkeyslabel);
 		
 		mapT = new JLabel();
-		mapT.setBounds(10, -1782, 3000, 3000);
-		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
+		mapT.setBounds(10, -1782, 2250, 2250);
+		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
 		add(mapT);
 		
 		add(labelCharacter);
 		
 		map = new JLabel();
-		map.setBounds(10, -1782, 3000, 3000);
+		map.setBounds(10, -1470, 2250, 2250);
 		map.setIcon(get.getIcon("maps/map 1/", "map 1", ".jpg"));
 		add(map);
 
 		mapsMove = new MapMove(map, mapT);
-		//mapThread = new Thread(mapsMove);
 	}
 	
 	@Override
