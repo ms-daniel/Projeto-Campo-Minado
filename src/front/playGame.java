@@ -20,6 +20,7 @@ import javax.swing.Timer;
 
 import assets.Character;
 import back.ImagesChange;
+import back.MapMove;
 
 import javax.swing.JButton;
 import java.awt.Insets;
@@ -37,6 +38,8 @@ public class playGame extends JPanel implements KeyListener {
 	private ImagesChange get = new ImagesChange();
 	
 	private Character character;
+	private MapMove mapsMove;
+	private Thread mapThread;
 	
 	private JLabel labelCharacter;
 	private JLabel map;
@@ -101,6 +104,8 @@ public class playGame extends JPanel implements KeyListener {
 		map.setIcon(get.getIcon("maps/map 1/", "map 1", ".jpg"));
 		add(map);
 
+		mapsMove = new MapMove(map);
+		//mapThread = new Thread(mapsMove);
 	}
 	
 	@Override
@@ -118,8 +123,7 @@ public class playGame extends JPanel implements KeyListener {
 	        	character.MoveTo('R', 2);
 	
 	        	//move o mapa
-	        	map.setLocation(map.getX() - 45, map.getY());
-	        	mapT.setLocation(mapT.getX() - 45, mapT.getY());
+	        	mapsMove.MoveMaps(-45, 0);
 	        	
 	        	timer.start();
 	        }else if((e.getKeyCode() == KeyEvent.VK_LEFT) ||
@@ -127,8 +131,7 @@ public class playGame extends JPanel implements KeyListener {
 	        	character.MoveTo('L', 4);
 	        	
 	        	//move o mapa
-	        	map.setLocation(map.getX() + 45, map.getY());
-	        	mapT.setLocation(mapT.getX() + 45, mapT.getY());
+	        	mapsMove.MoveMaps(+45, 0);
 	
 	        	timer.start();
 	        }else if((e.getKeyCode() == KeyEvent.VK_DOWN) ||
@@ -136,8 +139,7 @@ public class playGame extends JPanel implements KeyListener {
 	        	character.MoveTo('D', 1);
 	        	
 	        	//move o mapa
-	        	map.setLocation(map.getX(), map.getY() - 45);
-	        	mapT.setLocation(mapT.getX(), mapT.getY() - 45);
+	        	mapsMove.MoveMaps(0, -45);
 	      
 	        	timer.start();
 	        }
@@ -146,11 +148,12 @@ public class playGame extends JPanel implements KeyListener {
 	        	character.MoveTo('T', 3);
 	        	
 	        	//move o mapa
-	        	map.setLocation(map.getX(), map.getY() + 45);
-	        	mapT.setLocation(mapT.getX(), mapT.getY() + 45);
+	        	mapsMove.MoveMaps(0, +45);
 	        	
 	        	timer.start();
 	        }
+	        mapThread = new Thread(mapsMove);
+	        mapThread.start();
     	}
     }
 
