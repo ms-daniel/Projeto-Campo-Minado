@@ -9,15 +9,20 @@ import config.Config;
 
 public class Server {
     private static ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
-    private static int board[][] = new int[Config.boardLength][Config.boardLength]; 
+    private static ArrayList<Player> players = new ArrayList<Player>();
+    private static int board[][] = new int[Config.boardLength][Config.boardLength];
 
     public static void main(String[] args) throws IOException {
         ServerSocket server = new ServerSocket(Config.port);
         try {
             while (true) {
                 Socket SocketConnection = server.accept();
+                Player player;
                 if (SocketConnection.isConnected() && (connections.size() + 1) <= Config.connectionsNumber) {
-                    ServerConnection connection = new ServerConnection((connections.size() + 1), SocketConnection, board);
+                    player = new Player();
+                    players.add(player);
+                    ServerConnection connection = new ServerConnection((connections.size() + 1), SocketConnection,
+                            board, player, players);
                     connections.add(connection);
                     System.out.println(connections.size() + "º" + " jogador conectado");
                     if (connections.size() == Config.connectionsNumber) {
