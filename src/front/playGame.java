@@ -115,45 +115,53 @@ public class playGame extends JPanel implements KeyListener {
 
     @Override
     public synchronized void keyPressed(KeyEvent e) {
+    	Integer key = e.getKeyCode();
+    	boolean validKey = false; 
     	
     	if(!timer.isRunning()) {
 	        // Verifique se a tecla pressionada é a tecla desejada
-	        if ((e.getKeyCode() == KeyEvent.VK_RIGHT) ||
-	        		(e.getKeyCode() == KeyEvent.VK_D )) {
+	        if ((key == KeyEvent.VK_RIGHT) ||
+	        		(key == KeyEvent.VK_D )) {
 	        	character.MoveTo('R', 2);
 	
 	        	//move o mapa
 	        	mapsMove.MoveMaps(-45, 0);
 	        	
 	        	timer.start();
-	        }else if((e.getKeyCode() == KeyEvent.VK_LEFT) ||
-	        		(e.getKeyCode() == KeyEvent.VK_A)) {
+	        	validKey = true; 
+	        }else if((key == KeyEvent.VK_LEFT) ||
+	        		(key == KeyEvent.VK_A)) {
 	        	character.MoveTo('L', 4);
 	        	
 	        	//move o mapa
 	        	mapsMove.MoveMaps(+45, 0);
 	
 	        	timer.start();
-	        }else if((e.getKeyCode() == KeyEvent.VK_DOWN) ||
-	        		(e.getKeyCode() == KeyEvent.VK_S)) {
+	        	validKey = true; 
+	        }else if((key == KeyEvent.VK_DOWN) ||
+	        		(key == KeyEvent.VK_S)) {
 	        	character.MoveTo('D', 1);
 	        	
 	        	//move o mapa
 	        	mapsMove.MoveMaps(0, -45);
 	      
 	        	timer.start();
+	        	validKey = true; 
 	        }
-	        else if((e.getKeyCode() == KeyEvent.VK_UP) ||
-				(e.getKeyCode() == KeyEvent.VK_W)) {
+	        else if((key == KeyEvent.VK_UP) ||
+				(key == KeyEvent.VK_W)) {
 	        	character.MoveTo('T', 3);
 	        	
 	        	//move o mapa
 	        	mapsMove.MoveMaps(0, +45);
 	        	
 	        	timer.start();
+	        	validKey = true; 
 	        }
-	        mapThread = new Thread(mapsMove);
-	        mapThread.start();
+	        if(validKey) {
+		        mapThread = new Thread(mapsMove);
+		        mapThread.start();
+		    }
     	}
     }
 
