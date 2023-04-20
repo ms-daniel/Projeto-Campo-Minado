@@ -32,21 +32,21 @@ public class MapMove implements Runnable {
 	
 	@Override
 	public void run() {
+		//System.out.println("X: " + map.getX() + " Y: " + map.getY());
+		
+		int xAux = map.getX() + x, yAux = map.getY() + y;
 		
 		for(int i = 1; Math.abs(i) < 46; i+=increment) {
 			if(y == 0) {
 				map.setLocation(map.getX() + increment, map.getY());
-				if(mapT != null)
-					mapT.setLocation(mapT.getX() + increment, mapT.getY());
-				
+				/*if(mapT != null)
+					mapT.setLocation(mapT.getX() + increment, mapT.getY());*/
 			}else {
 				map.setLocation(map.getX(), map.getY() + increment);
-				if(mapT != null)
-					mapT.setLocation(mapT.getX(), mapT.getY() + increment);
-				
+				/*if(mapT != null)
+					mapT.setLocation(mapT.getX(), mapT.getY() + increment);*/	
 			}
-			
-			
+
 			try {
 				Thread.sleep(12);
 			} catch (InterruptedException e) {
@@ -55,6 +55,10 @@ public class MapMove implements Runnable {
 			}
 		}
 		
+		map.setLocation(xAux, yAux);
+		
+		//System.out.println("depois X: " + map.getX() + "depois Y: " + map.getY());
+
 	}
 	
 }
