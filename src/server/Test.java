@@ -19,7 +19,7 @@ public class Test {
         makeConnection();
         System.out.print("Digite seu nome: ");
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(sandPlayAndRecive(inFromUser.readLine()));
+        String bombs = sandPlayAndRecive(inFromUser.readLine());
 
         String play = "";
 

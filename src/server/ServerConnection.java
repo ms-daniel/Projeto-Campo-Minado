@@ -83,7 +83,7 @@ public class ServerConnection extends Thread {
             for (int c = 0; c < Config.boardLength; c++) {
                 if (board[l][c] == 2) {
                     data += String.valueOf(l) + ";";
-                    data += String.valueOf(c) + "|";
+                    data += String.valueOf(c) + ":";
                 }
             }
         }
