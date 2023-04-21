@@ -46,6 +46,13 @@ public class ServerConnection extends Thread {
                 jogada = inFromClient.readLine();
                 if (jogada.contains(";")) {
                     player.SetCoordinates(jogada.split(";")[0], jogada.split(";")[1]);
+                    if (verifyCoordinates(player.getX(), player.getY())) {
+                        outToClient.writeBytes("Bomba" + "\n");
+                    } else {
+                        outToClient.writeBytes("Seguro" + "\n");
+                    }
+                } else {
+                    outToClient.writeBytes("Erro: Coordenadas inválidas" + "\n");
                 }
                 sandMulticast();
             }
@@ -88,5 +95,16 @@ public class ServerConnection extends Thread {
             }
         }
         return data;
+    }
+
+    private boolean verifyCoordinates(int x, int y) {
+        if (x > Config.boardLength || y > Config.boardLength) {
+            return false;
+        }
+        if (board[x][y] == 2) {
+            board[x][y] = 0;
+            return true;
+        }
+        return false;
     }
 }

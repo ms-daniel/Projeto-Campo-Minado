@@ -14,7 +14,6 @@ public class Test {
     private static BufferedReader inFromServer;
 
     public static void main(String[] args) throws IOException {
-
         System.out.println("Conectando... Aguarde");
         makeConnection();
         System.out.print("Digite seu nome: ");
@@ -28,7 +27,7 @@ public class Test {
 
         while (play != "sair") {
             play = inFromUser.readLine();
-            sandPlay(play);
+            System.out.println(sandPlayAndRecive(play));
         }
         closeConnection();
     }
