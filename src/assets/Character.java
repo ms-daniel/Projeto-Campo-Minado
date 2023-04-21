@@ -1,7 +1,10 @@
 package assets;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -10,7 +13,8 @@ import back.ImagesChange;
 
 public class Character extends Thread{
 	private ImagesChange get = new ImagesChange();
-	private JLabel label;
+	private JLabel Skinlabel;
+	private JLabel PlayerName;
 	
 	private String name;
 	private String skinLocal;
@@ -27,22 +31,29 @@ public class Character extends Thread{
 	
 	/**
 	 * constructor para instaciar um personagem/character
-	 * @param name: nome do personagem
+	 * @param name: nome do jogador
 	 * @param FolderSkin: local + nome do arquivo + extensao da skin
 	 * @param x: posicao x inicial
 	 * @param y: posicao y inicial
 	 */
-	public Character(String name, String FolderSkin, JLabel label) {
-		this.label = label;
+	public Character(String name, String FolderSkin, JLabel SkinLabel, JLabel PlayerName) {
+		this.Skinlabel = SkinLabel;
+		this.PlayerName = PlayerName;
+		
 		this.name = name;
+		this.PlayerName.setText(this.name);
+		
 		this.skinLocal = FolderSkin;
 		SetSkinNamePosition(FolderSkin);
 		
-		this.label.setBounds(0, 0, 182, 252);
-		this.label.setHorizontalAlignment(SwingConstants.CENTER);
-		this.label.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.Skinlabel.setBounds(0, 0, 48, 66);
+		this.Skinlabel.setHorizontalAlignment(SwingConstants.CENTER);
+		this.Skinlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		this.PlayerName.setBounds(0, 0, 55, 15);
+		
 		this.skin = get.getIcon(FolderSkin);
-		this.label.setIcon(skin);
+		this.Skinlabel.setIcon(skin);
 	}
 	
 	@Override
@@ -60,24 +71,31 @@ public class Character extends Thread{
 	public void Locale(int x, int y) {
 		this.posX = x;
 		this.posY = y;
-		this.label.setLocation(x, y);
+		this.Skinlabel.setLocation(x, y);
+		this.PlayerName.setBounds(Skinlabel.getX() - 10, Skinlabel.getY() - 12, 65, 20);
+		
+		this.PlayerName.setFont(new Font("Arial", Font.BOLD, 10));
+		this.PlayerName.setForeground(Color.WHITE);
+		this.PlayerName.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		
+		this.PlayerName.setHorizontalTextPosition(SwingConstants.CENTER);
 	}
 	
 	public void Move(char direction, int position) {
 		this.nameSkin = this.nameSkin.replaceAll("\\d+", "") + position;
 		
 		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 1 + ".png");
-		this.label.setIcon(skin);
+		this.Skinlabel.setIcon(skin);
 		
 		WaitAFeelTime(250);
 		
 		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 2 + ".png");
-		this.label.setIcon(skin);
+		this.Skinlabel.setIcon(skin);
 		
 		WaitAFeelTime(250);
 		
 		skin = get.getIcon("character/luffy/" + nameSkin + ".png");
-		this.label.setIcon(skin);
+		this.Skinlabel.setIcon(skin);
 		this.move = false;
 	}
 	
@@ -90,7 +108,7 @@ public class Character extends Thread{
 	
 	public void Resize(int width, int height) {
 		skin = get.Resize(skin, width, height);
-		this.label.setIcon(skin);
+		this.Skinlabel.setIcon(skin);
 	}
 	
 	public void Pause(boolean pause) {
