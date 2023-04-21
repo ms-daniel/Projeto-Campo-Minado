@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.GridBagLayout;
@@ -42,7 +44,8 @@ public class playGame extends JPanel implements KeyListener {
 	private MapMove mapsMove;
 	private Thread mapThread;
 	
-	private JLabel labelCharacter;
+	private JLabel LabelCharacter;
+	private JLabel PlayerName;
 	private JLabel map;
 	private JLabel mapT;
 	
@@ -74,12 +77,15 @@ public class playGame extends JPanel implements KeyListener {
 		
 		setBackground(new Color(0, 0, 0));
 		setBounds(new Rectangle(0, 0, 630, 630));
+		setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		setLayout(null);
 		
-		labelCharacter = new JLabel();
+		LabelCharacter = new JLabel();
+		PlayerName = new JLabel();
 		
-		character = new Character("Luffy", "character/luffy/" + "lufy-1" + ".png", labelCharacter);
-		character.Locale(213, 128);
+		
+		character = new Character("CARLINHOS", "character/luffy/" + "lufy-1" + ".png", LabelCharacter, PlayerName);
+		character.Locale(270,235);
 		character.start(); 
 
 		JLabel arrowkeyslabel = new JLabel("");
@@ -87,22 +93,24 @@ public class playGame extends JPanel implements KeyListener {
 		arrowkeyslabel.setIcon(get.getIcon("icons/", "arrowskeys", ".png"));
 		arrowkeyslabel.setBounds(0, 450, 155, 100);
 
-		
 		//permite que seja identificada teclas pressionadas no panel
 		addKeyListener(this);
 		setFocusable(true); //so funciona com essa opcao ativada
 		
 		add(arrowkeyslabel);
 		
+		
+		
+		add(PlayerName);
+		add(LabelCharacter);
+		
 		mapT = new JLabel();
-		mapT.setBounds(10, -1782, 2250, 2250);
+		mapT.setBounds(0, 0, 2250, 2250);
 		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
 		add(mapT);
 		
-		add(labelCharacter);
-		
 		map = new JLabel();
-		map.setBounds(10, -1470, 2250, 2250);
+		map.setBounds(0, 0, 2250, 2250);
 		map.setIcon(get.getIcon("maps/map 1/", "map 1", ".jpg"));
 		add(map);
 
