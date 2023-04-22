@@ -18,7 +18,7 @@ public class TPlays extends Thread {
         try {
             makeConnection();
             while(true){
-                receberMatriz();
+                System.out.println(receberPlays());
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -32,14 +32,10 @@ public class TPlays extends Thread {
         receberCast.joinGroup(grp);
     }
 
-    private static boolean receberMatriz() throws IOException {
+    private static String receberPlays() throws IOException {
         receberCast.receive(pkg);
-        if (pkg.getData().length > 0) {
-            pkgValue = new String(pkg.getData(), 0, pkg.getLength());
-            System.out.println(pkgValue);
-            return false;
-        }
-        return true;
+        pkgValue = new String(pkg.getData(), 0, pkg.getLength());
+        return pkgValue;
     }
 
 }
