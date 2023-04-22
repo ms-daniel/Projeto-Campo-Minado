@@ -21,7 +21,7 @@ public class Test {
         String bombs = sandPlayAndRecive(inFromUser.readLine());
         String play = "";
 
-        ThreadMatriz board = new ThreadMatriz();
+        TPlays board = new TPlays();
         board.start();
 
         while (play != "sair") {

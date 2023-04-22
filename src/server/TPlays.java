@@ -7,7 +7,7 @@ import java.net.MulticastSocket;
 
 import config.Config;
 
-public class ThreadMatriz extends Thread {
+public class TPlays extends Thread {
     private static MulticastSocket receberCast;
     private static InetAddress grp;
     private static byte rec[] = new byte[256];
