@@ -19,18 +19,19 @@ public class ServerConnection extends Thread {
     private int[][] board;
 
     private Player player;
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private ArrayList<Player> players;
 
-    public ServerConnection otherPlayer;
+    public ArrayList<ServerConnection> connections;
 
     private InetAddress addr;
     private DatagramSocket enviarCast;
 
-    public ServerConnection(Socket connection, int[][] board, Player player, ArrayList<Player> players) {
+    public ServerConnection(Socket connection, int[][] board, Player player, ArrayList<Player> players, ArrayList<ServerConnection> connections) {
         this.connection = connection;
         this.board = board;
         this.player = player;
         this.players = players;
+        this.connections = connections;
     }
 
     public void run() {
@@ -58,7 +59,8 @@ public class ServerConnection extends Thread {
             }
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            players.remove(player);
+            connections.remove(this);
             e.printStackTrace();
         }
     }

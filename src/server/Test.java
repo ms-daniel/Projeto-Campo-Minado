@@ -19,7 +19,6 @@ public class Test {
         System.out.print("Digite seu nome: ");
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
         String bombs = sandPlayAndRecive(inFromUser.readLine());
-
         String play = "";
 
         ThreadMatriz board = new ThreadMatriz();

@@ -1,17 +1,23 @@
 package server;
 
+import java.util.regex.Pattern;
+
 public class Player {
     private String name;
     private int x;
     private int y;
+
+    private Pattern regex = Pattern.compile("\\d+");
 
     public void SetName(String name) {
         this.name = name;
     }
 
     public void SetCoordinates(String x, String y) {
-        this.x = Integer.parseInt(x);
-        this.y = Integer.parseInt(y);
+        if(regex.matcher(x).matches() && regex.matcher(y).matches()){
+            this.x = Integer.parseInt(x);
+            this.y = Integer.parseInt(y);
+        }
     }
 
     public int getX() {
@@ -22,8 +28,15 @@ public class Player {
         return y;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        return name + ";" + x + ";" + y + ";";
+        if(name != null){
+            return name + ";" + x + ";" + y + ";";
+        }
+        return "";
     }
 }

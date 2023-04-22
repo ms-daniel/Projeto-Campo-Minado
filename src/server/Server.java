@@ -11,6 +11,7 @@ public class Server {
     private static ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
     private static ArrayList<Player> players = new ArrayList<Player>();
     private static int board[][] = new int[Config.boardLength][Config.boardLength];
+    private static boolean running = false;
 
     public static void main(String[] args) throws IOException {
         ServerSocket server = new ServerSocket(Config.port);
@@ -21,31 +22,22 @@ public class Server {
                 if (SocketConnection.isConnected() && (connections.size() + 1) <= Config.connectionsNumber) {
                     player = new Player();
                     players.add(player);
-                    ServerConnection connection = new ServerConnection(SocketConnection, board, player, players);
+                    ServerConnection connection = new ServerConnection(SocketConnection, board, player, players, connections);
                     connections.add(connection);
                     System.out.println(connections.size() + "º" + " jogador conectado");
-                    if (connections.size() == Config.connectionsNumber) {
+                    if (connections.size() == Config.connectionsNumber && !running) {
                         PreencherBoard();
-                        int invertCount = 1;
-                        for (int i = 0; i < connections.size(); i++) {
-                            if (connections.size() == invertCount) {
-                                invertCount = 0;
-                            }
-                            connections.get(i).otherPlayer = connections.get(invertCount++);
-                            connections.get(i).start();
+                        for (ServerConnection c : connections) {
+                            c.start();
+                        }
+                        running = true;
+                    }else{
+                        if(running){
+                            connection.start();
                         }
                     }
-
                 } else {
-                    for (ServerConnection c : connections) {
-                        if (!c.isAlive()) {
-                            connections.remove(c);
-                            System.out.println(connections.size());
-                        }
-                    }
-                    if (connections.size() != 0) {
-                        SocketConnection.close();
-                    }
+                    SocketConnection.close();
                 }
             }
         } catch (IOException e) {
