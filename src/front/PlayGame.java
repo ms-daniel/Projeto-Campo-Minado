@@ -37,7 +37,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class playGame extends JPanel implements KeyListener {
+public class PlayGame extends JPanel implements KeyListener {
 	private ImagesChange get = new ImagesChange();
 	
 	private Character character;
@@ -64,7 +64,7 @@ public class playGame extends JPanel implements KeyListener {
 	/**
 	 * Create the panel.
 	 */
-	public playGame() {
+	public PlayGame() {
 		
 		timer = new Timer(500, new ActionListener() {
             @Override
@@ -98,7 +98,6 @@ public class playGame extends JPanel implements KeyListener {
 		setFocusable(true); //so funciona com essa opcao ativada
 		
 		add(arrowkeyslabel);
-		
 		
 		
 		add(PlayerName);
