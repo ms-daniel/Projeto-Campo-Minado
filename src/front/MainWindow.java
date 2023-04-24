@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class windows extends JFrame {
+public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
 
@@ -17,7 +17,7 @@ public class windows extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					windows frame = new windows();
+					MainWindow frame = new MainWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -29,11 +29,12 @@ public class windows extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public windows() {
+	public MainWindow() {
 		setTitle("Campo Minado");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 646, 669);
-		contentPane = new playGame();
+		//contentPane = new PlayGame();
+		contentPane = new Menu();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
