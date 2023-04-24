@@ -2,13 +2,17 @@ package server;
 
 public class ServerInterface {
     public static Server server;
+    public static String ipServer;
 
-    public static boolean startServer(int port){
-        if(server != null){
-            return false;
-        }
+
+    public static String startServer(int port){
         server = new Server(port);
-        server.start();
-        return true;
+        ipServer = server.runServer(port);
+        if(ipServer != null){
+            server.start();
+            return ipServer;
+        }
+        server = null; 
+        return null;
     }
 }

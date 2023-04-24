@@ -1,6 +1,7 @@
 package server;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ public class Server extends Thread {
 
     public void run() {
         try {
-            server = new ServerSocket(Config.port);
             while (true) {
                 Socket SocketConnection = server.accept();
                 Player player;
@@ -51,11 +51,13 @@ public class Server extends Thread {
         }
     }
 
-    public boolean isRunning(int port){
-        if(server == null){
-            return false;
+    public String runServer(int port){
+        try {
+            server = new ServerSocket(port);
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (IOException e) {
+            return null;
         }
-        return server.getLocalPort() == port;
     }
 
     private void PreencherBoard() {
