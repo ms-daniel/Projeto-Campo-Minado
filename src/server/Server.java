@@ -15,12 +15,6 @@ public class Server extends Thread {
     private static boolean running = false;
     private static ServerSocket server;
 
-    private int port;
-
-    public Server(int port) {
-        this.port = port;
-    }
-
     public void run() {
         try {
             while (true) {

@@ -53,7 +53,7 @@ public class ServerConnection extends Thread {
                         outToClient.writeBytes("Seguro" + "\n");
                     }
                 } else {
-                    outToClient.writeBytes("Erro: Coordenadas inválidas" + "\n");
+                    outToClient.writeBytes("Erro: Coordenadas invalidas" + "\n");
                 }
                 sandMulticast();
             }
@@ -61,7 +61,6 @@ public class ServerConnection extends Thread {
         } catch (IOException e) {
             players.remove(player);
             connections.remove(this);
-            e.printStackTrace();
         }
     }
 

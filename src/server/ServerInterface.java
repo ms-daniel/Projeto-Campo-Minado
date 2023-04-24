@@ -6,13 +6,13 @@ public class ServerInterface {
 
 
     public static String startServer(int port){
-        server = new Server(port);
+        server = new Server();
         ipServer = server.runServer(port);
         if(ipServer != null){
             server.start();
             return ipServer;
         }
         server = null; 
-        return null;
+        return "Porta indisponivel";
     }
 }
