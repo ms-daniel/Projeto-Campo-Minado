@@ -7,15 +7,22 @@ import java.util.ArrayList;
 
 import config.Config;
 
-public class Server {
+public class Server extends Thread {
     private static ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
     private static ArrayList<Player> players = new ArrayList<Player>();
     private static int board[][] = new int[Config.boardLength][Config.boardLength];
     private static boolean running = false;
+    private static ServerSocket server;
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket server = new ServerSocket(Config.port);
+    private int port;
+
+    public Server(int port) {
+        this.port = port;
+    }
+
+    public void run() {
         try {
+            server = new ServerSocket(Config.port);
             while (true) {
                 Socket SocketConnection = server.accept();
                 Player player;
@@ -24,7 +31,6 @@ public class Server {
                     players.add(player);
                     ServerConnection connection = new ServerConnection(SocketConnection, board, player, players, connections);
                     connections.add(connection);
-                    System.out.println(connections.size() + "º" + " jogador conectado");
                     if (connections.size() == Config.connectionsNumber && !running) {
                         PreencherBoard();
                         for (ServerConnection c : connections) {
@@ -41,12 +47,18 @@ public class Server {
                 }
             }
         } catch (IOException e) {
-            server.close();
             e.printStackTrace();
         }
     }
 
-    private static void PreencherBoard() {
+    public boolean isRunning(int port){
+        if(server == null){
+            return false;
+        }
+        return server.getLocalPort() == port;
+    }
+
+    private void PreencherBoard() {
         int count = 0;
         for (int l = 0; l < Config.boardLength; l++) {
             for (int c = 0; c < Config.boardLength; c++) {

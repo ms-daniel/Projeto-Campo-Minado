@@ -15,6 +15,7 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Conectando... Aguarde");
+        ServerInterface.startServer(7000);
         makeConnection();
         System.out.print("Digite seu nome: ");
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
