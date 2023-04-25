@@ -66,7 +66,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	 */
 	public PlayGame() {
 		
-		timer = new Timer(500, new ActionListener() {
+		timer = new Timer(570, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica do processamento do evento de teclado aqui
