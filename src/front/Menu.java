@@ -1,9 +1,9 @@
 package front;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import back.ImagesChange;
+import back.BombMenu;
 
 import javax.swing.JLabel;
 import javax.swing.Icon;
@@ -19,6 +19,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Menu extends JPanel {
+	private JPanel Menu = this;
 
 	private ImagesChange get = new ImagesChange();
 	private JLabel Connect;
@@ -28,25 +29,12 @@ public class Menu extends JPanel {
 	private JLabel BombIcon;
 	private JLabel MenuBackground;
 	
-	private Timer timer;
-	
-	private boolean clicked = false;
-	
-	
-	
+	private BombMenu Bomb;
 	
 	/**
 	 * Create the panel.
 	 */
 	public Menu() {
-		timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Lógica do processamento do evento de teclado aqui
-                timer.stop();
-            }
-        });
-		
 		setLayout(null);
 		
 		Connect = new JLabel("");
@@ -89,6 +77,8 @@ public class Menu extends JPanel {
 		MenuBackground.setBounds(0, 0, 630, 630);
 		add(MenuBackground);
 
+		Bomb = new BombMenu(this.Menu, this.BombIcon);
+		
 		EffectsOn();
 	}
 	
@@ -96,7 +86,7 @@ public class Menu extends JPanel {
 		Connect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					Connect.setIcon(get.getIcon("icons/ConectarSelected.png"));
 					BombIcon.setLocation(20, Connect.getY()-3);
 					BombIcon.setVisible(true);
@@ -104,7 +94,7 @@ public class Menu extends JPanel {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					Connect.setIcon(get.getIcon("icons/Conectar.png"));
 					BombIcon.setVisible(false);
 				}
@@ -112,19 +102,15 @@ public class Menu extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(!timer.isRunning()) {
-					ExploseBomb();
-					System.out.println("Car");
-					DisableComponents();
-					timer.start();
-				}
+				if(!Bomb.IsRunning()) 
+					Bomb.Explose();
 			}
 		});
 		
 		CreateSeason.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					CreateSeason.setIcon(get.getIcon("icons/Criar PartidaSelected.png"));
 					BombIcon.setLocation(20, CreateSeason.getY());
 					BombIcon.setVisible(true);
@@ -132,7 +118,7 @@ public class Menu extends JPanel {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
 					BombIcon.setVisible(false);
 				}
@@ -140,18 +126,15 @@ public class Menu extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(!timer.isRunning()) {
-					ExploseBomb();
-					DisableComponents();
-					timer.start();
-				}
+				if(!Bomb.IsRunning())
+					Bomb.Explose();
 			}
 		});
 		
 		ChangeSkin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					ChangeSkin.setIcon(get.getIcon("icons/Mudar BonecoSelected.png"));
 					BombIcon.setLocation(20, ChangeSkin.getY()-3);
 					BombIcon.setVisible(true);
@@ -159,7 +142,7 @@ public class Menu extends JPanel {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
 					BombIcon.setVisible(false);
 				}
@@ -167,18 +150,15 @@ public class Menu extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(!timer.isRunning()) {
-					ExploseBomb();
-					DisableComponents();
-					timer.start();
-				}
+				if(!Bomb.IsRunning()) 
+					Bomb.Explose();
 			}
 		});
 		
 		ExitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					ExitButton.setIcon(get.getIcon("icons/SairSelected.png"));
 					BombIcon.setLocation(20, ExitButton.getY());
 					BombIcon.setVisible(true);
@@ -186,7 +166,7 @@ public class Menu extends JPanel {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!timer.isRunning()) {
+				if(!Bomb.IsRunning()) {
 					ExitButton.setIcon(get.getIcon("icons/Sair.png"));
 					BombIcon.setVisible(false);
 				}
@@ -194,26 +174,11 @@ public class Menu extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(!timer.isRunning()) {
-					ExploseBomb();
-					DisableComponents();
-					timer.start();
-				}
+				if(!Bomb.IsRunning()) 
+					Bomb.Explose();
+				
 			}
 		});
 	}
-	
-	//TO_DO finalizacao do metodo com um timer 
-	private void ExploseBomb() {
-		BombIcon.setVisible(true);
-		BombIcon.setIcon(get.getIcon("icons/bomb-gif.gif"));
-	}
-	
-	private void DisableComponents() {
-		Component[] components = getRootPane().getComponents();
-	    for (Component component : components) {
-	        component.setEnabled(false);
-	    }
-	}
-	
+
 }
