@@ -26,15 +26,27 @@ public class Menu extends JPanel {
 	private JLabel ChangeSkin;
 	private JLabel ExitButton;
 	private JLabel BombIcon;
+	private JLabel MenuBackground;
+	
+	private Timer timer;
+	
 	private boolean clicked = false;
 	
-	private JLabel MenuBackground;
+	
 	
 	
 	/**
 	 * Create the panel.
 	 */
 	public Menu() {
+		timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Lógica do processamento do evento de teclado aqui
+                timer.stop();
+            }
+        });
+		
 		setLayout(null);
 		
 		Connect = new JLabel("");
@@ -84,13 +96,15 @@ public class Menu extends JPanel {
 		Connect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Connect.setIcon(get.getIcon("icons/ConectarSelected.png"));
-				BombIcon.setLocation(20, Connect.getY()-3);
-				BombIcon.setVisible(true);
+				if(!timer.isRunning()) {
+					Connect.setIcon(get.getIcon("icons/ConectarSelected.png"));
+					BombIcon.setLocation(20, Connect.getY()-3);
+					BombIcon.setVisible(true);
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!clicked) {
+				if(!timer.isRunning()) {
 					Connect.setIcon(get.getIcon("icons/Conectar.png"));
 					BombIcon.setVisible(false);
 				}
@@ -98,53 +112,93 @@ public class Menu extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				clicked = true;
-				
-				ExploseBomb();
-				
-				DisableComponents();
+				if(!timer.isRunning()) {
+					ExploseBomb();
+					System.out.println("Car");
+					DisableComponents();
+					timer.start();
+				}
 			}
 		});
 		
 		CreateSeason.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				CreateSeason.setIcon(get.getIcon("icons/Criar PartidaSelected.png"));
-				BombIcon.setLocation(20, CreateSeason.getY());
-				BombIcon.setVisible(true);
+				if(!timer.isRunning()) {
+					CreateSeason.setIcon(get.getIcon("icons/Criar PartidaSelected.png"));
+					BombIcon.setLocation(20, CreateSeason.getY());
+					BombIcon.setVisible(true);
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
-				BombIcon.setVisible(false);
+				if(!timer.isRunning()) {
+					CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
+					BombIcon.setVisible(false);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if(!timer.isRunning()) {
+					ExploseBomb();
+					DisableComponents();
+					timer.start();
+				}
 			}
 		});
 		
 		ChangeSkin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				ChangeSkin.setIcon(get.getIcon("icons/Mudar BonecoSelected.png"));
-				BombIcon.setLocation(20, ChangeSkin.getY()-3);
-				BombIcon.setVisible(true);
+				if(!timer.isRunning()) {
+					ChangeSkin.setIcon(get.getIcon("icons/Mudar BonecoSelected.png"));
+					BombIcon.setLocation(20, ChangeSkin.getY()-3);
+					BombIcon.setVisible(true);
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
-				BombIcon.setVisible(false);
+				if(!timer.isRunning()) {
+					ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
+					BombIcon.setVisible(false);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if(!timer.isRunning()) {
+					ExploseBomb();
+					DisableComponents();
+					timer.start();
+				}
 			}
 		});
 		
 		ExitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				ExitButton.setIcon(get.getIcon("icons/SairSelected.png"));
-				BombIcon.setLocation(20, ExitButton.getY());
-				BombIcon.setVisible(true);
+				if(!timer.isRunning()) {
+					ExitButton.setIcon(get.getIcon("icons/SairSelected.png"));
+					BombIcon.setLocation(20, ExitButton.getY());
+					BombIcon.setVisible(true);
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				ExitButton.setIcon(get.getIcon("icons/Sair.png"));
-				BombIcon.setVisible(false);
+				if(!timer.isRunning()) {
+					ExitButton.setIcon(get.getIcon("icons/Sair.png"));
+					BombIcon.setVisible(false);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if(!timer.isRunning()) {
+					ExploseBomb();
+					DisableComponents();
+					timer.start();
+				}
 			}
 		});
 	}
