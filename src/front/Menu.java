@@ -33,6 +33,8 @@ public class Menu extends JPanel {
 	private JLabel BombIcon;
 	private JLabel MenuBackground;
 	
+	private JLabel Transition;
+	
 	private BombMenu Bomb;
 	
 	/**
@@ -143,7 +145,6 @@ public class Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				if(!Bomb.IsRunning()) 
 					Bomb.Explose();
-				
 				
 			}
 		});
