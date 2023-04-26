@@ -7,7 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class MainWindow extends JFrame {
-
+	public enum Panels {
+	    MENU, PLAYGAME, CREATE, CONNECT, CHANGESKIN
+	}
+	
 	private JPanel contentPane;
 
 	/**
@@ -33,11 +36,34 @@ public class MainWindow extends JFrame {
 		setTitle("Campo Minado");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 646, 669);
-		//contentPane = new PlayGame();
-		contentPane = new Menu();
+//		contentPane = new PlayGame();
+		contentPane = new Menu(this);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+	}
+	
+	public void ChangeTo(Panels frame) {
+		switch(frame) {
+			case MENU:
+				
+				break;
+			case PLAYGAME:
+				
+				break;
+			case CREATE:
+				
+				break;
+			case CONNECT:
+				
+				break;
+			case CHANGESKIN:
+				
+				break;
+			default:
+				
+				break;
+		}
 	}
 
 }
