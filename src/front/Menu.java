@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Color;
 
 public class Menu extends JPanel {
 	private ImagesChange get = new ImagesChange();
@@ -32,8 +33,6 @@ public class Menu extends JPanel {
 	private JLabel ExitButton;
 	private JLabel BombIcon;
 	private JLabel MenuBackground;
-	
-	private JLabel Transition;
 	
 	private BombMenu Bomb;
 	
@@ -81,7 +80,7 @@ public class Menu extends JPanel {
 		add(BombIcon);
 		
 		MenuBackground = new JLabel("");
-		MenuBackground.setIcon(new ImageIcon(Menu.class.getResource("/icons/menu.jpg")));
+		MenuBackground.setIcon(get.getIcon("icons/menu.jpg"));
 		MenuBackground.setBounds(0, 0, 630, 630);
 		add(MenuBackground);
 
