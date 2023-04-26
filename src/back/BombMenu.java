@@ -30,11 +30,21 @@ public class BombMenu extends Thread{
 	
 	@Override
 	public synchronized void run() {
+		int cont = 1;
 		while(timer.isRunning()) {
-			
+			System.out.println("Dan " + cont);
+			cont++;
 		}
 		
 		EnableComponents();
+		this.interrupt();
+		
+		try {
+			this.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public synchronized void Explose() {
@@ -44,7 +54,7 @@ public class BombMenu extends Thread{
 		DisableComponents();
 		
 		timer.start(); //inicia timer
-		this.start(); //inicia essa(essa classe) thread
+		new Thread(this).start();
 	}
 	
 	public boolean IsRunning() {
