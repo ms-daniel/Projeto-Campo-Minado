@@ -8,6 +8,8 @@ import back.BombMenu;
 import javax.swing.JLabel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Component;
@@ -19,9 +21,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Menu extends JPanel {
-	private JPanel Menu = this;
-
 	private ImagesChange get = new ImagesChange();
+	
+	private JFrame mainWindow;
+	
+	private JPanel Menu = this;
 	private JLabel Connect;
 	private JLabel CreateSeason;
 	private JLabel ChangeSkin;
@@ -34,7 +38,9 @@ public class Menu extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Menu() {
+	public Menu(JFrame frame) {
+		this.mainWindow = frame;
+		
 		setLayout(null);
 		
 		Connect = new JLabel("");
@@ -86,23 +92,18 @@ public class Menu extends JPanel {
 		Connect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					Connect.setIcon(get.getIcon("icons/ConectarSelected.png"));
-					BombIcon.setLocation(20, Connect.getY()-3);
-					BombIcon.setVisible(true);
-				}
+				if(!Bomb.IsRunning()) 
+					mouseEnter(Connect, 3, "ConectarSelected");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					Connect.setIcon(get.getIcon("icons/Conectar.png"));
-					BombIcon.setVisible(false);
-				}
+				if(!Bomb.IsRunning()) 
+					mouseExit(Connect, "Conectar");
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(!Bomb.IsRunning()) 
+				if(!Bomb.IsRunning())
 					Bomb.Explose();
 			}
 		});
@@ -110,18 +111,13 @@ public class Menu extends JPanel {
 		CreateSeason.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					CreateSeason.setIcon(get.getIcon("icons/Criar PartidaSelected.png"));
-					BombIcon.setLocation(20, CreateSeason.getY());
-					BombIcon.setVisible(true);
-				}
+				if(!Bomb.IsRunning()) 
+					mouseEnter(CreateSeason, 0, "Criar PartidaSelected");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
-					BombIcon.setVisible(false);
-				}
+				if(!Bomb.IsRunning())
+					mouseExit(CreateSeason, "Criar Partida");
 			}
 
 			@Override
@@ -134,42 +130,13 @@ public class Menu extends JPanel {
 		ChangeSkin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					ChangeSkin.setIcon(get.getIcon("icons/Mudar BonecoSelected.png"));
-					BombIcon.setLocation(20, ChangeSkin.getY()-3);
-					BombIcon.setVisible(true);
-				}
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
-					BombIcon.setVisible(false);
-				}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
 				if(!Bomb.IsRunning()) 
-					Bomb.Explose();
-			}
-		});
-		
-		ExitButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					ExitButton.setIcon(get.getIcon("icons/SairSelected.png"));
-					BombIcon.setLocation(20, ExitButton.getY());
-					BombIcon.setVisible(true);
-				}
+					mouseEnter(ChangeSkin, 3, "Mudar BonecoSelected");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!Bomb.IsRunning()) {
-					ExitButton.setIcon(get.getIcon("icons/Sair.png"));
-					BombIcon.setVisible(false);
-				}
+				if(!Bomb.IsRunning()) 
+					mouseExit(ChangeSkin, "Mudar Boneco");
 			}
 
 			@Override
@@ -177,8 +144,38 @@ public class Menu extends JPanel {
 				if(!Bomb.IsRunning()) 
 					Bomb.Explose();
 				
+				
 			}
 		});
+		
+		ExitButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(!Bomb.IsRunning()) 
+					mouseEnter(ExitButton, 0, "SairSelected");
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(!Bomb.IsRunning()) 
+					mouseExit(ExitButton, "Sair");
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.exit(ABORT);
+			}
+		});
+	}
+	
+	private void mouseEnter(JLabel label, int adjustY, String nameArchieve) {
+		label.setIcon(get.getIcon("icons/" + nameArchieve + ".png"));
+		BombIcon.setLocation(20, label.getY()-adjustY);
+		BombIcon.setVisible(true);
+	}
+	
+	private void mouseExit(JLabel label, String nameArchieve) {
+		label.setIcon(get.getIcon("icons/" + nameArchieve + ".png"));
+		BombIcon.setVisible(false);
 	}
 
 }
