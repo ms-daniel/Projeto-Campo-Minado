@@ -32,7 +32,6 @@ public class BombMenu extends Thread{
 	public synchronized void run() {
 		int cont = 1;
 		while(timer.isRunning()) {
-			System.out.println("Dan " + cont);
 			cont++;
 		}
 		
