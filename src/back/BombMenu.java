@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import front.Menu;
+
 public class BombMenu extends Thread{
 	private ImagesChange get = new ImagesChange();
 	ArrayList<BufferedImage> images;
@@ -22,12 +24,12 @@ public class BombMenu extends Thread{
 	
 	private Thread thread;
 	
-	private JPanel Menu;
+	private Menu menu;
 	private JLabel Bomb;
 	
 	private int cont = 15;
 	
-	public BombMenu(JPanel Menu, JLabel Bomb) {
+	public BombMenu(Menu Menu, JLabel Bomb) {
 		try {
 			images = get.GetAllImagesGif("icons/bomb-gif.gif");
 		} catch (IOException e) {
@@ -45,7 +47,7 @@ public class BombMenu extends Thread{
         });
 		
 		this.Bomb = Bomb;
-		this.Menu = Menu;
+		this.menu = Menu;
 	}
 	
 	@Override
@@ -71,11 +73,12 @@ public class BombMenu extends Thread{
 		
 		try {
 			this.join();
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			this.Menu.removeAll();
+			this.menu.ChangeComponentsTo(Menu.Components.CONNECT);
 		}
 	}
 	
@@ -97,14 +100,14 @@ public class BombMenu extends Thread{
 	}
 	
 	private void DisableComponents() {
-		Component[] components = Menu.getRootPane().getComponents();
+		Component[] components = menu.getRootPane().getComponents();
 	    for (Component component : components) {
 	        component.setEnabled(false);
 	    }
 	}
 	
 	private void EnableComponents() {
-		Component[] components = Menu.getRootPane().getComponents();
+		Component[] components = menu.getRootPane().getComponents();
 	    for (Component component : components) {
 	        component.setEnabled(true);
 	    }
