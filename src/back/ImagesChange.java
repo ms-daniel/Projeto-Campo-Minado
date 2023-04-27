@@ -1,8 +1,16 @@
 package back;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 
 public class ImagesChange {
 	/**
@@ -22,7 +30,7 @@ public class ImagesChange {
 	 * @return
 	 */
 	public ImageIcon getIcon (String FolderName){
-		return new ImageIcon(getClass().getClassLoader().getResource(FolderName));
+		return new ImageIcon("resources/" + (FolderName));
 	}
 	/**
 	 * Metodo para redimensionar imagem
@@ -42,5 +50,28 @@ public class ImagesChange {
         ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
 		
 		return resizedImageIcon;
+	}
+	
+	public ArrayList<BufferedImage> GetAllImagesGif(String Folder) throws IOException{
+		File gifFile = new File("resources/" + Folder);
+        ImageInputStream stream = ImageIO.createImageInputStream(gifFile);
+        Iterator<ImageReader> readers = ImageIO.getImageReaders(stream);
+        
+        if (!readers.hasNext()) {
+            throw new RuntimeException("No reader for this format");
+        }
+        
+        ImageReader reader = readers.next();
+        reader.setInput(stream);
+        
+        int numImages = reader.getNumImages(true);
+        ArrayList<BufferedImage> images = new ArrayList<>();
+        
+        for (int i = 0; i < numImages; i++) {
+            BufferedImage image = reader.read(i);
+            images.add(image);
+        }
+        
+        return images;
 	}
 }
