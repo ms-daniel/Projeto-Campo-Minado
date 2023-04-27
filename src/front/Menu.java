@@ -25,7 +25,7 @@ import java.awt.event.ContainerEvent;
 
 public class Menu extends JPanel {
 	public enum Components{
-		CONNECT, CREATE, CHANGESKIN
+		MENU, CONNECT, CREATE, CHANGESKIN
 	}
 	
 	private ImagesChange get = new ImagesChange();
@@ -53,44 +53,36 @@ public class Menu extends JPanel {
 		Connect.setIcon(get.getIcon("icons/Conectar.png"));
 		Connect.setBorder(null);
 		Connect.setBounds(67, 205, 295, 45);
-		add(Connect);
 		
 		CreateSeason = new JLabel("");
 		CreateSeason.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
 		CreateSeason.setBorder(null);
 		CreateSeason.setBounds(67, 270, 460, 45);
-		add(CreateSeason);
 		
 		ChangeSkin = new JLabel("");
 		ChangeSkin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
 		ChangeSkin.setBorder(null);
 		ChangeSkin.setBounds(68, 340, 425, 45);
-		add(ChangeSkin);
 		
 		ExitButton = new JLabel("");
 		ExitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ExitButton.setIcon(get.getIcon("icons/Sair.png"));
 		ExitButton.setBorder(null);
 		ExitButton.setBounds(68, 403, 150, 45);
-		add(ExitButton);
 		
 		BombIcon = new JLabel("");
 		BombIcon.setIcon(get.getIcon("icons/Bomb-pixel.png"));
 		BombIcon.setBorder(null);
 		BombIcon.setBounds(0, 0, 50, 45);
 		BombIcon.setVisible(false);
-		add(BombIcon);
 		
 		MenuBackground = new JLabel("");
 		MenuBackground.setIcon(get.getIcon("icons/menu.jpg"));
 		MenuBackground.setBounds(0, 0, 630, 630);
-		add(MenuBackground);
-
-		Bomb = new BombMenu(this.Menu, this.BombIcon);
 		
-		EffectsOn();
+		AddComponents();
 	}
 	
 	private void EffectsOn() {
@@ -175,10 +167,11 @@ public class Menu extends JPanel {
 		this.removeAll();
 		
 		switch(next) {
+		case MENU:
+			AddComponents();
+			break;
 		case CONNECT:
 			new MenuConnect().AddComponents(Menu, MenuBackground);
-			
-			System.out.println("Ëntrou");
 			break;
 		case CREATE:
 			
@@ -201,6 +194,21 @@ public class Menu extends JPanel {
 	private void mouseExit(JLabel label, String nameArchieve) {
 		label.setIcon(get.getIcon("icons/" + nameArchieve + ".png"));
 		BombIcon.setVisible(false);
+	}
+	
+	private void AddComponents() {
+		add(Connect);
+		add(CreateSeason);
+		add(ChangeSkin);
+		add(ExitButton);
+		add(BombIcon);
+		add(MenuBackground);
+		
+		Bomb = new BombMenu(this.Menu, this.BombIcon);
+		
+		EffectsOn();
+		
+		repaint();
 	}
 
 }
