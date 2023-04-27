@@ -54,6 +54,10 @@ public class Server extends Thread {
         }
     }
 
+    public void closeServer() throws IOException{
+        server.close();
+    }
+
     private void PreencherBoard() {
         int count = 0;
         for (int l = 0; l < Config.boardLength; l++) {
