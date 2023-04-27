@@ -3,6 +3,7 @@ package front;
 import javax.swing.JPanel;
 
 import back.ImagesChange;
+import front.Menu.Components;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -19,12 +20,18 @@ import java.awt.event.MouseEvent;
 
 public class MenuConnect extends JPanel{
 	private ImagesChange get = new ImagesChange();
+	
+	private Menu Menu;
+	
+	
 	private JTextField IpText;
 	private JTextField PortText;
+	
 	private JLabel PortLabel;
 	private JLabel ipLabel;
 	private JLabel IpPortLabel;
 	private JLabel Entrar;
+	private JLabel Voltar;
 	
 	public MenuConnect(){
 		setLayout(null);
@@ -72,12 +79,17 @@ public class MenuConnect extends JPanel{
 		IpPortLabel.setBounds(132, 202, 400, 200);
 		add(IpPortLabel);
 		
+		Voltar = new JLabel("");
+		Voltar.setIcon(get.getIcon("icons/voltar.png"));
+		Voltar.setBounds(204, 465, 220, 45);
+		add(Voltar);
+		
 		
 		
 	}
 	
 	public void AddComponents(Menu Menu, JLabel Background) {
-		get.getIcon(null);
+		this.Menu = Menu;
 		
 		ipLabel = new JLabel("");
 		ipLabel.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
@@ -115,12 +127,18 @@ public class MenuConnect extends JPanel{
 		Entrar.setIcon(get.getIcon("icons/entrar.png"));
 		Entrar.setBounds(204, 414, 220, 45);
 		
+		Voltar = new JLabel("");
+		Voltar.setIcon(get.getIcon("icons/voltar.png"));
+		Voltar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Voltar.setBounds(207, 465, 220, 45);
+		
 		
 		IpPortLabel = new JLabel("");
 		IpPortLabel.setIcon(get.getIcon("icons/menuConnect.png"));
 		IpPortLabel.setBounds(132, 202, 400, 200);
 		
 		Menu.add(Entrar);
+		Menu.add(Voltar);
 		Menu.add(PortText);
 		Menu.add(PortLabel);
 		Menu.add(IpText);
@@ -171,6 +189,22 @@ public class MenuConnect extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				//TO DO
+			}
+		});
+		
+		Voltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Voltar.setIcon(get.getIcon("icons/voltarSelected.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Voltar.setIcon(get.getIcon("icons/voltar.png"));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Menu.ChangeComponentsTo(Components.MENU);
 			}
 		});
 	}
