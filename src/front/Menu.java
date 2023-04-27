@@ -24,11 +24,15 @@ import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 
 public class Menu extends JPanel {
+	public enum Components{
+		CONNECT, CREATE, CHANGESKIN
+	}
+	
 	private ImagesChange get = new ImagesChange();
 	
 	private JFrame mainWindow;
 	
-	private JPanel Menu = this;
+	private Menu Menu = this;
 	private JLabel Connect;
 	private JLabel CreateSeason;
 	private JLabel ChangeSkin;
@@ -42,14 +46,6 @@ public class Menu extends JPanel {
 	 * Create the panel.
 	 */
 	public Menu(JFrame frame) {
-		addContainerListener(new ContainerAdapter() {
-			@Override
-			public void componentRemoved(ContainerEvent e) {
-				System.out.println("Daniel");
-			}
-		});
-		this.mainWindow = frame;
-		
 		setLayout(null);
 		
 		Connect = new JLabel("");
@@ -173,6 +169,27 @@ public class Menu extends JPanel {
 				System.exit(ABORT);
 			}
 		});
+	}
+	
+	public void ChangeComponentsTo(Components next) {
+		this.removeAll();
+		
+		switch(next) {
+		case CONNECT:
+			new MenuConnect().AddComponents(Menu, MenuBackground);
+			
+			System.out.println("Ëntrou");
+			break;
+		case CREATE:
+			
+			break;
+		case CHANGESKIN:
+			
+			break;
+		default:
+			
+			break;
+		}
 	}
 	
 	private void mouseEnter(JLabel label, int adjustY, String nameArchieve) {
