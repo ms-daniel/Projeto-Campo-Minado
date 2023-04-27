@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 
 public class Menu extends JPanel {
 	private ImagesChange get = new ImagesChange();
@@ -40,6 +42,12 @@ public class Menu extends JPanel {
 	 * Create the panel.
 	 */
 	public Menu(JFrame frame) {
+		addContainerListener(new ContainerAdapter() {
+			@Override
+			public void componentRemoved(ContainerEvent e) {
+				System.out.println("Daniel");
+			}
+		});
 		this.mainWindow = frame;
 		
 		setLayout(null);
