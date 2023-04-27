@@ -50,33 +50,27 @@ public class Menu extends JPanel {
 		
 		Connect = new JLabel("");
 		Connect.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Connect.setIcon(get.getIcon("icons/Conectar.png"));
 		Connect.setBorder(null);
 		Connect.setBounds(67, 205, 295, 45);
 		
 		CreateSeason = new JLabel("");
 		CreateSeason.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
 		CreateSeason.setBorder(null);
 		CreateSeason.setBounds(67, 270, 460, 45);
 		
 		ChangeSkin = new JLabel("");
 		ChangeSkin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
 		ChangeSkin.setBorder(null);
 		ChangeSkin.setBounds(68, 340, 425, 45);
 		
 		ExitButton = new JLabel("");
 		ExitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		ExitButton.setIcon(get.getIcon("icons/Sair.png"));
 		ExitButton.setBorder(null);
 		ExitButton.setBounds(68, 403, 150, 45);
 		
 		BombIcon = new JLabel("");
-		BombIcon.setIcon(get.getIcon("icons/Bomb-pixel.png"));
 		BombIcon.setBorder(null);
 		BombIcon.setBounds(0, 0, 50, 45);
-		BombIcon.setVisible(false);
 		
 		MenuBackground = new JLabel("");
 		MenuBackground.setIcon(get.getIcon("icons/menu.jpg"));
@@ -197,6 +191,14 @@ public class Menu extends JPanel {
 	}
 	
 	private void AddComponents() {
+		Connect.setIcon(get.getIcon("icons/Conectar.png"));
+		CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
+		ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
+		BombIcon.setIcon(get.getIcon("icons/Bomb-pixel.png"));
+		ExitButton.setIcon(get.getIcon("icons/Sair.png"));
+		
+		BombIcon.setVisible(false);
+		
 		add(Connect);
 		add(CreateSeason);
 		add(ChangeSkin);
