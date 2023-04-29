@@ -38,6 +38,7 @@ public class MainWindow extends JFrame {
 		setBounds(0, 0, 646, 669);
 //		contentPane = new PlayGame();
 		contentPane = new Menu(this);
+//		contentPane = new ChangeSkin();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
