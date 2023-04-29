@@ -1,24 +1,21 @@
 package front;
 
-import javax.swing.JPanel;
 
 import back.ImagesChange;
 import front.Menu.Components;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
-import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MenuConnect extends JPanel{
+public class MenuConnect{
 	private ImagesChange get = new ImagesChange();
 	
 	private Menu Menu;
@@ -32,58 +29,6 @@ public class MenuConnect extends JPanel{
 	private JLabel IpPortLabel;
 	private JLabel Entrar;
 	private JLabel Voltar;
-	
-	public MenuConnect(){
-		setLayout(null);
-		
-		ipLabel = new JLabel("");
-		ipLabel.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		ipLabel.setVisible(false);
-		
-		IpText = new JTextField();
-		IpText.setFont(new Font("Unispace", Font.PLAIN, 24));
-		IpText.setBorder(new EmptyBorder(0, 0, 0, 0));
-		IpText.setHorizontalAlignment(SwingConstants.LEFT);
-		IpText.setBounds(141, 253, 350, 42);
-		IpText.setColumns(10);
-		add(IpText);
-		
-		PortText = new JTextField();
-		PortText.setFont(new Font("Unispace", Font.PLAIN, 24));
-		PortText.setHorizontalAlignment(SwingConstants.LEFT);
-		PortText.setColumns(10);
-		PortText.setBorder(new EmptyBorder(0, 0, 0, 0));
-		PortText.setBounds(141, 353, 172, 42);
-		add(PortText);
-		
-		ipLabel.setLabelFor(IpText);
-		ipLabel.setIcon(new ImageIcon(MenuConnect.class.getResource("/icons/ipret.png")));
-		ipLabel.setBounds(130, 246, 370, 55);
-		add(ipLabel);
-		
-		PortLabel = new JLabel("");
-		PortLabel.setVisible(false);
-		PortLabel.setIcon(new ImageIcon(MenuConnect.class.getResource("/icons/portret.png")));
-		PortLabel.setLabelFor(PortText);
-		PortLabel.setBounds(130, 346, 200, 55);
-		add(PortLabel);
-	
-		Entrar = new JLabel("New label");
-		Entrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Entrar.setIcon(new ImageIcon(MenuConnect.class.getResource("/icons/entrar.png")));
-		Entrar.setBounds(204, 414, 220, 45);
-		add(Entrar);
-		
-		IpPortLabel = new JLabel("");
-		IpPortLabel.setIcon(new ImageIcon(MenuConnect.class.getResource("/icons/menuConnect.png")));
-		IpPortLabel.setBounds(132, 202, 400, 200);
-		add(IpPortLabel);
-		
-		Voltar = new JLabel("");
-		Voltar.setIcon(get.getIcon("icons/voltar.png"));
-		Voltar.setBounds(204, 465, 220, 45);
-		add(Voltar);
-	}
 	
 	public void AddComponents(Menu Menu, JLabel Background) {
 		this.Menu = Menu;
