@@ -73,7 +73,6 @@ public class Menu extends JPanel {
 		BombIcon.setBounds(0, 0, 50, 45);
 		
 		MenuBackground = new JLabel("");
-		MenuBackground.setIcon(get.getIcon("icons/menu.jpg"));
 		MenuBackground.setBounds(0, 0, 630, 630);
 		
 		AddComponents();
@@ -164,15 +163,19 @@ public class Menu extends JPanel {
 		case MENU:
 			AddComponents();
 			break;
+			
 		case CONNECT:
 			new MenuConnect().AddComponents(Menu, MenuBackground);
 			break;
+			
 		case CREATE:
 			
 			break;
+			
 		case CHANGESKIN:
 			
 			break;
+			
 		default:
 			
 			break;

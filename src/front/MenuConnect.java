@@ -83,9 +83,6 @@ public class MenuConnect extends JPanel{
 		Voltar.setIcon(get.getIcon("icons/voltar.png"));
 		Voltar.setBounds(204, 465, 220, 45);
 		add(Voltar);
-		
-		
-		
 	}
 	
 	public void AddComponents(Menu Menu, JLabel Background) {
