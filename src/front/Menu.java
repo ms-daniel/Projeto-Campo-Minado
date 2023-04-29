@@ -158,6 +158,7 @@ public class Menu extends JPanel {
 	
 	public void ChangeComponentsTo(Components next) {
 		this.removeAll();
+		add(MenuBackground);
 		
 		switch(next) {
 		case MENU:
@@ -199,6 +200,7 @@ public class Menu extends JPanel {
 		ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
 		BombIcon.setIcon(get.getIcon("icons/Bomb-pixel.png"));
 		ExitButton.setIcon(get.getIcon("icons/Sair.png"));
+		MenuBackground.setIcon(get.getIcon("icons/Menu.jpg"));
 		
 		BombIcon.setVisible(false);
 		
