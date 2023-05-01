@@ -3,6 +3,7 @@ package assets;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -14,11 +15,11 @@ import back.ImagesChange;
 public class Character extends Thread{
 	private ImagesChange get = new ImagesChange();
 	private JLabel Skinlabel;
-	private JLabel PlayerName;
+	private JLabel PlayerNameLabel;
 	
-	private String name;
-	private String skinLocal;
-	private String nameSkin;
+	private String PlayerName;
+	private ImageIcon[][] SkinImages;
+	private String SkinName;
 	private ImageIcon skin;
 	
 	private boolean pause = false;
@@ -32,27 +33,33 @@ public class Character extends Thread{
 	/**
 	 * constructor para instaciar um personagem/character
 	 * @param name: nome do jogador
-	 * @param FolderSkin: local + nome do arquivo + extensao da skin
+	 * @param SkinName: nome da skin
 	 * @param x: posicao x inicial
 	 * @param y: posicao y inicial
 	 */
-	public Character(String name, String FolderSkin, JLabel SkinLabel, JLabel PlayerName) {
+	public Character(String name, String SkinName, JLabel SkinLabel, JLabel PlayerName) {
+		//labels
 		this.Skinlabel = SkinLabel;
-		this.PlayerName = PlayerName;
+		this.PlayerNameLabel = PlayerName;
 		
-		this.name = name;
-		this.PlayerName.setText(this.name);
+		//nomes
+		this.PlayerName = name;
+		this.SkinName = SkinName;
 		
-		this.skinLocal = FolderSkin;
-		SetSkinNamePosition(FolderSkin);
+		this.PlayerNameLabel.setText(this.PlayerName);
 		
+		//reconfigurando label da skin
 		this.Skinlabel.setBounds(0, 0, 48, 66);
 		this.Skinlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.Skinlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		this.PlayerName.setBounds(0, 0, 55, 15);
+		//label do nome do jogador
+		this.PlayerNameLabel.setBounds(0, 0, 55, 15);
 		
-		this.skin = get.getIcon(FolderSkin);
+		//carregar imagens da skin e transformar para ImageIcon
+		SkinImages = ImageToIcon(get.GetSkinImages(SkinName));
+		
+		this.skin = SkinImages[0][0];
 		this.Skinlabel.setIcon(skin);
 	}
 	
@@ -72,55 +79,41 @@ public class Character extends Thread{
 		this.posX = x;
 		this.posY = y;
 		this.Skinlabel.setLocation(x, y);
-		this.PlayerName.setBounds(Skinlabel.getX() - 10, Skinlabel.getY() - 12, 65, 20);
+		this.PlayerNameLabel.setBounds(Skinlabel.getX() - 10, Skinlabel.getY() - 12, 65, 20);
 		
-		this.PlayerName.setFont(new Font("Arial", Font.BOLD, 10));
-		this.PlayerName.setForeground(Color.WHITE);
-		this.PlayerName.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		this.PlayerNameLabel.setFont(new Font("Arial", Font.BOLD, 10));
+		this.PlayerNameLabel.setForeground(Color.WHITE);
+		this.PlayerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		
-		this.PlayerName.setHorizontalTextPosition(SwingConstants.CENTER);
+		this.PlayerNameLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 	}
 	
 	public void Move(char direction, int position) {
-		this.nameSkin = this.nameSkin.replaceAll("\\d+", "") + position;
+		this.SkinName = this.SkinName.replaceAll("\\d+", "") + position;
 		
-		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 1 + ".png");
+		skin = get.getIcon("character/luffy/" + SkinName + "-" + 1 + ".png");
 		this.Skinlabel.setIcon(skin);
 		
 		WaitAFeelTime(250);
 		
-		skin = get.getIcon("character/luffy/" + nameSkin + "-" + 2 + ".png");
+		skin = get.getIcon("character/luffy/" + SkinName + "-" + 2 + ".png");
 		this.Skinlabel.setIcon(skin);
 		
 		WaitAFeelTime(250);
 		
-		skin = get.getIcon("character/luffy/" + nameSkin + ".png");
+		skin = get.getIcon("character/luffy/" + SkinName + ".png");
 		this.Skinlabel.setIcon(skin);
 		this.move = false;
 	}
 	
-	public synchronized void MoveTo(char direction, int position) {
+	public void MoveTo(char direction, int position) {
 		this.move = true;
 		this.direction = direction;
 		this.position = position;
-		//this.notify();
-	}
-	
-	public void Resize(int width, int height) {
-		skin = get.Resize(skin, width, height);
-		this.Skinlabel.setIcon(skin);
 	}
 	
 	public void Pause(boolean pause) {
 		this.pause = pause;
-	}
-	
-	private void SetSkinNamePosition(String Folder) {
-		String[] partes = Folder.split("/");
-		
-		partes = partes[partes.length-1].split("\\.");
-		
-		this.nameSkin = partes[0];
 	}
 	
 	public int GetSkinWidth() {
@@ -132,11 +125,26 @@ public class Character extends Thread{
 	}
 	
 	/**
+	 * Passa uma matriz de BufferedImage para ImageIcon
+	 * @param images: matriz BufferedImage a ser convertida
+	 * @return matriz de ImageIcon contendo todos os BufferedImage
+	 */
+	private ImageIcon[][] ImageToIcon(BufferedImage[][] images) {
+		ImageIcon[][] icons = new ImageIcon[4][3]; 
+		
+		for(int y = 0; y < 4; y++) 
+			for(int x = 0; x < 3; x++)
+				icons[y][x] = new ImageIcon(images[y][x]);
+		
+		return icons;
+	}
+	
+	/**
 	 * espera um tempo antes da proxima ação
 	 * @param time: milissegundos
 	 * @throws InterruptedException 
 	 */
-	public void WaitAFeelTime(long time){
+	private void WaitAFeelTime(long time){
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
