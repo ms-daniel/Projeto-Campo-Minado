@@ -52,6 +52,12 @@ public class ImagesChange {
 		return resizedImageIcon;
 	}
 	
+	/**
+	 * Separa um gif em varias imagens separadas(frames)
+	 * @param Folder: a pasta + nome do arquivo do gif a ser lido
+	 * @return um array list de imagens (BufferedImage)
+	 * @throws IOException
+	 */
 	public ArrayList<BufferedImage> GetAllImagesGif(String Folder) throws IOException{
 		File gifFile = new File("resources/" + Folder);
         ImageInputStream stream = ImageIO.createImageInputStream(gifFile);
@@ -73,5 +79,37 @@ public class ImagesChange {
         }
         
         return images;
+	}
+	
+	public BufferedImage[][] GetSkinImages(String SkinName){
+		File inputFile = new File("resources/character/" + SkinName + ".png");
+		BufferedImage inputImage;
+		BufferedImage[][] outputImages = null;
+		
+		try {
+			inputImage = ImageIO.read(inputFile);
+			
+			int rows = 4; // número de linhas para dividir a imagem
+			int cols = 3; // número de colunas para dividir a imagem
+			int partWidth = inputImage.getWidth() / cols; // largura de cada parte
+			int partHeight = inputImage.getHeight() / rows; // altura de cada parte
+
+			outputImages = new BufferedImage[rows][cols];
+			int count = 0;
+			for (int y = 0; y < rows; y++) {
+				for (int x = 0; x < cols; x++) {
+					int xPos = x * partWidth;
+		            int yPos = y * partHeight;
+		            BufferedImage chunk = inputImage.getSubimage(xPos, yPos, partWidth, partHeight);
+		            outputImages[y][x] = chunk;
+		            count++;
+		        }
+		    }
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return outputImages;
 	}
 }
