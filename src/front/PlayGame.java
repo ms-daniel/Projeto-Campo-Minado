@@ -84,7 +84,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerName = new JLabel();
 		
 		
-		character = new Character("CARLINHOS", "character/luffy/" + "lufy-1" + ".png", LabelCharacter, PlayerName);
+		character = new Character("CARLINHOS", "luffy", LabelCharacter, PlayerName);
 		character.Locale(270,235);
 		character.start(); 
 
