@@ -90,10 +90,10 @@ public class MenuConnect{
 		
 		Menu.repaint();
 		
-		Effects();
+		Events();
 	}
 	
-	private void Effects() {
+	private void Events() {
 		PortText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
