@@ -27,6 +27,8 @@ public class Menu extends JPanel {
 	public enum Components{
 		MENU, CONNECT, CREATE, CHANGESKIN
 	}
+	private MenuConnect MenuConnect = new MenuConnect();
+	private ChangeSkin ChangeSkin = new ChangeSkin() ;
 	
 	private ImagesChange get = new ImagesChange();
 	
@@ -35,7 +37,7 @@ public class Menu extends JPanel {
 	private Menu Menu = this;
 	private JLabel Connect;
 	private JLabel CreateSeason;
-	private JLabel ChangeSkin;
+	private JLabel ChangeSkinButton;
 	private JLabel ExitButton;
 	private JLabel BombIcon;
 	private JLabel MenuBackground;
@@ -58,10 +60,10 @@ public class Menu extends JPanel {
 		CreateSeason.setBorder(null);
 		CreateSeason.setBounds(67, 270, 460, 45);
 		
-		ChangeSkin = new JLabel("");
-		ChangeSkin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		ChangeSkin.setBorder(null);
-		ChangeSkin.setBounds(68, 340, 425, 45);
+		ChangeSkinButton = new JLabel("");
+		ChangeSkinButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		ChangeSkinButton.setBorder(null);
+		ChangeSkinButton.setBounds(68, 340, 425, 45);
 		
 		ExitButton = new JLabel("");
 		ExitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -94,7 +96,7 @@ public class Menu extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if(!Bomb.IsRunning())
-					Bomb.Explose();
+					Bomb.Explose(1);
 			}
 		});
 		
@@ -113,26 +115,26 @@ public class Menu extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if(!Bomb.IsRunning())
-					Bomb.Explose();
+					Bomb.Explose(2);
 			}
 		});
 		
-		ChangeSkin.addMouseListener(new MouseAdapter() {
+		ChangeSkinButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(!Bomb.IsRunning()) 
-					mouseEnter(ChangeSkin, 3, "Mudar BonecoSelected");
+					mouseEnter(ChangeSkinButton, 3, "Mudar BonecoSelected");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if(!Bomb.IsRunning()) 
-					mouseExit(ChangeSkin, "Mudar Boneco");
+					mouseExit(ChangeSkinButton, "Mudar Boneco");
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if(!Bomb.IsRunning()) 
-					Bomb.Explose();
+					Bomb.Explose(3);
 				
 			}
 		});
@@ -166,7 +168,7 @@ public class Menu extends JPanel {
 			break;
 			
 		case CONNECT:
-			new MenuConnect().AddComponents(Menu, MenuBackground);
+			MenuConnect.AddComponents(Menu, MenuBackground);
 			break;
 			
 		case CREATE:
@@ -174,7 +176,7 @@ public class Menu extends JPanel {
 			break;
 			
 		case CHANGESKIN:
-			
+			ChangeSkin.AddComponents(Menu, MenuBackground);
 			break;
 			
 		default:
@@ -197,7 +199,7 @@ public class Menu extends JPanel {
 	private void AddComponents() {
 		Connect.setIcon(get.getIcon("icons/Conectar.png"));
 		CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
-		ChangeSkin.setIcon(get.getIcon("icons/Mudar Boneco.png"));
+		ChangeSkinButton.setIcon(get.getIcon("icons/Mudar Boneco.png"));
 		BombIcon.setIcon(get.getIcon("icons/Bomb-pixel.png"));
 		ExitButton.setIcon(get.getIcon("icons/Sair.png"));
 		MenuBackground.setIcon(get.getIcon("icons/Menu.jpg"));
@@ -206,7 +208,7 @@ public class Menu extends JPanel {
 		
 		add(Connect);
 		add(CreateSeason);
-		add(ChangeSkin);
+		add(ChangeSkinButton);
 		add(ExitButton);
 		add(BombIcon);
 		add(MenuBackground);
