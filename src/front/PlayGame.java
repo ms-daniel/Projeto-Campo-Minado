@@ -84,7 +84,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerName = new JLabel();
 		
 		
-		character = new Character("CARLINHOS", "luffy", LabelCharacter, PlayerName);
+		character = new Character("CARLINHOS", "baby", LabelCharacter, PlayerName);
 		character.Locale(270,235);
 		character.start(); 
 
@@ -130,7 +130,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        // Verifique se a tecla pressionada é a tecla desejada
 	        if ((key == KeyEvent.VK_RIGHT) ||
 	        		(key == KeyEvent.VK_D )) {
-	        	character.MoveTo('R', 2);
+	        	character.MoveTo('R', 3);
 	
 	        	//move o mapa
 	        	mapsMove.MoveMaps(-45, 0);
@@ -139,7 +139,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	validKey = true; 
 	        }else if((key == KeyEvent.VK_LEFT) ||
 	        		(key == KeyEvent.VK_A)) {
-	        	character.MoveTo('L', 4);
+	        	character.MoveTo('L', 2);
 	        	
 	        	//move o mapa
 	        	mapsMove.MoveMaps(+45, 0);
@@ -158,7 +158,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        }
 	        else if((key == KeyEvent.VK_UP) ||
 				(key == KeyEvent.VK_W)) {
-	        	character.MoveTo('T', 3);
+	        	character.MoveTo('T', 4);
 	        	
 	        	//move o mapa
 	        	mapsMove.MoveMaps(0, +45);
