@@ -43,9 +43,9 @@ public class ChangeSkin extends JPanel {
 		add(ChangeSkinButton);
 		
 		panelCharacter = new JLabel("");
-		panelCharacter.setOpaque(true);
+		panelCharacter.setIcon(get.getIcon("/icons/painelChangeSkin.png"));
 		panelCharacter.setBackground(new Color(0, 0, 0));
-		panelCharacter.setBounds(30, 150, 570, 380);
+		panelCharacter.setBounds(12, 150, 606, 404);
 		add(panelCharacter);
 		
 		bakcgrouhd = new JLabel("");
@@ -62,26 +62,21 @@ public class ChangeSkin extends JPanel {
 		BackButton = new JLabel("");
 		BackButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		BackButton.setIcon(get.getIcon("icons/voltar.png"));
-		BackButton.setBounds(73, 540, 220, 42);
+		BackButton.setBounds(73, 550, 220, 42);
 		
 		ChangeSkinButton = new JLabel("");
 		ChangeSkinButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ChangeSkinButton.setIcon(get.getIcon("icons/mudar.png"));
-		ChangeSkinButton.setBounds(350, 540, 200, 42);
+		ChangeSkinButton.setBounds(350, 550, 200, 42);
 		
 		panelCharacter = new JLabel("");
-		panelCharacter.setOpaque(true);
+		panelCharacter.setIcon(get.getIcon("/icons/painelChangeSkin.png"));
 		panelCharacter.setBackground(new Color(0, 0, 0));
-		panelCharacter.setBounds(30, 150, 570, 380);
-		
-//		bakcgrouhd = new JLabel("");
-//		bakcgrouhd.setIcon(get.getIcon("icons/menu.jpg"));
-//		bakcgrouhd.setBounds(0, 0, 630, 630);
+		panelCharacter.setBounds(12, 150, 606, 404);
 		
 		Menu.add(BackButton);
 		Menu.add(ChangeSkinButton);
 		Menu.add(panelCharacter);
-//		Menu.add(bakcgrouhd);
 		Menu.add(Background);
 		
 		Menu.repaint();
@@ -116,6 +111,11 @@ public class ChangeSkin extends JPanel {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				ChangeSkinButton.setIcon(get.getIcon("icons/mudar.png"));
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
 			}
 		});
 	}
