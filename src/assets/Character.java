@@ -89,20 +89,17 @@ public class Character extends Thread{
 	}
 	
 	public void Move(char direction, int position) {
-		this.SkinName = this.SkinName.replaceAll("\\d+", "") + position;
+		position--; //to correct position
 		
-		skin = get.getIcon("character/luffy/" + SkinName + "-" + 1 + ".png");
-		this.Skinlabel.setIcon(skin);
-		
-		WaitAFeelTime(250);
-		
-		skin = get.getIcon("character/luffy/" + SkinName + "-" + 2 + ".png");
-		this.Skinlabel.setIcon(skin);
+		this.Skinlabel.setIcon(SkinImages[position][1]);
 		
 		WaitAFeelTime(250);
+
+		this.Skinlabel.setIcon(SkinImages[position][2]);
 		
-		skin = get.getIcon("character/luffy/" + SkinName + ".png");
-		this.Skinlabel.setIcon(skin);
+		WaitAFeelTime(250);
+
+		this.Skinlabel.setIcon(SkinImages[position][0]);
 		this.move = false;
 	}
 	
