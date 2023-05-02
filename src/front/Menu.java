@@ -29,6 +29,7 @@ public class Menu extends JPanel {
 	}
 	private MenuConnect MenuConnect = new MenuConnect();
 	private ChangeSkin ChangeSkin = new ChangeSkin() ;
+	private CreateSeason CreateSeason = new CreateSeason();
 	
 	private ImagesChange get = new ImagesChange();
 	
@@ -36,7 +37,7 @@ public class Menu extends JPanel {
 	
 	private Menu Menu = this;
 	private JLabel Connect;
-	private JLabel CreateSeason;
+	private JLabel CreateSeasonButton;
 	private JLabel ChangeSkinButton;
 	private JLabel ExitButton;
 	private JLabel BombIcon;
@@ -55,10 +56,10 @@ public class Menu extends JPanel {
 		Connect.setBorder(null);
 		Connect.setBounds(67, 205, 295, 45);
 		
-		CreateSeason = new JLabel("");
-		CreateSeason.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		CreateSeason.setBorder(null);
-		CreateSeason.setBounds(67, 270, 460, 45);
+		CreateSeasonButton = new JLabel("");
+		CreateSeasonButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		CreateSeasonButton.setBorder(null);
+		CreateSeasonButton.setBounds(67, 270, 460, 45);
 		
 		ChangeSkinButton = new JLabel("");
 		ChangeSkinButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -80,7 +81,7 @@ public class Menu extends JPanel {
 		AddComponents();
 	}
 	
-	private void EffectsOn() {
+	private void Events() {
 		Connect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -100,16 +101,16 @@ public class Menu extends JPanel {
 			}
 		});
 		
-		CreateSeason.addMouseListener(new MouseAdapter() {
+		CreateSeasonButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(!Bomb.IsRunning()) 
-					mouseEnter(CreateSeason, 0, "Criar PartidaSelected");
+					mouseEnter(CreateSeasonButton, 0, "Criar PartidaSelected");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if(!Bomb.IsRunning())
-					mouseExit(CreateSeason, "Criar Partida");
+					mouseExit(CreateSeasonButton, "Criar Partida");
 			}
 
 			@Override
@@ -172,7 +173,7 @@ public class Menu extends JPanel {
 			break;
 			
 		case CREATE:
-			
+			CreateSeason.AddComponents(Menu, MenuBackground);
 			break;
 			
 		case CHANGESKIN:
@@ -198,7 +199,7 @@ public class Menu extends JPanel {
 	
 	private void AddComponents() {
 		Connect.setIcon(get.getIcon("icons/Conectar.png"));
-		CreateSeason.setIcon(get.getIcon("icons/Criar Partida.png"));
+		CreateSeasonButton.setIcon(get.getIcon("icons/Criar Partida.png"));
 		ChangeSkinButton.setIcon(get.getIcon("icons/Mudar Boneco.png"));
 		BombIcon.setIcon(get.getIcon("icons/Bomb-pixel.png"));
 		ExitButton.setIcon(get.getIcon("icons/Sair.png"));
@@ -207,7 +208,7 @@ public class Menu extends JPanel {
 		BombIcon.setVisible(false);
 		
 		add(Connect);
-		add(CreateSeason);
+		add(CreateSeasonButton);
 		add(ChangeSkinButton);
 		add(ExitButton);
 		add(BombIcon);
@@ -215,7 +216,7 @@ public class Menu extends JPanel {
 		
 		Bomb = new BombMenu(this.Menu, this.BombIcon);
 		
-		EffectsOn();
+		Events();
 		
 		repaint();
 	}
