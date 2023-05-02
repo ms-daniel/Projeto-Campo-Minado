@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,16 +19,17 @@ import front.Menu;
 
 public class BombMenu extends Thread{
 	private ImagesChange get = new ImagesChange();
-	ArrayList<BufferedImage> images;
+	private ArrayList<BufferedImage> images;
 	
 	private Timer timer;
-	
+
 	private Thread thread;
 	
 	private Menu menu;
 	private JLabel Bomb;
 	
 	private int cont = 15;
+	private int opc = 0;
 	
 	public BombMenu(Menu Menu, JLabel Bomb) {
 		try {
@@ -78,11 +80,20 @@ public class BombMenu extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			this.menu.ChangeComponentsTo(Menu.Components.CONNECT);
+			if(opc == 1)
+				this.menu.ChangeComponentsTo(Menu.Components.CONNECT);
+			else if (opc == 2)
+				this.menu.ChangeComponentsTo(Menu.Components.CREATE);
+			else if (opc == 3)
+				this.menu.ChangeComponentsTo(Menu.Components.CHANGESKIN);
+			else
+				JOptionPane.showMessageDialog(null, "Opcao inexistente", "Error de sistema", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	public synchronized void Explose() {
+	public synchronized void Explose(int opc) {
+		this.opc = opc;
+		
 		ImageIcon icon = new ImageIcon(images.get(cont));
 		Bomb.setIcon(icon);
 		Bomb.setVisible(true);
