@@ -41,11 +41,20 @@ public class PlayGame extends JPanel implements KeyListener {
 	private ImagesChange get = new ImagesChange();
 	
 	private Character character;
+	private JLabel LabelCharacter;
+	private JLabel PlayerName;
+	
+	//testes
+	private Character character2;
+	private JLabel LabelCharacter2;
+	private JLabel PlayerName2;
+	//=========================
+	
 	private MapMove mapsMove;
 	private Thread mapThread;
 	
-	private JLabel LabelCharacter;
-	private JLabel PlayerName;
+	
+	
 	private JLabel map;
 	private JLabel mapT;
 	
@@ -84,7 +93,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerName = new JLabel();
 		
 		
-		character = new Character("CARLINHOS", "baby", LabelCharacter, PlayerName);
+		character = new Character("SKULLMONKEY", "baby", LabelCharacter, PlayerName);
 		character.Locale(270,235);
 		character.start(); 
 
@@ -114,6 +123,8 @@ public class PlayGame extends JPanel implements KeyListener {
 		add(map);
 
 		mapsMove = new MapMove(map, mapT);
+		AddOtherPlayer("Moises", "luffy", 270+90,235);
+		mapsMove.AddCharacterToMap(character2);
 	}
 	
 	@Override
@@ -170,11 +181,30 @@ public class PlayGame extends JPanel implements KeyListener {
 		        mapThread = new Thread(mapsMove);
 		        mapThread.start();
 		    }
+	        validKey = false; 
     	}
     }
 
     @Override
     public synchronized void keyReleased(KeyEvent e) {
         // Implemente o método keyReleased se necessário
+    }
+    /**
+     * Introduce another player in the map
+     * @param PlayerName: player name
+     * @param SkinName: name of skin used by the player
+     * @param x: coordenate x for player position
+     * @param y: coordenate y for player position
+     */
+    public void AddOtherPlayer(String PlayerName, String SkinName, int x, int y) {
+    	LabelCharacter2 = new JLabel();
+		PlayerName2 = new JLabel();
+    	
+    	character2 = new Character(PlayerName, SkinName, LabelCharacter2, PlayerName2);
+		character2.Locale(x, y);
+		character2.start(); 
+		
+		add(PlayerName2, 2);
+		add(LabelCharacter2, 3);
     }
 }
