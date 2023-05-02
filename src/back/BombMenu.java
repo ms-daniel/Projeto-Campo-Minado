@@ -66,8 +66,6 @@ public class BombMenu extends Thread{
 				e.printStackTrace();
 			}
 		}
-		
-		
 		cont = 15;
 		
 		EnableComponents();
