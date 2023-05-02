@@ -103,7 +103,7 @@ public class Character extends Thread{
 		this.move = false;
 	}
 	
-	public void MoveTo(char direction, int position) {
+	public synchronized void MoveTo(char direction, int position) {
 		this.move = true;
 		this.direction = direction;
 		this.position = position;
