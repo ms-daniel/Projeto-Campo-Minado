@@ -3,6 +3,7 @@ package assets;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
@@ -14,6 +15,8 @@ import back.ImagesChange;
 
 public class Character extends Thread{
 	private ImagesChange get = new ImagesChange();
+	private Font fonte = new Font("Arial", Font.BOLD, 10);
+	
 	private JLabel Skinlabel;
 	private JLabel PlayerNameLabel;
 	
@@ -27,8 +30,8 @@ public class Character extends Thread{
 	private char direction;
 	private int position;
 	
-	private int posX;
-	private int posY;
+	private int posX = 0;
+	private int posY = 0;
 	
 	/**
 	 * constructor para instaciar um personagem/character
@@ -43,6 +46,7 @@ public class Character extends Thread{
 		this.PlayerNameLabel = PlayerName;
 		
 		//nomes
+		name = name.toUpperCase();
 		this.PlayerName = name;
 		this.SkinName = SkinName;
 		
@@ -55,6 +59,11 @@ public class Character extends Thread{
 		
 		//label do nome do jogador
 		this.PlayerNameLabel.setBounds(0, 0, 55, 15);
+		this.PlayerNameLabel.setFont(this.fonte);
+		this.PlayerNameLabel.setForeground(Color.WHITE);
+		this.PlayerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		this.PlayerNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		this.PlayerNameLabel.setVerticalAlignment(SwingConstants.CENTER);
 		
 		//carregar imagens da skin e transformar para ImageIcon
 		SkinImages = ImageToIcon(get.GetSkinImages(SkinName));
@@ -76,16 +85,20 @@ public class Character extends Thread{
 	}
 	
 	public void Locale(int x, int y) {
-		this.posX = x;
-		this.posY = y;
-		this.Skinlabel.setLocation(x, y);
+		this.posX += x;
+		this.posY += y;
+		this.Skinlabel.setLocation(this.posX, this.posY);
+		this.PlayerNameLabel.setBounds(Skinlabel.getX() - 17, Skinlabel.getY() - 12, 78, 20);
+	}
+	/**
+	 * increment or decrement player location
+	 * @param x: increment or decrement x
+	 * @param y: increment or decrement y
+	 */
+	public void InDecLocale(int x, int y) {
+		
+		this.Skinlabel.setLocation(Skinlabel.getX() + x, Skinlabel.getY() + y);
 		this.PlayerNameLabel.setBounds(Skinlabel.getX() - 10, Skinlabel.getY() - 12, 65, 20);
-		
-		this.PlayerNameLabel.setFont(new Font("Arial", Font.BOLD, 10));
-		this.PlayerNameLabel.setForeground(Color.WHITE);
-		this.PlayerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		
-		this.PlayerNameLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 	}
 	
 	public void Move(char direction, int position) {
