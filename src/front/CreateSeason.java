@@ -32,7 +32,7 @@ private ImagesChange get = new ImagesChange();
 	private JLabel PortLabel;
 	private JLabel ipLabel;
 	private JLabel IpPortLabel;
-	private JLabel Entrar;
+	private JLabel Criar;
 	private JLabel Voltar;
 	
 	public void AddComponents(Menu Menu, JLabel Background) {
@@ -69,10 +69,10 @@ private ImagesChange get = new ImagesChange();
 		IpText.setColumns(10);
 		
 	
-		Entrar = new JLabel("");
-		Entrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Entrar.setIcon(get.getIcon("icons/entrar.png"));
-		Entrar.setBounds(204, 414, 220, 45);
+		Criar = new JLabel("");
+		Criar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Criar.setIcon(get.getIcon("icons/criar.png"));
+		Criar.setBounds(204, 414, 220, 45);
 		
 		Voltar = new JLabel("");
 		Voltar.setIcon(get.getIcon("icons/voltar.png"));
@@ -84,7 +84,7 @@ private ImagesChange get = new ImagesChange();
 		IpPortLabel.setIcon(get.getIcon("icons/menuConnect.png"));
 		IpPortLabel.setBounds(132, 202, 400, 200);
 		
-		Menu.add(Entrar);
+		Menu.add(Criar);
 		Menu.add(Voltar);
 		Menu.add(PortText);
 		Menu.add(PortLabel);
@@ -123,14 +123,14 @@ private ImagesChange get = new ImagesChange();
 			}
 		});
 		
-		Entrar.addMouseListener(new MouseAdapter() {
+		Criar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Entrar.setIcon(get.getIcon("icons/entrarSelected.png"));
+				Criar.setIcon(get.getIcon("icons/criarSelected.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				Entrar.setIcon(get.getIcon("icons/entrar.png"));
+				Criar.setIcon(get.getIcon("icons/criar.png"));
 			}
 
 			@Override
