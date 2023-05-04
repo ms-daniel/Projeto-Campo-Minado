@@ -13,16 +13,30 @@ public class MapMove implements Runnable {
     private int increment;
     private ArrayList<Character> characters = new ArrayList<>();;
     
+    /**
+     * Class responsible for moving the map of other players
+     * @param map: Image of the main map
+     * @param mapT: Usually the second layer of the map containing the tops of trees, mountains, etc.
+     */
 	public MapMove(JLabel map, JLabel mapT) {
         this.map = map;
         this.mapT = mapT;
     }
 	
+    /**
+     * Class responsible for moving the map of other players
+     * @param map: Image of the main map
+     */
 	public MapMove(JLabel map) {
         this.map = map;
         this.mapT = null;
     }
 	
+	/**
+	 * Tells where the map should be moved and whether it's a negative (up) or positive (down) move
+	 * @param x: x position
+	 * @param y: y position
+	 */
 	public void MoveMaps(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -34,16 +48,23 @@ public class MapMove implements Runnable {
 		}
 	}
 	
+	/**
+	 * Add a new character to the list of secondary characters (other players)
+	 * @param Character: player
+	 */
 	public void AddCharacterToMap(Character Character) {
 		this.characters.add(Character);
 	}
 	
+	/**
+	 * Makes all the animation of the main character and the secondary ones according to the main one
+	 */
 	@Override
 	public void run() {
-		//System.out.println("X: " + map.getX() + " Y: " + map.getY());
+		int xAux = map.getX() + x, yAux = map.getY() + y; //stores the final position of the map at
+														  //the end of the animation of the main character
 		
-		int xAux = map.getX() + x, yAux = map.getY() + y;
-		
+		//This for is responsible for the movement of the map while it shows the animation of the main character walking
 		for(int i = 1; Math.abs(i) < 46; i+=increment) {
 			if(y == 0) {
 				map.setLocation(map.getX() + increment, map.getY());
@@ -66,21 +87,25 @@ public class MapMove implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		//=======================================================================
 		
+		//position the maps in their final places
 		map.setLocation(xAux, yAux);
-		
-		//posiciona todos os players dentro do mapa nos seus lugares
-		if(y == 0)
-			setLocaleToAllCharacters(45*increment, 0);
-		else
-			setLocaleToAllCharacters(0, 45*increment);
-		
 		if(mapT != null)
-			mapT.setLocation(xAux, yAux);	
-		//System.out.println("depois X: " + map.getX() + "depois Y: " + map.getY());
-
+			mapT.setLocation(xAux, yAux);
+		
+		//positions all players within the map in their final places
+		if(y == 0)
+			MoveAllCharacters(45*increment, 0);
+		else
+			MoveAllCharacters(0, 45*increment);
 	}
 	
+	/**
+	 * Moves all players according to the animation and movement of the main player
+	 * @param x: x position
+	 * @param y: y position
+	 */
 	private void MoveAllCharacters(int x, int y) {
 		Character CurrentCharacter;
 		
@@ -90,6 +115,11 @@ public class MapMove implements Runnable {
 		}
 	}
 	
+	/**
+	 * Moves all players to a specific position
+	 * @param x: x position
+	 * @param y: y position
+	 */
 	private void setLocaleToAllCharacters(int x, int y) {
 		Character CurrentCharacter;
 		
