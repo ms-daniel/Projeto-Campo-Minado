@@ -53,8 +53,8 @@ public class PlayGame extends JPanel implements KeyListener {
 	private MapMove mapsMove;
 	private Thread mapThread;
 	
-	
-	
+	private int[][] walls = Config.matrizMap1;
+ 	
 	private JLabel map;
 	private JLabel mapT;
 	
@@ -114,8 +114,10 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		mapT = new JLabel();
 		mapT.setBounds(0, 0, 2250, 2250);
-		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
-		add(mapT);
+//		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
+		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
+		add(mapT,0);
+		
 		
 		map = new JLabel();
 		map.setBounds(0, 0, 2250, 2250);
@@ -123,7 +125,17 @@ public class PlayGame extends JPanel implements KeyListener {
 		add(map);
 
 		mapsMove = new MapMove(map, mapT);
+		//add other players
 		AddOtherPlayer("Moises", "luffy", 270+90,235);
+		mapsMove.AddCharacterToMap(character2);
+		
+		AddOtherPlayer("Law0", "green-dragon", 270+180,235);
+		mapsMove.AddCharacterToMap(character2);
+		
+		AddOtherPlayer("Chocolate", "jill-valentine", 270+90,235+90);
+		mapsMove.AddCharacterToMap(character2);
+		
+		AddOtherPlayer("Leitinho", "claire-redfield", 270+180,235+90);
 		mapsMove.AddCharacterToMap(character2);
 	}
 	
