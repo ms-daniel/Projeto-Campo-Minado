@@ -39,7 +39,8 @@ public class ServerConnection extends Thread {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             DataOutputStream outToClient = new DataOutputStream(connection.getOutputStream());
 
-            player.SetName(inFromClient.readLine());
+            String nameSkin[] = inFromClient.readLine().split(";");
+            player.SetNameAndSkin(nameSkin[0], nameSkin[1]);
             makeMulticastConnection();
             outToClient.writeBytes(getAllBombs() + "\n");
 
@@ -80,9 +81,9 @@ public class ServerConnection extends Thread {
     private String getAllData() {
         String data = "";
         for (Player i : players) {
-            data += i.toString();
+            data += i.toString() + ":";
         }
-        return data;
+        return data.substring(0, data.length() - 1) + "";
     }
 
     private String getAllBombs() {
@@ -95,7 +96,7 @@ public class ServerConnection extends Thread {
                 }
             }
         }
-        return data;
+        return data.substring(0, data.length() - 1) + "";
     }
 
     private boolean verifyCoordinates(int x, int y) {

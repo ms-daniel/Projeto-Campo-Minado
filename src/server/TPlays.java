@@ -12,13 +12,14 @@ public class TPlays extends Thread {
     private static InetAddress grp;
     private static byte rec[] = new byte[256];
     private static DatagramPacket pkg = new DatagramPacket(rec, rec.length);
-    private static String pkgValue;
+    private static String currentInfos;
 
     public void run(){
         try {
             makeConnection();
             while(true){
-                System.out.println(receberPlays());
+                receberPlays();
+                System.out.println(getCurrentInfos());
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -26,16 +27,19 @@ public class TPlays extends Thread {
         }
     }
 
-    private static void makeConnection() throws IOException {
+    private void makeConnection() throws IOException {
         receberCast = new MulticastSocket(Config.multicastPort);
         grp = InetAddress.getByName(Config.multicastIp);
         receberCast.joinGroup(grp);
     }
 
-    private static String receberPlays() throws IOException {
+    private void receberPlays() throws IOException {
         receberCast.receive(pkg);
-        pkgValue = new String(pkg.getData(), 0, pkg.getLength());
-        return pkgValue;
+        currentInfos = new String(pkg.getData(), 0, pkg.getLength());
+    }
+
+    public String getCurrentInfos(){
+        return currentInfos;
     }
 
 }

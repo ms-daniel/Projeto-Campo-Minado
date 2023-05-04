@@ -36,10 +36,32 @@ public class ServerInterface {
         board.start();
     }
 
-    public static String sandPlayAndRecive(String play) throws IOException {
+    /**
+     * 
+     * @param play Na primeira chamada deve ser enviado o nome do jogador
+     * @return Na primeira chamada retorna as bombas
+     * @throws IOException
+     */
+    public static String sandPlay(String play) throws IOException {
         String res = "Erro: Conexão não iniciada entre jogador e servidor. Tente utilizar o método connectPlayer antes";
         if(outToServer != null && inFromServer != null){
             outToServer.writeBytes(play + "\n");
+            res = inFromServer.readLine();
+        }
+        return res;
+    }
+
+    /**
+     * 
+     * @param name Nome do jogador
+     * @param skin Skin do jogador
+     * @return As bombas no seguinte formato - x;y:x¹;y¹:x²;y²...
+     * @throws IOException
+     */
+    public static String sandNameAndSkin(String name, String skin) throws IOException {
+        String res = "Erro: Conexão não iniciada entre jogador e servidor. Tente utilizar o método connectPlayer antes";
+        if(outToServer != null && inFromServer != null){
+            outToServer.writeBytes(name + ";" + skin + "\n");
             res = inFromServer.readLine();
         }
         return res;
@@ -55,6 +77,13 @@ public class ServerInterface {
         if(server != null){
             server.closeServer();
         }
+    }
+
+    public static String getCurrentInfos() throws IOException{
+        if(board != null){
+            return board.getCurrentInfos();
+        }
+        return "É necessário iniciar a thread board";
     }
 
     private static void makeConnection(String ip, int port) throws IOException {

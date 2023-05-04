@@ -4,13 +4,15 @@ import java.util.regex.Pattern;
 
 public class Player {
     private String name;
+    private String skin;
     private int x;
     private int y;
 
     private Pattern regex = Pattern.compile("\\d+");
 
-    public void SetName(String name) {
+    public void SetNameAndSkin(String name, String skin) {
         this.name = name;
+        this.skin = skin;
     }
 
     public void SetCoordinates(String x, String y) {
@@ -35,7 +37,7 @@ public class Player {
     @Override
     public String toString() {
         if(name != null){
-            return name + ";" + x + ";" + y + ";";
+            return name + ";" + skin + ";" + x + ";" + y + ";";
         }
         return "";
     }
