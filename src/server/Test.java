@@ -17,12 +17,11 @@ public class Test {
 
         System.out.print("Digite seu nome: ");
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-        String bombs = ServerInterface.sandPlayAndRecive(inFromUser.readLine());
+        String bombs = ServerInterface.sandNameAndSkin(inFromUser.readLine(), "skin_teste");
         String play = "";
-
         while (play != "sair") {
             play = inFromUser.readLine();
-            System.out.println(ServerInterface.sandPlayAndRecive(play));
+            System.out.println(ServerInterface.sandPlay(play));
         }
         ServerInterface.closeConnection();
     }
