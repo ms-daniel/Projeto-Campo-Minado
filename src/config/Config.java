@@ -6,6 +6,10 @@ public class Config {
     public static String multicastIp = "239.0.0.1";
     public static int multicastPort = 6924;
     public static int connectionsNumber = 2;
+    
+    public static int mapPositionX = 135; //funcao para calcular posição do mapa
+    									 //em relação do char principal f(x/y) = (((Xc-1)*45) - 270)*-1
+    public static int mapPositionY = -1710;
 
     public static int boardLength = 50;
     
