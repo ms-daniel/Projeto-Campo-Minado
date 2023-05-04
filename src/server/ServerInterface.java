@@ -19,9 +19,9 @@ public class ServerInterface {
     private static BufferedReader inFromServer;
     private static TPlays board;
 
-    public static String startServer(int port){
+    public static String startServer(int port, String ip){
         server = new Server();
-        ipServer = server.runServer(port);
+        ipServer = server.runServer(port, ip);
         if(ipServer != null){
             server.start();
             return ipServer;
@@ -30,10 +30,15 @@ public class ServerInterface {
         return "Porta indisponivel";
     }
 
-    public static void connectPlayer(String ip, int port) throws IOException{
-        makeConnection(ip, port);
-        board = new TPlays();
-        board.start();
+    public static Boolean connectPlayer(String ip, int port){
+        try {
+			makeConnection(ip, port);
+			board = new TPlays();
+	        board.start();
+	        return true;
+		} catch (IOException e) {
+			return false;
+		}
     }
 
     /**

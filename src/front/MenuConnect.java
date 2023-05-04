@@ -3,8 +3,11 @@ package front;
 
 import back.ImagesChange;
 import front.Menu.Components;
+import server.ServerInterface;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -130,7 +133,15 @@ public class MenuConnect{
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//TO DO
+				if(!IpText.getText().equals("") || !PortText.getText().equals("")) {
+					if(!ServerInterface.connectPlayer(IpText.getText(),Integer.parseInt(PortText.getText()))) {
+						JOptionPane.showMessageDialog(null, "IP ou Porta indisponiveis", "Error", JOptionPane.ERROR_MESSAGE);
+					}else {
+						JOptionPane.showMessageDialog(null, "Introduzido com sucesso!", "Aberto (la ele)", JOptionPane.PLAIN_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "IP ou Porta estao vazios", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		

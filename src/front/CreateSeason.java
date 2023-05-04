@@ -1,19 +1,26 @@
 package front;
 
+import server.ServerInterface;
+
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import back.ImagesChange;
+import config.Config;
 import front.Menu.Components;
 
 public class CreateSeason extends JPanel {
@@ -53,7 +60,7 @@ private ImagesChange get = new ImagesChange();
 		PortLabel.setBounds(130, 346, 200, 55);
 		
 		
-		PortText = new JTextField();
+		PortText = new JTextField(String.valueOf(Config.port));
 		PortText.setFont(new Font("Unispace", Font.PLAIN, 24));
 		PortText.setHorizontalAlignment(SwingConstants.LEFT);
 		PortText.setColumns(10);
@@ -61,7 +68,12 @@ private ImagesChange get = new ImagesChange();
 		PortText.setBounds(141, 353, 172, 42);
 		
 		
-		IpText = new JTextField();
+		try {
+			IpText = new JTextField(InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		IpText.setFont(new Font("Unispace", Font.PLAIN, 24));
 		IpText.setBorder(new EmptyBorder(0, 0, 0, 0));
 		IpText.setHorizontalAlignment(SwingConstants.LEFT);
@@ -135,7 +147,15 @@ private ImagesChange get = new ImagesChange();
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//TO DO
+				if(!IpText.getText().equals("") || !PortText.getText().equals("")) {
+					if(ServerInterface.startServer(Integer.parseInt(PortText.getText()), IpText.getText()) == null) {
+						JOptionPane.showMessageDialog(null, "IP ou Porta indisponiveis", "Error", JOptionPane.ERROR_MESSAGE);
+					}else {
+						JOptionPane.showMessageDialog(null, "Aberto com sucesso!", "Aberto (la ele)", JOptionPane.PLAIN_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "IP ou Porta estao vazios", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		

@@ -45,28 +45,4 @@ public class MainWindow extends JFrame {
 
 		setContentPane(contentPane);
 	}
-	
-	public void ChangeTo(Panels frame) {
-		switch(frame) {
-			case MENU:
-				
-				break;
-			case PLAYGAME:
-				
-				break;
-			case CREATE:
-				
-				break;
-			case CONNECT:
-				
-				break;
-			case CHANGESKIN:
-				
-				break;
-			default:
-				
-				break;
-		}
-	}
-
 }

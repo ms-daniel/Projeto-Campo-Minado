@@ -45,10 +45,11 @@ public class Server extends Thread {
         }
     }
 
-    public String runServer(int port){
+    public String runServer(int port, String ipString){
         try {
-            server = new ServerSocket(port);
-            return InetAddress.getLocalHost().getHostAddress();
+        	InetAddress ip = InetAddress.getByName(ipString);
+            server = new ServerSocket(port, 0, ip);
+            return "Servidor Funcionando";
         } catch (IOException e) {
             return null;
         }

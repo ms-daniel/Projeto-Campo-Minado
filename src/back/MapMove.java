@@ -96,9 +96,9 @@ public class MapMove implements Runnable {
 		
 		//positions all players within the map in their final places
 		if(y == 0)
-			MoveAllCharacters(45*increment, 0);
+			setLocaleToAllCharacters(45*increment, 0);
 		else
-			MoveAllCharacters(0, 45*increment);
+			setLocaleToAllCharacters(0, 45*increment);
 	}
 	
 	/**

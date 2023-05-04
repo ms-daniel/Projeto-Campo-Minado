@@ -74,14 +74,7 @@ public class Character extends Thread{
 	
 	@Override
 	public void run() {
-		while(!pause) { // Verifica se o pause foi ativado
-			synchronized (this) {} //apenas para poder continuar executando a thread
-			if(move){
-				Move(this.direction, this.position);
-			}
-			
-		}
-		
+		Move(this.direction, this.position);
 	}
 	
 	public void Locale(int x, int y) {
@@ -96,7 +89,6 @@ public class Character extends Thread{
 	 * @param y: increment or decrement y
 	 */
 	public void InDecLocale(int x, int y) {
-		
 		this.Skinlabel.setLocation(Skinlabel.getX() + x, Skinlabel.getY() + y);
 		this.PlayerNameLabel.setBounds(Skinlabel.getX() - 10, Skinlabel.getY() - 12, 65, 20);
 	}
@@ -120,6 +112,8 @@ public class Character extends Thread{
 		this.move = true;
 		this.direction = direction;
 		this.position = position;
+		
+		new Thread(this).start();
 	}
 	
 	public void Pause(boolean pause) {

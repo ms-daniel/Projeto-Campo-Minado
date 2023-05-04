@@ -11,7 +11,7 @@ import config.Config;
 public class Test {
     public static void main(String[] args) throws IOException {
         System.out.println("Conectando... Aguarde");
-        System.out.println(ServerInterface.startServer(Config.port));
+        System.out.println(ServerInterface.startServer(Config.port, Config.ip));
 
         ServerInterface.connectPlayer(Config.ip, Config.port);
 

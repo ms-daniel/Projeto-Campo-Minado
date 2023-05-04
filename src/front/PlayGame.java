@@ -51,7 +51,6 @@ public class PlayGame extends JPanel implements KeyListener {
 	//=========================
 	
 	private MapMove mapsMove;
-	private Thread mapThread;
 	
 	private int[][] walls = Config.matrizMap1;
  	
@@ -75,7 +74,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	 */
 	public PlayGame() {
 		
-		timer = new Timer(570, new ActionListener() {
+		timer = new Timer(600, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica do processamento do evento de teclado aqui
@@ -95,7 +94,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		character = new Character("SKULLMONKEY", "baby", LabelCharacter, PlayerName);
 		character.Locale(270,235);
-		character.start(); 
+		//character.start(); 
 
 		JLabel arrowkeyslabel = new JLabel("");
 		arrowkeyslabel.setToolTipText("keys");
@@ -116,7 +115,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		mapT.setBounds(0, 0, 2250, 2250);
 //		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
 		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
-		add(mapT,0);
+//		add(mapT,0);
 		
 		
 		map = new JLabel();
@@ -129,7 +128,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		AddOtherPlayer("Moises", "luffy", 270+90,235);
 		mapsMove.AddCharacterToMap(character2);
 		
-		AddOtherPlayer("Law0", "green-dragon", 270+180,235);
+		AddOtherPlayer("Law", "green-dragon", 270+180,235);
 		mapsMove.AddCharacterToMap(character2);
 		
 		AddOtherPlayer("Chocolate", "jill-valentine", 270+90,235+90);
@@ -190,8 +189,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	validKey = true; 
 	        }
 	        if(validKey) {
-		        mapThread = new Thread(mapsMove);
-		        mapThread.start();
+		        new Thread(mapsMove).start();
 		    }
 	        validKey = false; 
     	}
@@ -214,7 +212,7 @@ public class PlayGame extends JPanel implements KeyListener {
     	
     	character2 = new Character(PlayerName, SkinName, LabelCharacter2, PlayerName2);
 		character2.Locale(x, y);
-		character2.start(); 
+		//character2.start(); 
 		
 		add(PlayerName2, 2);
 		add(LabelCharacter2, 3);
