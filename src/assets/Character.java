@@ -29,6 +29,7 @@ public class Character extends Thread{
 	private boolean move = false;
 	private char direction;
 	private int position;
+	private int adjusteNameLabel = 0;
 	
 	private int posX = 0;
 	private int posY = 0;
@@ -50,6 +51,8 @@ public class Character extends Thread{
 		this.PlayerName = name;
 		this.SkinName = SkinName;
 		
+		this.adjusteNameLabel = 23 - (this.PlayerName.length()*4);
+		
 		this.PlayerNameLabel.setText(this.PlayerName);
 		
 		//reconfigurando label da skin
@@ -58,12 +61,14 @@ public class Character extends Thread{
 		this.Skinlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//label do nome do jogador
-		this.PlayerNameLabel.setBounds(0, 0, 55, 15);
+		this.PlayerNameLabel.setBounds(0, 0, name.length()*8, 9);
 		this.PlayerNameLabel.setFont(this.fonte);
 		this.PlayerNameLabel.setForeground(Color.WHITE);
+		this.PlayerNameLabel.setBackground(Color.BLUE);
 		this.PlayerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		this.PlayerNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.PlayerNameLabel.setVerticalAlignment(SwingConstants.CENTER);
+		this.PlayerNameLabel.setOpaque(true);
 		
 		//carregar imagens da skin e transformar para ImageIcon
 		SkinImages = ImageToIcon(get.GetSkinImages(SkinName));
@@ -81,7 +86,7 @@ public class Character extends Thread{
 		this.posX += x;
 		this.posY += y;
 		this.Skinlabel.setLocation(this.posX, this.posY);
-		this.PlayerNameLabel.setBounds(Skinlabel.getX() - 17, Skinlabel.getY() - 12, 78, 20);
+		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
 	/**
 	 * increment or decrement player location
@@ -90,7 +95,7 @@ public class Character extends Thread{
 	 */
 	public void InDecLocale(int x, int y) {
 		this.Skinlabel.setLocation(Skinlabel.getX() + x, Skinlabel.getY() + y);
-		this.PlayerNameLabel.setBounds(Skinlabel.getX() - 10, Skinlabel.getY() - 12, 65, 20);
+		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
 	
 	public void Move(char direction, int position) {
