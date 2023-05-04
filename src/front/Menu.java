@@ -22,6 +22,8 @@ import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
+import javax.swing.border.BevelBorder;
+import javax.swing.SwingConstants;
 
 public class Menu extends JPanel {
 	public enum Components{
