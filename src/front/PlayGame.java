@@ -95,8 +95,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		
 		character = new Character("SKULLMONKEY", "baby", LabelCharacter, PlayerName);
-		character.Locale(270,235);
-		//character.start(); 
+		character.Locale(270, 235);
 
 		JLabel arrowkeyslabel = new JLabel("");
 		arrowkeyslabel.setToolTipText("keys");
@@ -110,43 +109,40 @@ public class PlayGame extends JPanel implements KeyListener {
 		add(arrowkeyslabel);
 		
 		
-		add(PlayerName);
+		add(PlayerName, 0);
 		add(LabelCharacter);
 		
 		mapT = new JLabel();
-		mapT.setBounds(0, 0, 2250, 2250);
+		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
 //		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
 		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
-//		add(mapT,0);
+		add(mapT,0);
 		
 		
 		map = new JLabel();
-		map.setBounds(0, 0, 2250, 2250);
+		map.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
 		map.setIcon(get.getIcon("maps/map 1/", "map 1", ".jpg"));
 		add(map);
 
 		mapsMove = new MapMove(map, mapT);
 		//add other players
-		AddOtherPlayer("Moises", "luffy", 270+90,235);
+		AddOtherPlayer("Moises", "luffy", 270+45,235-45);
 		mapsMove.AddCharacterToMap(character2);
-		ServerInterface.startServer(Config.port, Config.ip);
-		ServerInterface.connectPlayer(Config.ip, Config.port);
+		/*ServerInterface.startServer(Config.port, "10.11.157.251");
+		ServerInterface.connectPlayer("10.11.157.251", Config.port);
 		
 		try {
 			System.out.println(ServerInterface.sandNameAndSkin("SKULLMONKEY", "baby"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		
-		/*AddOtherPlayer("Law", "green-dragon", 270+180,235);
+		AddOtherPlayer("la", "green-dragon", 270-45,235-45);
 		mapsMove.AddCharacterToMap(character2);
 		
-		AddOtherPlayer("Chocolate", "jill-valentine", 270+90,235+90);
+		AddOtherPlayer("Chocolate", "jill-valentine", 270,235-90);
 		mapsMove.AddCharacterToMap(character2);
-		
-		AddOtherPlayer("Leitinho", "claire-redfield", 270+180,235+90);
-		mapsMove.AddCharacterToMap(character2);*/
 	}
 	
 	@Override
