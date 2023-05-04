@@ -4,6 +4,8 @@
 # Compiled class file
 *.class
 
+*.classpath
+
 # Log file
 *.log
 
@@ -29,3 +31,4 @@ replay_pid*
 /.project
 /.settings
 /arquivos psd
+/.classpath
