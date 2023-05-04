@@ -24,12 +24,14 @@ import assets.Character;
 import back.ImagesChange;
 import back.MapMove;
 import config.Config;
+import server.ServerInterface;
 
 import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -127,15 +129,24 @@ public class PlayGame extends JPanel implements KeyListener {
 		//add other players
 		AddOtherPlayer("Moises", "luffy", 270+90,235);
 		mapsMove.AddCharacterToMap(character2);
+		ServerInterface.startServer(Config.port, Config.ip);
+		ServerInterface.connectPlayer(Config.ip, Config.port);
 		
-		AddOtherPlayer("Law", "green-dragon", 270+180,235);
+		try {
+			System.out.println(ServerInterface.sandNameAndSkin("SKULLMONKEY", "baby"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		/*AddOtherPlayer("Law", "green-dragon", 270+180,235);
 		mapsMove.AddCharacterToMap(character2);
 		
 		AddOtherPlayer("Chocolate", "jill-valentine", 270+90,235+90);
 		mapsMove.AddCharacterToMap(character2);
 		
 		AddOtherPlayer("Leitinho", "claire-redfield", 270+180,235+90);
-		mapsMove.AddCharacterToMap(character2);
+		mapsMove.AddCharacterToMap(character2);*/
 	}
 	
 	@Override
@@ -180,6 +191,12 @@ public class PlayGame extends JPanel implements KeyListener {
 	        }
 	        else if((key == KeyEvent.VK_UP) ||
 				(key == KeyEvent.VK_W)) {
+	        	try {
+					ServerInterface.sandPlay("1;1");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	        	character.MoveTo('T', 4);
 	        	
 	        	//move o mapa

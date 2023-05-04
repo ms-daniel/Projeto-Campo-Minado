@@ -38,8 +38,8 @@ public class MainWindow extends JFrame {
 		setTitle("Campo Minado");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 646, 669);
-//		contentPane = new PlayGame();
-		contentPane = new Menu(this);
+		contentPane = new PlayGame();
+//		contentPane = new Menu(this);
 //		contentPane = new terstSkin();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
