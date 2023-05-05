@@ -76,14 +76,13 @@ public class PlayGame extends JPanel implements KeyListener {
 	 */
 	public PlayGame() {
 		
-		timer = new Timer(600, new ActionListener() {
+		timer = new Timer(650, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica do processamento do evento de teclado aqui
                 timer.stop();
             }
         });
-		
 		
 		setBackground(new Color(0, 0, 0));
 		setBounds(new Rectangle(0, 0, 630, 630));
@@ -114,8 +113,8 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		mapT = new JLabel();
 		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
-//		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
-		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
+		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
+//		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
 		add(mapT,0);
 		
 		
@@ -126,7 +125,7 @@ public class PlayGame extends JPanel implements KeyListener {
 
 		mapsMove = new MapMove(map, mapT);
 		//add other players
-		AddOtherPlayer("Moises", "luffy", 270+45,235-45);
+		AddOtherPlayer("MJ", "luffy", 270+45,235-45);
 		mapsMove.AddCharacterToMap(character2);
 		/*ServerInterface.startServer(Config.port, "10.11.157.251");
 		ServerInterface.connectPlayer("10.11.157.251", Config.port);
@@ -229,5 +228,30 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		add(PlayerName2, 2);
 		add(LabelCharacter2, 3);
+    }
+    
+    /**
+     * Calcula o x/y do mapa para uma coordenada
+     * especifica
+     * @param xy: coordenada de x/y
+     * @return: posiçao do mapa para aquele valor de x/y
+     */
+    /**
+     * Calcula o x/y do mapa para uma coordenada
+     * especifica
+     * @param xy: coordenada de x/y
+     * @return: posiçao do mapa para aquele valor de x/y
+     */
+    private int CalcXY(int xy) {
+    	return (((xy-1)*45) - 270)*-1;
+    }
+    //Xm = ((-x + 270)/45) + 1
+    /**
+     * Calcula a posiçao do mapa na matriz
+     * @param xy: posiçao x/y que deseja ser recebida
+     * @return: posiçao equivalente na matriz
+     */
+    private int MapToMatriz(int xy) {
+    	return ((-xy + 270)/45) + 1;
     }
 }
