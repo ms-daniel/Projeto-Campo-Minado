@@ -31,8 +31,11 @@ public class Character extends Thread{
 	private int position;
 	private int adjusteNameLabel = 0;
 	
-	private int posX = 0;
-	private int posY = 0;
+	private int posXatCharacter = 0;
+	private int posYatCharacter = 0;
+	
+	private int CoordenateX = 0;
+	private int CoordenateY = 0;
 	
 	/**
 	 * constructor para instaciar um personagem/character
@@ -81,19 +84,20 @@ public class Character extends Thread{
 	public void run() {
 		Move(this.direction, this.position);
 	}
-	
+
 	public void Locale(int x, int y) {
-		this.posX += x;
-		this.posY += y;
-		this.Skinlabel.setLocation(this.posX, this.posY);
+		this.posXatCharacter += x;
+		this.posYatCharacter += y;
+		this.Skinlabel.setLocation(this.posXatCharacter, this.posYatCharacter);
 		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
+	
 	/**
 	 * increment or decrement player location
 	 * @param x: increment or decrement x
 	 * @param y: increment or decrement y
 	 */
-	public void InDecLocale(int x, int y) {
+	public void IncrementLocale(int x, int y) {
 		this.Skinlabel.setLocation(Skinlabel.getX() + x, Skinlabel.getY() + y);
 		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
@@ -125,6 +129,30 @@ public class Character extends Thread{
 		this.pause = pause;
 	}
 	
+	//Get e Set para posicao
+	public void setCoordenateX(int x) {
+		this.CoordenateX = x;
+	}
+	
+	public void setCoordenateY(int y) {
+		this.CoordenateY = y;
+	}
+	
+	public int getCoordenateX() {
+		return this.CoordenateX;
+	}
+	
+	public int getCoordenateY() {
+		return this.CoordenateY;
+	}
+	
+	//
+	public int[] getPosInMainCharacter(){
+		int[] pos = {this.posXatCharacter, this.posYatCharacter};
+		return pos;
+	}
+	
+	//
 	public int GetSkinWidth() {
 		return skin.getIconWidth();
 	}
