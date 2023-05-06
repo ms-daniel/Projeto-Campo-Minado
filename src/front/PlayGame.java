@@ -32,6 +32,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Arrays;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,21 +55,18 @@ public class PlayGame extends JPanel implements KeyListener {
 	
 	private MapMove mapsMove;
 	
-	private int[][] walls = Config.matrizMap1;
+	/**
+	 * y: linhas, x: colunas
+	 */
+	private int[][] Walls = Config.matrizMap1;
+	
+	private int[] PlayerPosition = {0,0};
  	
 	private JLabel map;
 	private JLabel mapT;
-	
-	private JButton leftButton;
-	private JButton rightButton;
-	private JButton playButton;
-	
-	private String name = "lufy-";
-	private String ext = ".png";
-	
+
 	private Timer timer;
-	
-	private int atual = 1;
+
 	private int[][] matrizMap = Config.matrizMap1;
 	
 	/**
@@ -76,7 +74,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	 */
 	public PlayGame() {
 		
-		timer = new Timer(650, new ActionListener() {
+		timer = new Timer(550, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica do processamento do evento de teclado aqui
@@ -115,33 +113,41 @@ public class PlayGame extends JPanel implements KeyListener {
 		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
 		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
 //		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
-		add(mapT,0);
+		add(mapT,3);
 		
 		
 		map = new JLabel();
 		map.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
-		map.setIcon(get.getIcon("maps/map 1/", "map 1", ".jpg"));
+		map.setIcon(get.getIcon("maps/map 1/map 1.jpg"));
 		add(map);
-
+		
+		character.setCoordenateX(MapToArray(map.getX()));
+		character.setCoordenateY(MapToArray(map.getY()));
+		
+		PlayerPosition[0] = character.getCoordenateY();
+		PlayerPosition[1] = character.getCoordenateX();
+		
 		mapsMove = new MapMove(map, mapT);
+		
+//		ServerInterface.startServer(Config.port, "10.11.157.251");
+//		ServerInterface.connectPlayer("10.11.157.251", Config.port);
+//		
+//		try {
+//			System.out.println(ServerInterface.sandNameAndSkin("SKULLMONKEY", "baby"));
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		//add other players
 		AddOtherPlayer("MJ", "luffy", 270+45,235-45);
 		mapsMove.AddCharacterToMap(character2);
-		/*ServerInterface.startServer(Config.port, "10.11.157.251");
-		ServerInterface.connectPlayer("10.11.157.251", Config.port);
-		
-		try {
-			System.out.println(ServerInterface.sandNameAndSkin("SKULLMONKEY", "baby"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-		
+				
 		AddOtherPlayer("la", "green-dragon", 270-45,235-45);
 		mapsMove.AddCharacterToMap(character2);
 		
 		AddOtherPlayer("Chocolate", "jill-valentine", 270,235-90);
 		mapsMove.AddCharacterToMap(character2);
+		
 	}
 	
 	@Override
@@ -153,57 +159,85 @@ public class PlayGame extends JPanel implements KeyListener {
     public synchronized void keyPressed(KeyEvent e) {
     	Integer key = e.getKeyCode();
     	boolean validKey = false; 
+    	boolean validMove = false;
+    	
     	
     	if(!timer.isRunning()) {
 	        // Verifique se a tecla pressionada é a tecla desejada
 	        if ((key == KeyEvent.VK_RIGHT) ||
-	        		(key == KeyEvent.VK_D )) {
+	        	(key == KeyEvent.VK_D )) {
 	        	character.MoveTo('R', 3);
-	
-	        	//move o mapa
-	        	mapsMove.MoveMaps(-45, 0);
 	        	
-	        	timer.start();
+	        	if(Walls[ PlayerPosition[0] ][ PlayerPosition[1]+1 ] != 1) {
+	        		character.setCoordenateX(1);
+		        	PlayerPosition[1]++;
+		        	
+		        	//move o mapa
+		        	mapsMove.MoveMaps(-45, 0);
+		        	
+		        	validMove = true;
+	        	}
+	        	
 	        	validKey = true; 
 	        }else if((key == KeyEvent.VK_LEFT) ||
 	        		(key == KeyEvent.VK_A)) {
 	        	character.MoveTo('L', 2);
 	        	
-	        	//move o mapa
-	        	mapsMove.MoveMaps(+45, 0);
+	        	if(Walls[ PlayerPosition[0] ][ PlayerPosition[1]-1 ] != 1) {
+		        	character.setCoordenateX(-1);
+		        	PlayerPosition[1]--;
+	        	
+		        	//move o mapa
+		        	mapsMove.MoveMaps(+45, 0);
+		        	
+		        	validMove = true;
+		        }
 	
-	        	timer.start();
 	        	validKey = true; 
 	        }else if((key == KeyEvent.VK_DOWN) ||
 	        		(key == KeyEvent.VK_S)) {
 	        	character.MoveTo('D', 1);
 	        	
-	        	//move o mapa
-	        	mapsMove.MoveMaps(0, -45);
+	        	if(Walls[ PlayerPosition[0]+1 ][ PlayerPosition[1] ] != 1) {
+		        	character.setCoordenateY(1);
+		        	PlayerPosition[0]++;
+		        		        	
+		        	//move o mapa
+		        	mapsMove.MoveMaps(0, -45);
+		        	
+		        	validMove = true;
+	        	}
 	      
-	        	timer.start();
 	        	validKey = true; 
 	        }
 	        else if((key == KeyEvent.VK_UP) ||
-				(key == KeyEvent.VK_W)) {
-	        	try {
-					ServerInterface.sandPlay("1;1");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+	        	   (key == KeyEvent.VK_W)) {
 	        	character.MoveTo('T', 4);
+	        	if(Walls[ PlayerPosition[0]-1 ][ PlayerPosition[1] ] != 1) {
+		        	character.setCoordenateY(-1);
+		        	PlayerPosition[0]--;
+		        	
+		        	//move o mapa
+		        	mapsMove.MoveMaps(0, +45);
+		        	
+		        	validMove = true;
+	        	}else {
+	        		System.out.println(Walls[ PlayerPosition[0] ][ PlayerPosition[1]-1 ]);
+	        	}
 	        	
-	        	//move o mapa
-	        	mapsMove.MoveMaps(0, +45);
-	        	
-	        	timer.start();
 	        	validKey = true; 
 	        }
+	        
+	        //checks if a valid key was pressed
+	        //to start the moves in map and timer
 	        if(validKey) {
-		        new Thread(mapsMove).start();
+	        	if(validMove)
+	        		new Thread(mapsMove).start();
+	        	
+		        timer.start();
 		    }
-	        validKey = false; 
+	        System.out.println("x: " + PlayerPosition[0] + "\ny: " + PlayerPosition[1] + "\n");
+	        
     	}
     }
 
@@ -231,27 +265,22 @@ public class PlayGame extends JPanel implements KeyListener {
     }
     
     /**
-     * Calcula o x/y do mapa para uma coordenada
+     * Calcula o x/y da matriz para o mapa
      * especifica
      * @param xy: coordenada de x/y
      * @return: posiçao do mapa para aquele valor de x/y
      */
-    /**
-     * Calcula o x/y do mapa para uma coordenada
-     * especifica
-     * @param xy: coordenada de x/y
-     * @return: posiçao do mapa para aquele valor de x/y
-     */
-    private int CalcXY(int xy) {
+    private int ArrayToMap(int xy) {
     	return (((xy-1)*45) - 270)*-1;
     }
+    
     //Xm = ((-x + 270)/45) + 1
     /**
      * Calcula a posiçao do mapa na matriz
      * @param xy: posiçao x/y que deseja ser recebida
      * @return: posiçao equivalente na matriz
      */
-    private int MapToMatriz(int xy) {
-    	return ((-xy + 270)/45) + 1;
+    private int MapToArray(int xy) {
+    	return ((-xy + 270)/45);
     }
 }
