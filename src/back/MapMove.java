@@ -60,7 +60,7 @@ public class MapMove implements Runnable {
 	 * Makes all the animation of the main character and the secondary ones according to the main one
 	 */
 	@Override
-	public void run() {
+	public synchronized void run() {
 		int xAux = map.getX() + x, yAux = map.getY() + y; //stores the final position of the map at
 														  //the end of the animation of the main character
 		
@@ -81,7 +81,7 @@ public class MapMove implements Runnable {
 			}
 
 			try {
-				Thread.sleep(12);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,7 +111,7 @@ public class MapMove implements Runnable {
 		
 		for(int i = 0; i < characters.size(); i++) {
 			CurrentCharacter = characters.get(i);
-			CurrentCharacter.InDecLocale(x, y);
+			CurrentCharacter.IncrementLocale(x, y);
 		}
 	}
 	
