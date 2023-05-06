@@ -22,7 +22,7 @@ public class ImagesChange {
 	 * @return
 	 */
 	public ImageIcon getIcon (String FolderName, String name, String extension){
-		return new ImageIcon(getClass().getClassLoader().getResource(FolderName + name + extension));
+		return new ImageIcon("resources/" + FolderName + name + extension);
 	}
 	/**
 	 * Abrir uma imagem como icon usando a string toda junta (local + nome do arquivo + extensao)
