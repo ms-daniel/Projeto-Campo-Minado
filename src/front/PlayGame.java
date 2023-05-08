@@ -70,6 +70,8 @@ public class PlayGame extends JPanel implements KeyListener {
 
 	private int[][] matrizMap = Config.matrizMap1;
 	
+	private Thread mapThread;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -92,7 +94,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerName = new JLabel();
 		
 		
-		character = new Character("SKULLMONKEY", "baby", LabelCharacter, PlayerName);
+		character = new Character("SKULLMONKEY", "claire-redfield", LabelCharacter, PlayerName);
 		character.Locale(270, 235);
 
 		JLabel arrowkeyslabel = new JLabel("");
@@ -130,15 +132,6 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		mapsMove = new MapMove(map, mapT);
 		
-//		ServerInterface.startServer(Config.port, "10.11.157.251");
-//		ServerInterface.connectPlayer("10.11.157.251", Config.port);
-//		
-//		try {
-//			System.out.println(ServerInterface.sandNameAndSkin("SKULLMONKEY", "baby"));
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 		//add other players
 		AddOtherPlayer("MJ", "luffy", 270+45,235-45);
 		mapsMove.AddCharacterToMap(character2);
@@ -148,7 +141,6 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		AddOtherPlayer("Chocolate", "jill-valentine", 270,235-90);
 		mapsMove.AddCharacterToMap(character2);
-		
 	}
 	
 	@Override
@@ -167,7 +159,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        // Verifique se a tecla pressionada é a tecla desejada
 	        if ((key == KeyEvent.VK_RIGHT) ||
 	        	(key == KeyEvent.VK_D )) {
-	        	character.MoveTo('R', 3);
+	        	character.MoveTo(3);
 	        	
 	        	if(Walls[ PlayerPosition[0] ][ PlayerPosition[1]+1 ] != 1) {
 	        		character.setCoordenateX(1);
@@ -182,7 +174,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	validKey = true; 
 	        }else if((key == KeyEvent.VK_LEFT) ||
 	        		(key == KeyEvent.VK_A)) {
-	        	character.MoveTo('L', 2);
+	        	character.MoveTo(2);
 	        	
 	        	if(Walls[ PlayerPosition[0] ][ PlayerPosition[1]-1 ] != 1) {
 		        	character.setCoordenateX(-1);
@@ -197,7 +189,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	validKey = true; 
 	        }else if((key == KeyEvent.VK_DOWN) ||
 	        		(key == KeyEvent.VK_S)) {
-	        	character.MoveTo('D', 1);
+	        	character.MoveTo(1);
 	        	
 	        	if(Walls[ PlayerPosition[0]+1 ][ PlayerPosition[1] ] != 1) {
 		        	character.setCoordenateY(1);
@@ -213,7 +205,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        }
 	        else if((key == KeyEvent.VK_UP) ||
 	        	   (key == KeyEvent.VK_W)) {
-	        	character.MoveTo('T', 4);
+	        	character.MoveTo(4);
 	        	if(Walls[ PlayerPosition[0]-1 ][ PlayerPosition[1] ] != 1) {
 		        	character.setCoordenateY(-1);
 		        	PlayerPosition[0]--;
@@ -229,9 +221,10 @@ public class PlayGame extends JPanel implements KeyListener {
 	        //checks if a valid key was pressed
 	        //to start the moves in map and timer
 	        if(validKey) {
-	        	if(validMove)
-	        		new Thread(mapsMove).start();
-	        	
+	        	if(validMove) {
+	        		mapThread = new Thread(mapsMove);
+	        		mapThread.start();
+	        	}       	
 		        timer.start();
 		    }
 //	        System.out.println("x: " + PlayerPosition[0] + "\ny: " + PlayerPosition[1] + "\n");
@@ -249,12 +242,12 @@ public class PlayGame extends JPanel implements KeyListener {
      * @param SkinName: name of skin used by the player
      * @param x: coordenate x for player position
      * @param y: coordenate y for player position
-     */
+     */s
     public void AddOtherPlayer(String PlayerName, String SkinName, int x, int y) {
     	LabelCharacter2 = new JLabel();
 		PlayerName2 = new JLabel();
     	
-    	character2 = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter2, PlayerName2);
+    	character2 = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter2, PlayerName2, null);
 		character2.Locale(x, y);
 		//character2.start(); 
 		
