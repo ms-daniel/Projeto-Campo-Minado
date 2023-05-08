@@ -17,19 +17,19 @@ public class Character extends Thread{
 	private ImagesChange get = new ImagesChange();
 	private Font fonte = new Font("Arial", Font.BOLD, 10);
 	
-	private JLabel Skinlabel;
-	private JLabel PlayerNameLabel;
+	protected JLabel Skinlabel;
+	protected JLabel PlayerNameLabel;
 	
 	private String PlayerName;
 	private ImageIcon[][] SkinImages;
-	private String SkinName;
+	protected String SkinName;
 	private ImageIcon skin;
 	
 	private boolean pause = false;
 	private boolean move = false;
 	private char direction;
 	private int position;
-	private int adjusteNameLabel = 0;
+	protected int adjusteNameLabel = 0;
 	
 	private int posXatCharacter = 0;
 	private int posYatCharacter = 0;
@@ -89,16 +89,6 @@ public class Character extends Thread{
 		this.posXatCharacter += x;
 		this.posYatCharacter += y;
 		this.Skinlabel.setLocation(this.posXatCharacter, this.posYatCharacter);
-		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
-	}
-	
-	/**
-	 * increment or decrement player location
-	 * @param x: increment or decrement x
-	 * @param y: increment or decrement y
-	 */
-	public void IncrementLocale(int x, int y) {
-		this.Skinlabel.setLocation(Skinlabel.getX() + x, Skinlabel.getY() + y);
 		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
 	
