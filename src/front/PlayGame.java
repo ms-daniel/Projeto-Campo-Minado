@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import assets.Character;
+import assets.SecundaryCharacter;
 import back.ImagesChange;
 import back.MapMove;
 import config.Config;
@@ -48,7 +49,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	private JLabel PlayerName;
 	
 	//testes
-	private Character character2;
+	private SecundaryCharacter character2;
 	private JLabel LabelCharacter2;
 	private JLabel PlayerName2;
 	//=========================
@@ -221,10 +222,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		        	mapsMove.MoveMaps(0, +45);
 		        	
 		        	validMove = true;
-	        	}else {
-	        		System.out.println(Walls[ PlayerPosition[0] ][ PlayerPosition[1]-1 ]);
 	        	}
-	        	
 	        	validKey = true; 
 	        }
 	        
@@ -236,7 +234,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	
 		        timer.start();
 		    }
-	        System.out.println("x: " + PlayerPosition[0] + "\ny: " + PlayerPosition[1] + "\n");
+//	        System.out.println("x: " + PlayerPosition[0] + "\ny: " + PlayerPosition[1] + "\n");
 	        
     	}
     }
@@ -256,7 +254,7 @@ public class PlayGame extends JPanel implements KeyListener {
     	LabelCharacter2 = new JLabel();
 		PlayerName2 = new JLabel();
     	
-    	character2 = new Character(PlayerName, SkinName, LabelCharacter2, PlayerName2);
+    	character2 = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter2, PlayerName2);
 		character2.Locale(x, y);
 		//character2.start(); 
 		
