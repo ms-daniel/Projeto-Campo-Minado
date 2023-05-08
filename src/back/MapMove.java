@@ -3,7 +3,7 @@ package back;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
-import assets.Character;
+import assets.SecundaryCharacter;
 
 public class MapMove implements Runnable {
 	private JLabel map;
@@ -11,7 +11,7 @@ public class MapMove implements Runnable {
     private int x;
     private int y;
     private int increment;
-    private ArrayList<Character> characters = new ArrayList<>();;
+    private ArrayList<SecundaryCharacter> characters = new ArrayList<>();;
     
     /**
      * Class responsible for moving the map of other players
@@ -52,7 +52,7 @@ public class MapMove implements Runnable {
 	 * Add a new character to the list of secondary characters (other players)
 	 * @param Character: player
 	 */
-	public void AddCharacterToMap(Character Character) {
+	public void AddCharacterToMap(SecundaryCharacter Character) {
 		this.characters.add(Character);
 	}
 	
@@ -107,7 +107,7 @@ public class MapMove implements Runnable {
 	 * @param y: y position
 	 */
 	private void MoveAllCharacters(int x, int y) {
-		Character CurrentCharacter;
+		SecundaryCharacter CurrentCharacter;
 		
 		for(int i = 0; i < characters.size(); i++) {
 			CurrentCharacter = characters.get(i);
@@ -121,7 +121,7 @@ public class MapMove implements Runnable {
 	 * @param y: y position
 	 */
 	private void setLocaleToAllCharacters(int x, int y) {
-		Character CurrentCharacter;
+		SecundaryCharacter CurrentCharacter;
 		
 		for(int i = 0; i < characters.size(); i++) {
 			CurrentCharacter = characters.get(i);
