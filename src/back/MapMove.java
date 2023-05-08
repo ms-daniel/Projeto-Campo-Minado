@@ -99,6 +99,7 @@ public class MapMove implements Runnable {
 			setLocaleToAllCharacters(45*increment, 0);
 		else
 			setLocaleToAllCharacters(0, 45*increment);
+		
 	}
 	
 	/**
@@ -106,7 +107,7 @@ public class MapMove implements Runnable {
 	 * @param x: x position
 	 * @param y: y position
 	 */
-	private void MoveAllCharacters(int x, int y) {
+	private synchronized void MoveAllCharacters(int x, int y) {
 		SecundaryCharacter CurrentCharacter;
 		
 		for(int i = 0; i < characters.size(); i++) {
@@ -120,7 +121,7 @@ public class MapMove implements Runnable {
 	 * @param x: x position
 	 * @param y: y position
 	 */
-	private void setLocaleToAllCharacters(int x, int y) {
+	private synchronized void setLocaleToAllCharacters(int x, int y) {
 		SecundaryCharacter CurrentCharacter;
 		
 		for(int i = 0; i < characters.size(); i++) {
