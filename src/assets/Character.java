@@ -27,15 +27,14 @@ public class Character extends Thread{
 	
 	private boolean pause = false;
 	private boolean move = false;
-	private char direction;
 	private int position;
 	protected int adjusteNameLabel = 0;
 	
-	private int posXatCharacter = 0;
-	private int posYatCharacter = 0;
+	protected int posXatCharacter = 0;
+	protected int posYatCharacter = 0;
 	
-	private int CoordenateX = 0;
-	private int CoordenateY = 0;
+	protected int CoordenateX = 0;
+	protected int CoordenateY = 0;
 	
 	/**
 	 * constructor para instaciar um personagem/character
@@ -82,7 +81,7 @@ public class Character extends Thread{
 	
 	@Override
 	public void run() {
-		Move(this.direction, this.position);
+		Move(this.position);
 	}
 
 	public void Locale(int x, int y) {
@@ -92,7 +91,7 @@ public class Character extends Thread{
 		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
 	
-	public void Move(char direction, int position) {
+	public void Move(int position) {
 		position--; //to correct position
 		
 		this.Skinlabel.setIcon(SkinImages[position][1]);
@@ -107,11 +106,10 @@ public class Character extends Thread{
 		this.move = false;
 	}
 	
-	public synchronized void MoveTo(char direction, int position) {
+	public synchronized void MoveTo(int position) {
 		this.move = true;
-		this.direction = direction;
 		this.position = position;
-		
+
 		new Thread(this).start();
 	}
 	
@@ -171,7 +169,7 @@ public class Character extends Thread{
 	 * @param time: milissegundos
 	 * @throws InterruptedException 
 	 */
-	private void WaitAFeelTime(long time){
+	protected void WaitAFeelTime(long time){
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
