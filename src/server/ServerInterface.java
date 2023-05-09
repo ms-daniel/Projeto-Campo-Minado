@@ -19,7 +19,7 @@ public class ServerInterface {
     private static BufferedReader inFromServer;
     private static TPlays board;
 
-    public static String startServer(int port, String ip){
+    public static String startServer(String ip, int port){
         server = new Server();
         ipServer = server.runServer(port, ip);
         if(ipServer != null){
