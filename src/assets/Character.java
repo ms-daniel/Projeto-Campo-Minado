@@ -20,14 +20,14 @@ public class Character extends Thread{
 	protected JLabel Skinlabel;
 	protected JLabel PlayerNameLabel;
 	
-	private String PlayerName;
-	private ImageIcon[][] SkinImages;
+	protected String PlayerName;
+	protected ImageIcon[][] SkinImages;
 	protected String SkinName;
-	private ImageIcon skin;
+	protected ImageIcon skin;
 	
 	private boolean pause = false;
 	private boolean move = false;
-	private int position;
+	protected int position;
 	protected int adjusteNameLabel = 0;
 	
 	protected int posXatCharacter = 0;
@@ -136,7 +136,10 @@ public class Character extends Thread{
 	
 	//
 	public int[] getPosInMainCharacter(){
-		int[] pos = {this.posXatCharacter, this.posYatCharacter};
+		int[] pos = new int[2];
+		pos[0] = this.posXatCharacter;
+		pos[1] = this.posYatCharacter;
+		
 		return pos;
 	}
 	

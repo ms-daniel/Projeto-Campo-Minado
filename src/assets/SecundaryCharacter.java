@@ -21,17 +21,19 @@ public class SecundaryCharacter extends Character{
 		super(name, SkinName, SkinLabel, PlayerName);
 		this.connection = socket;
 		
-		try {
-			this.inFromServer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			this.inFromServer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 	@Override
 	public void run() {
 		// TODO Criar movimentação feita pelo servidor
+		move();
+		this.interrupt();
 	}
 	
 	/**
@@ -49,7 +51,7 @@ public class SecundaryCharacter extends Character{
 				toX = -45;
 		}
 		else {
-			if(y > this.CoordenateX)
+			if(y > this.CoordenateY)
 				toY = 45;
 			else
 				toY = -45;
@@ -57,6 +59,24 @@ public class SecundaryCharacter extends Character{
 		
 		this.CoordenateX = x;
 		this.CoordenateY = y;
+		
+		
+		
+		new Thread(this).start();
+	}
+	
+	private void move() {
+		this.Locale(toX, toY);
+	}
+	
+	@Override
+	public void WaitAFeelTime(long time){
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
