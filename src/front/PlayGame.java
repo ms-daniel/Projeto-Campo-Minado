@@ -22,6 +22,7 @@ import javax.swing.Timer;
 
 import assets.Character;
 import assets.SecundaryCharacter;
+import assets.testMove;
 import back.ImagesChange;
 import back.MapMove;
 import config.Config;
@@ -75,9 +76,10 @@ public class PlayGame extends JPanel implements KeyListener {
 	/**
 	 * Create the panel.
 	 */
-	public PlayGame() {
+	public PlayGame(MapMove maps) {
+		this.mapsMove = maps;
 		
-		timer = new Timer(550, new ActionListener() {
+		timer = new Timer(700, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica do processamento do evento de teclado aqui
@@ -89,40 +91,34 @@ public class PlayGame extends JPanel implements KeyListener {
 		setBounds(new Rectangle(0, 0, 630, 630));
 		setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		setLayout(null);
-		
-		LabelCharacter = new JLabel();
-		PlayerName = new JLabel();
-		
-		
-		character = new Character("SKULLMONKEY", "claire-redfield", LabelCharacter, PlayerName);
-		character.Locale(270, 235);
-
-		JLabel arrowkeyslabel = new JLabel("");
-		arrowkeyslabel.setToolTipText("keys");
-		arrowkeyslabel.setIcon(get.getIcon("icons/", "arrowskeys", ".png"));
-		arrowkeyslabel.setBounds(0, 450, 155, 100);
-
-		//permite que seja identificada teclas pressionadas no panel
-		addKeyListener(this);
+		addKeyListener(this);//permite que seja identificada teclas pressionadas no panel
 		setFocusable(true); //so funciona com essa opcao ativada
-		
-		add(arrowkeyslabel);
-		
-		
-		add(PlayerName, 0);
-		add(LabelCharacter);
-		
+
+//		JLabel arrowkeyslabel = new JLabel("");
+//		arrowkeyslabel.setToolTipText("keys");
+//		arrowkeyslabel.setIcon(get.getIcon("icons/", "arrowskeys", ".png"));
+//		arrowkeyslabel.setBounds(0, 450, 155, 100);
+//		add(arrowkeyslabel);
+
 		mapT = new JLabel();
 		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
 		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
 //		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
-		add(mapT,3);
-		
+		add(mapT,0);
 		
 		map = new JLabel();
 		map.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
 		map.setIcon(get.getIcon("maps/map 1/map 1.jpg"));
-		add(map);
+		add(map,1);
+	
+		mapsMove.setMaps(map, mapT);
+		
+		
+		LabelCharacter = new JLabel();
+		PlayerName = new JLabel();
+		
+		character = new Character("SKULLMONKEY", "claire-redfield", LabelCharacter, PlayerName);
+		character.Locale(270, 235);
 		
 		character.setCoordenateX(MapToArray(map.getX()));
 		character.setCoordenateY(MapToArray(map.getY()));
@@ -130,17 +126,12 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerPosition[0] = character.getCoordenateY();
 		PlayerPosition[1] = character.getCoordenateX();
 		
-		mapsMove = new MapMove(map, mapT);
+		add(PlayerName, 0);
+		add(LabelCharacter, 0);
 		
-		//add other players
-		AddOtherPlayer("MJ", "luffy", 270+45,235-45);
-		mapsMove.AddCharacterToMap(character2);
-				
-		AddOtherPlayer("la", "green-dragon", 270-45,235-45);
-		mapsMove.AddCharacterToMap(character2);
-		
-		AddOtherPlayer("Chocolate", "jill-valentine", 270,235-90);
-		mapsMove.AddCharacterToMap(character2);
+		CharactersPanel panel = new CharactersPanel(mapsMove);
+		panel.setBounds(0, 0, 630, 630);
+		add(panel,0);
 	}
 	
 	@Override
@@ -236,25 +227,25 @@ public class PlayGame extends JPanel implements KeyListener {
     public synchronized void keyReleased(KeyEvent e) {
         // Implemente o método keyReleased se necessário
     }
-    /**
-     * Introduce another player in the map
-     * @param PlayerName: player name
-     * @param SkinName: name of skin used by the player
-     * @param x: coordenate x for player position
-     * @param y: coordenate y for player position
-     */s
-    public void AddOtherPlayer(String PlayerName, String SkinName, int x, int y) {
-    	LabelCharacter2 = new JLabel();
-		PlayerName2 = new JLabel();
-    	
-    	character2 = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter2, PlayerName2, null);
-		character2.Locale(x, y);
-		//character2.start(); 
-		
-		add(PlayerName2, 2);
-		add(LabelCharacter2, 3);
-    }
-    
+//    /**
+//     * Introduce another player in the map
+//     * @param PlayerName: player name
+//     * @param SkinName: name of skin used by the player
+//     * @param x: coordenate x for player position
+//     * @param y: coordenate y for player position
+//     */
+//    public void AddOtherPlayer(String PlayerName, String SkinName, int x, int y) {
+//    	LabelCharacter2 = new JLabel();
+//		PlayerName2 = new JLabel();
+//    	
+//    	character2 = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter2, PlayerName2, null);
+//		character2.Locale(x, y);
+//		//character2.start(); 
+//		
+//		add(PlayerName2, 2);
+//		add(LabelCharacter2, 3);
+//    }
+//    
     /**
      * Calcula o x/y da matriz para o mapa
      * especifica
