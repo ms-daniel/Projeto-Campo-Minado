@@ -47,7 +47,8 @@ public class ServerInterface {
      * @return Na primeira chamada retorna as bombas
      * @throws IOException
      */
-    public static String sandPlay(String play) throws IOException {
+    public static String sandPlay(int x, int y) throws IOException {
+        String play = x + ";" + y;
         String res = "Erro: Conexão não iniciada entre jogador e servidor. Tente utilizar o método connectPlayer antes";
         if(outToServer != null && inFromServer != null){
             outToServer.writeBytes(play + "\n");
