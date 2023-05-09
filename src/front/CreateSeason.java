@@ -148,7 +148,7 @@ private ImagesChange get = new ImagesChange();
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if(!IpText.getText().equals("") || !PortText.getText().equals("")) {
-					if(ServerInterface.startServer(Integer.parseInt(PortText.getText()), IpText.getText()) == null) {
+					if(ServerInterface.startServer(IpText.getText(), Integer.parseInt(PortText.getText())) == null) {
 						JOptionPane.showMessageDialog(null, "IP ou Porta indisponiveis", "Error", JOptionPane.ERROR_MESSAGE);
 					}else {
 						JOptionPane.showMessageDialog(null, "Aberto com sucesso!", "Aberto (la ele)", JOptionPane.PLAIN_MESSAGE);
