@@ -8,6 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import back.MapMove;
+
 import java.awt.Toolkit;
 
 public class MainWindow extends JFrame {
@@ -16,6 +19,7 @@ public class MainWindow extends JFrame {
 	}
 	
 	private JPanel contentPane;
+	private MapMove mapsMove = new MapMove();
 
 	/**
 	 * Launch the application.
@@ -43,11 +47,15 @@ public class MainWindow extends JFrame {
 		setBounds(0, 0, 646, 669);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		contentPane = new PlayGame();
+		
+		contentPane = new PlayGame(mapsMove);
 //		contentPane = new Menu(this);
 //		contentPane = new terstSkin();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
+		
+//		contentPane.setBounds(0, 0, 630, 630);
+//		add(contentPane);
+//		add(contentPane2);
 	}
 }
