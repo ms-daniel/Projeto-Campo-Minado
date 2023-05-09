@@ -37,7 +37,7 @@ public class Player {
     @Override
     public String toString() {
         if(name != null){
-            return name + ";" + skin + ";" + x + ";" + y + ";";
+            return name + ";" + skin + ";" + x + ";" + y;
         }
         return "";
     }
