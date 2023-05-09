@@ -32,7 +32,21 @@ public class SecundaryCharacter extends Character{
 	@Override
 	public void run() {
 		// TODO Criar movimentação feita pelo servidor
-		move();
+
+//		//left
+//		if(toX < 0) 
+//			MoveAnimation(2);
+//		//right
+//		else if(toX > 0) 
+//			MoveAnimation(3);
+		//baixo
+		 if(toY < 0) 
+			MoveAnimation(1);
+		//cima
+		else 
+			MoveAnimation(4);
+		
+		Move();
 		this.interrupt();
 	}
 	
@@ -46,27 +60,56 @@ public class SecundaryCharacter extends Character{
 		//verifica se irá pra esquerda/direita ou cima/baixo
 		if(x != this.CoordenateX) {
 			if(x > this.CoordenateX)
-				toX = 45;
+				toX += 45;
 			else
-				toX = -45;
+				toX += -45;
 		}
 		else {
 			if(y > this.CoordenateY)
-				toY = 45;
+				toY += 45;
 			else
-				toY = -45;
+				toY += -45;
 		}
 		
 		this.CoordenateX = x;
 		this.CoordenateY = y;
 		
-		
-		
 		new Thread(this).start();
 	}
 	
-	private void move() {
+	protected void Move() {
+		int increment = 1;
+		int auxX = toX, auxY = toY;
+		int position = 0;
+		boolean isX = false;
+		
+		
+		
+		if(toX < 0 || toY < 0)
+			increment = -1;
+		
+		
+		while((Math.abs(auxX) > 0) || (Math.abs(auxY) > 0)) {
+			if(auxX != 0) {
+				IncrementLocale(increment, 0);
+				auxX += (increment*-1);
+				
+				isX = true;
+			}
+			else if(auxY != 0) {
+				IncrementLocale(0, increment);
+				auxY += (increment*-1);
+			}
+			WaitAFeelTime(10);
+		}
+
 		this.Locale(toX, toY);
+		
+		if(isX)
+			toX = 0;
+		else
+			toY = 0;
+
 	}
 	
 	@Override
@@ -89,3 +132,6 @@ public class SecundaryCharacter extends Character{
 		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
 }
+
+
+

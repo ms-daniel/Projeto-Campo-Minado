@@ -126,8 +126,8 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerPosition[0] = character.getCoordenateY();
 		PlayerPosition[1] = character.getCoordenateX();
 		
-		add(PlayerName, 0);
-		add(LabelCharacter, 0);
+		add(PlayerName, 1);
+		add(LabelCharacter, 1);
 		
 		CharactersPanel panel = new CharactersPanel(mapsMove);
 		panel.setBounds(0, 0, 630, 630);
@@ -218,7 +218,6 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	}       	
 		        timer.start();
 		    }
-//	        System.out.println("x: " + PlayerPosition[0] + "\ny: " + PlayerPosition[1] + "\n");
 	        
     	}
     }

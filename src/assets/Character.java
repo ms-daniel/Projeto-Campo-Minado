@@ -81,7 +81,7 @@ public class Character extends Thread{
 	
 	@Override
 	public void run() {
-		Move(this.position);
+		MoveAnimation(this.position);
 	}
 
 	public void Locale(int x, int y) {
@@ -91,7 +91,7 @@ public class Character extends Thread{
 		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
 	
-	public void Move(int position) {
+	protected void MoveAnimation(int position) {
 		position--; //to correct position
 		
 		this.Skinlabel.setIcon(SkinImages[position][1]);
@@ -179,6 +179,11 @@ public class Character extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	protected void Move() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
