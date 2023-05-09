@@ -117,7 +117,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		LabelCharacter = new JLabel();
 		PlayerName = new JLabel();
 		
-		character = new Character("SKULLMONKEY", "claire-redfield", LabelCharacter, PlayerName);
+		character = new Character("SKULLMONKEY", "blue-pen", LabelCharacter, PlayerName);
 		character.Locale(270, 235);
 		
 		character.setCoordenateX(MapToArray(map.getX()));
