@@ -48,8 +48,8 @@ public class MainWindow extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		
-		contentPane = new PlayGame(mapsMove);
-//		contentPane = new Menu(this);
+//		contentPane = new PlayGame(mapsMove);
+		contentPane = new Menu(this);
 //		contentPane = new terstSkin();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

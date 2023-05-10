@@ -152,12 +152,13 @@ private ImagesChange get = new ImagesChange();
 						JOptionPane.showMessageDialog(null, "IP ou Porta indisponiveis", "Error", JOptionPane.ERROR_MESSAGE);
 					}else {
 						JOptionPane.showMessageDialog(null, "Aberto com sucesso!", "Aberto (la ele)", JOptionPane.PLAIN_MESSAGE);
+						ServerInterface.connectPlayer(IpText.getText(), Integer.parseInt(PortText.getText()));
+						Menu.ChangeComponentsTo(Components.LOBBY);
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "IP ou Porta estao vazios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				
-				Menu.ChangeComponentsTo(Components.LOBBY);
 			}
 		});
 		
