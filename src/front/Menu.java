@@ -250,8 +250,6 @@ public class Menu extends JPanel {
 	
 	private String SkinLoad() {
 		String[] name = new String(SkinName).split("-");
-		
-		System.out.println(Arrays.toString( name));
 		return name[0] + "-perfil";
 	}
 
