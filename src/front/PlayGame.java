@@ -47,7 +47,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	
 	private Character character;
 	private JLabel LabelCharacter;
-	private JLabel PlayerName;
+	private JLabel PlayerNameLabel;
 	
 	//testes
 	private SecundaryCharacter character2;
@@ -76,7 +76,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	/**
 	 * Create the panel.
 	 */
-	public PlayGame(MapMove maps) {
+	public PlayGame(MapMove maps, String SkinName, String PlayerName) {
 		this.mapsMove = maps;
 		
 		timer = new Timer(700, new ActionListener() {
@@ -115,9 +115,9 @@ public class PlayGame extends JPanel implements KeyListener {
 		
 		
 		LabelCharacter = new JLabel();
-		PlayerName = new JLabel();
+		PlayerNameLabel = new JLabel();
 		
-		character = new Character("SKULLMONKEY", "blue-pen", LabelCharacter, PlayerName);
+		character = new Character(PlayerName, SkinName, LabelCharacter, PlayerNameLabel);
 		character.Locale(270, 235);
 		
 		character.setCoordenateX(MapToArray(map.getX()));
@@ -126,7 +126,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerPosition[0] = character.getCoordenateY();
 		PlayerPosition[1] = character.getCoordenateX();
 		
-		add(PlayerName, 1);
+		add(PlayerNameLabel, 1);
 		add(LabelCharacter, 1);
 		
 		CharactersPanel panel = new CharactersPanel(mapsMove);
@@ -134,8 +134,8 @@ public class PlayGame extends JPanel implements KeyListener {
 		add(panel,0);
 
 		/* testes servidor */
-		System.out.println(ServerInterface.startServer(Config.ip, Config.port));
-		ServerInterface.connectPlayer(Config.ip, Config.port);
+//		System.out.println(ServerInterface.startServer(Config.ip, Config.port));
+//		ServerInterface.connectPlayer(Config.ip, Config.port);
 		/* fim testes servidor */
 	}
 	
