@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -29,10 +30,7 @@ public class Menu extends JPanel {
 	public enum Components{
 		MENU, CONNECT, CREATE, CHANGESKIN
 	}
-	private MenuConnect MenuConnect = new MenuConnect();
-	private ChangeSkin ChangeSkin = new ChangeSkin() ;
-	private CreateSeason CreateSeason = new CreateSeason();
-	
+
 	private ImagesChange get = new ImagesChange();
 	
 	private JFrame mainWindow;
@@ -47,11 +45,24 @@ public class Menu extends JPanel {
 	
 	private BombMenu Bomb;
 	
+	private StringBuilder SkinName = new StringBuilder("baby");
+	private String PLayerName = "";
+	
+	private MenuConnect MenuConnect;
+	private ChangeSkin ChangeSkin;
+	private CreateSeason CreateSeason;
+	private JLabel SkinLabel;
+	private JLabel SkinTextLabel;
+	
 	/**
 	 * Create the panel.
 	 */
 	public Menu(JFrame frame) {
 		setLayout(null);
+		
+		MenuConnect = new MenuConnect();
+		ChangeSkin = new ChangeSkin();
+		CreateSeason = new CreateSeason();
 		
 		Connect = new JLabel("");
 		Connect.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -79,6 +90,14 @@ public class Menu extends JPanel {
 		
 		MenuBackground = new JLabel("");
 		MenuBackground.setBounds(0, 0, 630, 630);
+		
+		SkinLabel = new JLabel("");
+		SkinLabel.setBounds(530, 237, 95, 127);
+		
+		SkinTextLabel = new JLabel("Minha Skin");
+		SkinTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		SkinTextLabel.setOpaque(true);
+		SkinTextLabel.setBounds(530, 362, 95, 16);
 		
 		AddComponents();
 	}
@@ -179,7 +198,7 @@ public class Menu extends JPanel {
 			break;
 			
 		case CHANGESKIN:
-			ChangeSkin.AddComponents(Menu, MenuBackground);
+			ChangeSkin.AddComponents(Menu, MenuBackground, this.SkinName);
 			break;
 			
 		default:
@@ -200,6 +219,7 @@ public class Menu extends JPanel {
 	}
 	
 	private void AddComponents() {
+		SkinLabel.setIcon(get.getIcon("character/" + SkinLoad() + ".png"));
 		Connect.setIcon(get.getIcon("icons/Conectar.png"));
 		CreateSeasonButton.setIcon(get.getIcon("icons/Criar Partida.png"));
 		ChangeSkinButton.setIcon(get.getIcon("icons/Mudar Boneco.png"));
@@ -209,6 +229,10 @@ public class Menu extends JPanel {
 		
 		BombIcon.setVisible(false);
 		
+		
+		add(SkinTextLabel);
+		
+		add(SkinLabel);
 		add(Connect);
 		add(CreateSeasonButton);
 		add(ChangeSkinButton);
@@ -221,6 +245,14 @@ public class Menu extends JPanel {
 		Events();
 		
 		repaint();
+		revalidate();
+	}
+	
+	private String SkinLoad() {
+		String[] name = new String(SkinName).split("-");
+		
+		System.out.println(Arrays.toString( name));
+		return name[0] + "-perfil";
 	}
 
 }
