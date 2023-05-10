@@ -2,6 +2,7 @@ package front;
 
 
 import back.ImagesChange;
+import config.Config;
 import front.Menu.Components;
 import server.ServerInterface;
 
@@ -17,6 +18,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class MenuConnect{
 	private ImagesChange get = new ImagesChange();
@@ -51,7 +54,7 @@ public class MenuConnect{
 		PortLabel.setBounds(130, 346, 200, 55);
 		
 		
-		PortText = new JTextField();
+		PortText = new JTextField(Config.port);
 		PortText.setFont(new Font("Unispace", Font.PLAIN, 24));
 		PortText.setHorizontalAlignment(SwingConstants.LEFT);
 		PortText.setColumns(10);
@@ -59,7 +62,12 @@ public class MenuConnect{
 		PortText.setBounds(141, 353, 172, 42);
 		
 		
-		IpText = new JTextField();
+		try {
+			IpText = new JTextField(InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		IpText.setFont(new Font("Unispace", Font.PLAIN, 24));
 		IpText.setBorder(new EmptyBorder(0, 0, 0, 0));
 		IpText.setHorizontalAlignment(SwingConstants.LEFT);
