@@ -28,10 +28,11 @@ public class CharactersPanel extends JPanel {
 	 */
 	public CharactersPanel(MapMove maps) {
 		setOpaque(false);
+		setFocusable(false);
 		this.mapsMove = maps;
 		
 		//add other players
-		AddOtherPlayer("MJ", "luffy", 315, 190);
+		AddOtherPlayer("MJ", "luffy", 270, 235);
 		mapsMove.AddCharacterToMap(character2);
 		
 		TMove moveChar = new TMove(character2);
@@ -41,7 +42,6 @@ public class CharactersPanel extends JPanel {
 		
 		AddOtherPlayer("Chocolate", "jill-valentine", 270,145);
 		mapsMove.AddCharacterToMap(character2);*/
-		
 		
 		moveChar.start();
 	}
