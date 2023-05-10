@@ -54,7 +54,9 @@ public class TMove extends Thread{
 			}
 		}
 	}
-
+	/**
+	 * metodo para teste
+	 */
 	private synchronized void UpDown() {
 		//this.character.WaitAFeelTime(500);
 		
