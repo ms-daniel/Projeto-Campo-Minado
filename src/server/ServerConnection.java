@@ -42,10 +42,9 @@ public class ServerConnection extends Thread {
             String nameSkin[] = inFromClient.readLine().split(";");
             player.SetNameAndSkin(nameSkin[0], nameSkin[1]);
             makeMulticastConnection();
-            while(keepWaiting()){
-                System.out.println("Aqui");
-            }
+            while(keepWaiting()){}
             outToClient.writeBytes(getAllBombs() + "\n");
+            sandMulticast();
 
             while (true) {
                 jogada = inFromClient.readLine();
