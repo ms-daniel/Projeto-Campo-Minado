@@ -3,6 +3,7 @@ package front;
 import javax.swing.JPanel;
 
 import back.ImagesChange;
+import front.MainWindow.Panels;
 import back.BombMenu;
 
 import javax.swing.JLabel;
@@ -16,12 +17,12 @@ import javax.swing.SwingConstants;
 
 public class Menu extends JPanel {
 	public enum Components{
-		MENU, CONNECT, CREATE, CHANGESKIN, LOBBY
+		MENU, CONNECT, CREATE, CHANGESKIN, LOBBY, PLAYGAME
 	}
 
 	private ImagesChange get = new ImagesChange();
 	
-	private JFrame mainWindow;
+	private MainWindow mainWindow;
 	
 	private Menu Menu = this;
 	private JLabel Connect;
@@ -34,7 +35,7 @@ public class Menu extends JPanel {
 	private BombMenu Bomb;
 	
 	private StringBuilder SkinName = new StringBuilder("baby");
-	private String PLayerName = "";
+	private StringBuilder PlayerName = new StringBuilder("");
 	
 	private MenuConnect MenuConnect;
 	private ChangeSkin ChangeSkin;
@@ -47,7 +48,8 @@ public class Menu extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Menu(JFrame frame) {
+	public Menu(MainWindow frame) {
+		this.mainWindow = frame;
 		setLayout(null);
 		
 		MenuConnect = new MenuConnect();
@@ -196,6 +198,12 @@ public class Menu extends JPanel {
 			Lobby.AddComponents(Menu, MenuBackground);
 			break;
 			
+		case PLAYGAME:
+			System.out.println(PlayerName + "\n" + SkinName);
+			setFocusable(false);
+			mainWindow.ChangeTo(Panels.PLAYGAME);
+			break;
+			
 		default:
 			
 			break;
@@ -244,8 +252,16 @@ public class Menu extends JPanel {
 		revalidate();
 	}
 	
+	public StringBuilder getPlayerNameSB() {
+		return this.PlayerName;
+	}
+	
 	public String getSkinName() {
 		return this.SkinName.toString();
+	}
+	
+	public String getPlayerName() {
+		return this.PlayerName.toString();
 	}
 	
 	private String SkinLoad() {
