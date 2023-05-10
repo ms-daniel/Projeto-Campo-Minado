@@ -63,7 +63,6 @@ public class MainWindow extends JFrame {
 			case PLAYGAME:
 				this.play = new PlayGame(mapsMove, Menu.getSkinName(), Menu.getPlayerName());
 				contentPane = this.play;
-//				contentPane = new PlayGame(mapsMove, Menu.getSkinName(), Menu.getPlayerName());
 				break;
 			default:
 				break;

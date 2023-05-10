@@ -94,12 +94,6 @@ public class PlayGame extends JPanel implements KeyListener {
 		addKeyListener(this);//permite que seja identificada teclas pressionadas no panel
 		setFocusable(true); //so funciona com essa opcao ativada
 
-//		JLabel arrowkeyslabel = new JLabel("");
-//		arrowkeyslabel.setToolTipText("keys");
-//		arrowkeyslabel.setIcon(get.getIcon("icons/", "arrowskeys", ".png"));
-//		arrowkeyslabel.setBounds(0, 450, 155, 100);
-//		add(arrowkeyslabel);
-
 		mapT = new JLabel();
 		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
 		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));

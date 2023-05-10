@@ -17,35 +17,14 @@ public class SecundaryCharacter extends Character{
 	private BufferedReader inFromServer;
 	private InputStream toServer;
 	
-	public SecundaryCharacter(String name, String SkinName, JLabel SkinLabel, JLabel PlayerName, Socket socket) {
+	public SecundaryCharacter(String name, String SkinName, JLabel SkinLabel, JLabel PlayerName) {
 		super(name, SkinName, SkinLabel, PlayerName);
-		this.connection = socket;
-		
-//		try {
-//			this.inFromServer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 	
 	@Override
 	public void run() {
 		// TODO Criar movimentação feita pelo servidor
 
-//		//left
-//		if(toX < 0) 
-//			MoveAnimation(2);
-//		//right
-//		else if(toX > 0) 
-//			MoveAnimation(3);
-		//baixo
-//		 if(toY < 0) 
-//			MoveAnimation(1);
-//		//cima
-//		else 
-//			MoveAnimation(4);
-		
 		Move();
 		this.interrupt();
 	}

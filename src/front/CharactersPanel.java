@@ -18,9 +18,9 @@ public class CharactersPanel extends JPanel {
 	
 	private MapMove mapsMove;
 	//testes
-	private SecundaryCharacter character2;
-	private JLabel LabelCharacter2;
-	private JLabel PlayerName2;
+	private SecundaryCharacter character;
+	private JLabel LabelCharacter;
+	private JLabel PlayerNameLabel;
 	//=========================
 
 	private Timer timer;
@@ -30,23 +30,21 @@ public class CharactersPanel extends JPanel {
 	 */
 	public CharactersPanel(MapMove maps) {
 		setOpaque(false);
-		setFocusable(false);
+		
+		JLabel mapT = new JLabel();
+		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
+		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
+		add(mapT,0);
+		
 		this.mapsMove = maps;
 		
 		AddPlayers();
 		
-		TMove moveChar = new TMove(character2);
-				
-		/*AddOtherPlayer("la", "green-dragon", 225, 190);
-		mapsMove.AddCharacterToMap(character2);
-		
-		AddOtherPlayer("Chocolate", "jill-valentine", 270,145);
-		mapsMove.AddCharacterToMap(character2);*/
+		TMove moveChar = new TMove(character);
 		
 		moveChar.start();
 	}
 
-	
 	/**
      * Introduce another player in the map
      * @param PlayerName: player name
@@ -55,17 +53,15 @@ public class CharactersPanel extends JPanel {
      * @param y: coordenate y for player position
      */
     public void AddOtherPlayer(String PlayerName, String SkinName, int x, int y) {
-    	LabelCharacter2 = new JLabel();
-    	LabelCharacter2.setBounds(230, 5, 0, 0);
-		PlayerName2 = new JLabel();
-		PlayerName2.setBounds(225, 5, 0, 0);
+    	LabelCharacter = new JLabel();
+		PlayerNameLabel = new JLabel();
     	
-    	character2 = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter2, PlayerName2, null);
-		character2.Locale(x, y);
+    	character = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter, PlayerNameLabel);
+		character.Locale(x, y);
 		setLayout(null);
 	
-		add(PlayerName2);
-		add(LabelCharacter2);
+		add(PlayerNameLabel);
+		add(LabelCharacter);
     }
     
     /**
@@ -100,7 +96,7 @@ public class CharactersPanel extends JPanel {
 			 */
 			if(!(ServerInterface.playerName.equals(infos[0]))){
 				AddOtherPlayer(infos[0], infos[1], Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
-				mapsMove.AddCharacterToMap(character2);
+				mapsMove.AddCharacterToMap(character);
 			}
 		}
 	}
