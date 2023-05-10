@@ -40,11 +40,11 @@ public class SecundaryCharacter extends Character{
 //		else if(toX > 0) 
 //			MoveAnimation(3);
 		//baixo
-		 if(toY < 0) 
-			MoveAnimation(1);
-		//cima
-		else 
-			MoveAnimation(4);
+//		 if(toY < 0) 
+//			MoveAnimation(1);
+//		//cima
+//		else 
+//			MoveAnimation(4);
 		
 		Move();
 		this.interrupt();
