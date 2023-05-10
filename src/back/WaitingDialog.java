@@ -93,7 +93,10 @@ public class WaitingDialog extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 				skin = Menu.getSkinName();
-				waitPlayes();
+				
+				System.out.println("TEste");
+				
+				waitPlayes(Menu);
 				cancelButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
@@ -107,7 +110,7 @@ public class WaitingDialog extends JDialog {
 		}
 	}
 
-	private void waitPlayes(){
+	private void waitPlayes(Menu Menu){
 		Thread thread = new Thread(new Runnable() {
 			public void run() {
 				String bombs;
@@ -115,6 +118,7 @@ public class WaitingDialog extends JDialog {
 					bombs = ServerInterface.sandNameAndSkin(PlayerName, skin);
 					System.out.println(bombs);
 					me.dispose();
+					Menu.ChangeComponentsTo(Components.MENU);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
