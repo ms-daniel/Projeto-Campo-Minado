@@ -42,6 +42,9 @@ public class ServerConnection extends Thread {
             String nameSkin[] = inFromClient.readLine().split(";");
             player.SetNameAndSkin(nameSkin[0], nameSkin[1]);
             makeMulticastConnection();
+            while(keepWaiting()){
+                System.out.println("Aqui");
+            }
             outToClient.writeBytes(getAllBombs() + "\n");
 
             while (true) {
@@ -108,5 +111,18 @@ public class ServerConnection extends Thread {
             return true;
         }
         return false;
+    }
+
+    private Boolean keepWaiting(){
+        int count = 0;
+        for (Player p : players) {
+            if(p.getName() != null){
+                count++;
+            }
+            if(players.size() == count){
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -26,8 +26,8 @@ public class Server extends Thread {
                     players.add(player);
                     ServerConnection connection = new ServerConnection(SocketConnection, board, player, players, connections);
                     connections.add(connection);
-                    status += SocketConnection.getLocalAddress().getHostAddress() + " Conectou" + "\n";
-                    status += "Total de jogadores conectados: " + connections.size();
+                    /*status += SocketConnection.getLocalAddress().getHostAddress() + " Conectou" + "\n";
+                    status += "Total de jogadores conectados: " + connections.size();*/
                     System.out.println(status);
                     if (connections.size() == Config.connectionsNumber && !running) {
                         PreencherBoard();

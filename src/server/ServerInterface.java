@@ -33,8 +33,10 @@ public class ServerInterface {
     public static Boolean connectPlayer(String ip, int port){
         try {
 			makeConnection(ip, port);
-			board = new TPlays();
-	        board.start();
+            if(Config.testServer){
+                board = new TPlays();
+                board.start();
+            }
 	        return true;
 		} catch (IOException e) {
 			return false;

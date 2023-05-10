@@ -15,7 +15,7 @@ public class TPlays extends Thread {
     private static String currentInfos;
 
     public void run(){
-        /*try {
+        try {
             makeConnection();
             while(true){
                 receberPlays();
@@ -24,7 +24,7 @@ public class TPlays extends Thread {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }*/
+        }
     }
 
     private void makeConnection() throws IOException {
