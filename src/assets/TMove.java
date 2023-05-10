@@ -42,6 +42,12 @@ public class TMove extends Thread{
 		String[] allInfos = currentInfos.split(":");
 		for (String playeString : allInfos) {
 			String[] infos = playeString.split(";");
+			/*
+			 * infos[0] == nome do jogador
+			 * infos[1] == skin do jogador
+			 * infos[2] == posicao x
+			 * infos[3] == posicao y
+			 */
 			if(character.PlayerName.equals(infos[0])){
 				this.character.ToMove(Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
 				this.character.WaitAFeelTime(1000);
