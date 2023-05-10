@@ -48,7 +48,7 @@ public class TMove extends Thread{
 			 * infos[2] == posicao x
 			 * infos[3] == posicao y
 			 */
-			if(character.PlayerName.equals(infos[0])){
+			if(character.PlayerName.equals(infos[0].toUpperCase())){
 				this.character.ToMove(Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
 				this.character.WaitAFeelTime(1000);
 			}
