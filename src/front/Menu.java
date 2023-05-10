@@ -6,29 +6,17 @@ import back.ImagesChange;
 import back.BombMenu;
 
 import javax.swing.JLabel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
-import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Color;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
-import javax.swing.border.BevelBorder;
 import javax.swing.SwingConstants;
 
 public class Menu extends JPanel {
 	public enum Components{
-		MENU, CONNECT, CREATE, CHANGESKIN
+		MENU, CONNECT, CREATE, CHANGESKIN, LOBBY
 	}
 
 	private ImagesChange get = new ImagesChange();
@@ -51,6 +39,8 @@ public class Menu extends JPanel {
 	private MenuConnect MenuConnect;
 	private ChangeSkin ChangeSkin;
 	private CreateSeason CreateSeason;
+	private Lobby Lobby;
+	
 	private JLabel SkinLabel;
 	private JLabel SkinTextLabel;
 	
@@ -63,6 +53,7 @@ public class Menu extends JPanel {
 		MenuConnect = new MenuConnect();
 		ChangeSkin = new ChangeSkin();
 		CreateSeason = new CreateSeason();
+		Lobby = new Lobby();
 		
 		Connect = new JLabel("");
 		Connect.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -201,6 +192,10 @@ public class Menu extends JPanel {
 			ChangeSkin.AddComponents(Menu, MenuBackground, this.SkinName);
 			break;
 			
+		case LOBBY:
+			Lobby.AddComponents(Menu, MenuBackground);
+			break;
+			
 		default:
 			
 			break;
@@ -226,6 +221,7 @@ public class Menu extends JPanel {
 		BombIcon.setIcon(get.getIcon("icons/Bomb-pixel.png"));
 		ExitButton.setIcon(get.getIcon("icons/Sair.png"));
 		MenuBackground.setIcon(get.getIcon("icons/Menu.jpg"));
+		MenuBackground.setEnabled(true);
 		
 		BombIcon.setVisible(false);
 		
@@ -246,6 +242,10 @@ public class Menu extends JPanel {
 		
 		repaint();
 		revalidate();
+	}
+	
+	public String getSkinName() {
+		return this.SkinName.toString();
 	}
 	
 	private String SkinLoad() {
