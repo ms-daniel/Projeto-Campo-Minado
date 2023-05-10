@@ -26,7 +26,8 @@ public class TMove extends Thread{
             makeConnection();
             while(true){
                 receberPlays();
-                System.out.println(getCurrentInfos());
+				Move();
+                //System.out.println(getCurrentInfos());
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -37,6 +38,17 @@ public class TMove extends Thread{
 		}*/
 	}
 	
+	private synchronized void Move(){
+		String[] allInfos = currentInfos.split(":");
+		for (String playeString : allInfos) {
+			String[] infos = playeString.split(";");
+			if(character.PlayerName.equals(infos[0])){
+				this.character.ToMove(Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
+				this.character.WaitAFeelTime(1000);
+			}
+		}
+	}
+
 	private synchronized void UpDown() {
 		//this.character.WaitAFeelTime(500);
 		

@@ -6,7 +6,7 @@ import javax.swing.Timer;
 
 import assets.Character;
 import assets.SecundaryCharacter;
-import assets.testMove;
+import assets.TMove;
 import back.ImagesChange;
 import back.MapMove;
 import config.Config;
@@ -34,13 +34,13 @@ public class CharactersPanel extends JPanel {
 		AddOtherPlayer("MJ", "luffy", 315, 190);
 		mapsMove.AddCharacterToMap(character2);
 		
-		testMove moveChar = new testMove(character2);
+		TMove moveChar = new TMove(character2);
 				
-		AddOtherPlayer("la", "green-dragon", 225, 190);
+		/*AddOtherPlayer("la", "green-dragon", 225, 190);
 		mapsMove.AddCharacterToMap(character2);
 		
 		AddOtherPlayer("Chocolate", "jill-valentine", 270,145);
-		mapsMove.AddCharacterToMap(character2);
+		mapsMove.AddCharacterToMap(character2);*/
 		
 		
 		moveChar.start();
