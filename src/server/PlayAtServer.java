@@ -11,6 +11,7 @@ import config.Config;
 public class PlayAtServer {
     public static void main(String[] args) throws IOException {
         System.out.println("Conectando... Aguarde");
+        Config.testServer = true;
         System.out.println(ServerInterface.startServer(Config.ip, Config.port));
 
         ServerInterface.connectPlayer(Config.ip, Config.port);
