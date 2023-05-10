@@ -156,6 +156,8 @@ private ImagesChange get = new ImagesChange();
 				}else {
 					JOptionPane.showMessageDialog(null, "IP ou Porta estao vazios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				Menu.ChangeComponentsTo(Components.LOBBY);
 			}
 		});
 		
