@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import front.Menu;
 import front.Menu.Components;
+import server.ServerInterface;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,12 +19,16 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import javax.swing.JTextField;
 
 public class WaitingDialog extends JDialog {
 	private ImagesChange get = new ImagesChange();
 	
 	private final JPanel contentPanel = new JPanel();
+	private String PlayerName;
+	private String skin;
 	
 	private WaitingDialog me = this;
 
@@ -31,7 +36,7 @@ public class WaitingDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public WaitingDialog(Menu Menu) {
-		String PlayerName = JOptionPane.showInputDialog(this, "Nome do jogador: ");
+		PlayerName = JOptionPane.showInputDialog(this, "Nome do jogador: ");
 
 		setTitle("Aguardando");
 		setBounds(100, 100, 450, 300);
@@ -87,7 +92,8 @@ public class WaitingDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-				
+				skin = Menu.getSkinName();
+				waitPlayes();
 				cancelButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
@@ -99,5 +105,22 @@ public class WaitingDialog extends JDialog {
 				});
 			}
 		}
+	}
+
+	private void waitPlayes(){
+		Thread thread = new Thread(new Runnable() {
+			public void run() {
+				String bombs;
+				try {
+					bombs = ServerInterface.sandNameAndSkin(PlayerName, skin);
+					System.out.println(bombs);
+					me.dispose();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
 	}
 }
