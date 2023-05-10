@@ -15,11 +15,13 @@ import java.awt.Toolkit;
 
 public class MainWindow extends JFrame {
 	public enum Panels {
-	    MENU, PLAYGAME, CREATE, CONNECT, CHANGESKIN
+	    MENU, PLAYGAME
 	}
 	
 	private JPanel contentPane;
 	private MapMove mapsMove = new MapMove();
+	private Menu Menu;
+	private PlayGame play;
 
 	/**
 	 * Launch the application.
@@ -47,15 +49,29 @@ public class MainWindow extends JFrame {
 		setBounds(0, 0, 646, 669);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		
-//		contentPane = new PlayGame(mapsMove);
-		contentPane = new Menu(this);
-//		contentPane = new terstSkin();
+		this.Menu = new Menu(this);
+
+		ChangeTo(Panels.MENU);
+
+	}
+	
+	public void ChangeTo(Panels panels) {
+		switch(panels) {
+			case MENU:
+				contentPane = this.Menu;
+				break;
+			case PLAYGAME:
+				this.play = new PlayGame(mapsMove, Menu.getSkinName(), Menu.getPlayerName());
+				contentPane = this.play;
+//				contentPane = new PlayGame(mapsMove, Menu.getSkinName(), Menu.getPlayerName());
+				break;
+			default:
+				break;
+		}
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
-//		contentPane.setBounds(0, 0, 630, 630);
-//		add(contentPane);
-//		add(contentPane2);
+		this.repaint();
+		this.revalidate();
+		contentPane.setFocusable(true);
 	}
 }
