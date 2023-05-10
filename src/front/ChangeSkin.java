@@ -47,147 +47,6 @@ public class ChangeSkin extends JPanel {
 	
 	private ButtonGroup GroupRadio;
 	private JRadioButton[] RadioList = new JRadioButton[6];
-
-	
-	/**
-	 * Create the panel.
-	 */
-	public ChangeSkin() {
-//		
-//		BluePenRadio = new JRadioButton("Blue Pen");
-//		BluePenRadio.setOpaque(false);
-//		BluePenRadio.setMargin(new Insets(0, 0, 0, 0));
-//		BluePenRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
-//		BluePenRadio.setHorizontalAlignment(SwingConstants.CENTER);
-//		BluePenRadio.setBorder(null);
-//		BluePenRadio.setBounds(42, 315, 95, 23);
-//		add(BluePenRadio);
-//		
-//		BluePenLabel = new JLabel("");
-//		BluePenLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/manoel-perfil.png")));
-//		BluePenLabel.setOpaque(true);
-//		BluePenLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-//		BluePenLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		BluePenLabel.setBackground(new Color(169, 169, 169));
-//		BluePenLabel.setBounds(42, 315, 95, 127);
-//		add(BluePenLabel);
-//		
-//		JillRadio = new JRadioButton("Jill Valentine");
-//		JillRadio.setOpaque(false);
-//		JillRadio.setMargin(new Insets(0, 0, 0, 0));
-//		JillRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
-//		JillRadio.setHorizontalAlignment(SwingConstants.CENTER);
-//		JillRadio.setBorder(null);
-//		JillRadio.setBounds(384, 177, 95, 23);
-//		add(JillRadio);
-//		
-//		LuffyRadio = new JRadioButton("M D Luffy");
-//		LuffyRadio.setOpaque(false);
-//		LuffyRadio.setMargin(new Insets(0, 0, 0, 0));
-//		LuffyRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
-//		LuffyRadio.setHorizontalAlignment(SwingConstants.CENTER);
-//		LuffyRadio.setBorder(null);
-//		LuffyRadio.setBounds(498, 177, 95, 23);
-//		add(LuffyRadio);
-//		
-//		
-//		ClaireRadio = new JRadioButton("Claire Redfield");
-//		ClaireRadio.setBorder(null);
-//		ClaireRadio.setMargin(new Insets(0, 0, 0, 0));
-//		ClaireRadio.setOpaque(false);
-//		ClaireRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
-//		ClaireRadio.setHorizontalAlignment(SwingConstants.CENTER);
-//		ClaireRadio.setBounds(156, 177, 95, 23);
-//		add(ClaireRadio);
-//		
-//		GreenDRadio = new JRadioButton("Green Dragon");
-//		GreenDRadio.setBorder(null);
-//		GreenDRadio.setMargin(new Insets(0, 0, 0, 0));
-//		GreenDRadio.setOpaque(false);
-//		GreenDRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
-//		GreenDRadio.setHorizontalAlignment(SwingConstants.CENTER);
-//		GreenDRadio.setBounds(270, 177, 95, 23);
-//		add(GreenDRadio);
-//		
-//		BabyRadio = new JRadioButton("Baby");
-//		BabyRadio.setHorizontalAlignment(SwingConstants.CENTER);
-//		BabyRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
-//		BabyRadio.setBounds(42, 177, 95, 23);
-//		add(BabyRadio);
-//		
-//		LuffyLabel = new JLabel("");
-//		LuffyLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/luffy-perfil.png")));
-//		LuffyLabel.setOpaque(true);
-//		LuffyLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-//		LuffyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		LuffyLabel.setBackground(new Color(169, 169, 169));
-//		LuffyLabel.setBounds(498, 177, 95, 127);
-//		add(LuffyLabel);
-//		
-//		JillLabel = new JLabel("");
-//		JillLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/jill-perfil.png")));
-//		JillLabel.setOpaque(true);
-//		JillLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-//		JillLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		JillLabel.setBackground(new Color(169, 169, 169));
-//		JillLabel.setBounds(384, 177, 95, 127);
-//		add(JillLabel);
-//		
-//		GreenDLabel = new JLabel("");
-//		GreenDLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/green-dragon-perfil.png")));
-//		GreenDLabel.setOpaque(true);
-//		GreenDLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-//		GreenDLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		GreenDLabel.setBackground(new Color(169, 169, 169));
-//		GreenDLabel.setBounds(270, 177, 95, 127);
-//		add(GreenDLabel);
-//		
-//		ClaireLabel = new JLabel("");
-//		ClaireLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/claire-perfil.png")));
-//		ClaireLabel.setOpaque(true);
-//		ClaireLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-//		ClaireLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		ClaireLabel.setBackground(new Color(169, 169, 169));
-//		ClaireLabel.setBounds(156, 177, 95, 127);
-//		add(ClaireLabel);
-//		
-//		BabyLabel = new JLabel("");
-//		BabyLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//		BabyLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-//		BabyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		BabyLabel.setBackground(new Color(169, 169, 169));
-//		BabyLabel.setOpaque(true);
-//		BabyLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/baby-perfil.png")));
-//		BabyLabel.setBounds(42, 177, 95, 127);
-//		add(BabyLabel);
-//
-//		
-//		BackButton = new JLabel("");
-//		BackButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//		
-//		BackButton.setIcon(new ImageIcon(ChangeSkin.class.getResource("/icons/voltar.png")));
-//		BackButton.setBounds(73, 540, 220, 42);
-//		add(BackButton);
-//		
-//		ChangeSkinButton = new JLabel("");
-//		ChangeSkinButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//		ChangeSkinButton.setIcon(new ImageIcon(ChangeSkin.class.getResource("/icons/mudar.png")));
-//		ChangeSkinButton.setBounds(350, 540, 200, 42);
-//		add(ChangeSkinButton);
-//		
-//		panelCharacter = new JLabel("");
-//		panelCharacter.setIcon(new ImageIcon(ChangeSkin.class.getResource("/icons/painelChangeSkin.png")));
-//		panelCharacter.setBackground(new Color(0, 0, 0));
-//		panelCharacter.setBounds(12, 150, 606, 404);
-//		add(panelCharacter);
-//		
-//		bakcgrouhd = new JLabel("");
-//		bakcgrouhd.setIcon(new ImageIcon(ChangeSkin.class.getResource("/icons/menu.jpg")));
-//		bakcgrouhd.setBounds(0, 0, 630, 630);
-//		add(bakcgrouhd);
-//
-//		Events();
-	}
 	
 	public void AddComponents(Menu Menu, JLabel Background, StringBuilder SkinName) {
 		this.Menu = Menu;
@@ -208,7 +67,7 @@ public class ChangeSkin extends JPanel {
 		BabyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		BabyLabel.setBackground(new Color(169, 169, 169));
 		BabyLabel.setOpaque(true);
-		BabyLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/baby-perfil.png")));
+		BabyLabel.setIcon(get.getIcon("character/baby-perfil.png"));
 		BabyLabel.setBounds(42, 177, 95, 127);
 		
 		
@@ -248,7 +107,7 @@ public class ChangeSkin extends JPanel {
 		
 		
 		GreenDLabel = new JLabel("");
-		GreenDLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/green-perfil.png")));
+		GreenDLabel.setIcon(get.getIcon("character/green-perfil.png"));
 		GreenDLabel.setOpaque(true);
 		GreenDLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		GreenDLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -257,7 +116,7 @@ public class ChangeSkin extends JPanel {
 		
 		
 		ClaireLabel = new JLabel("");
-		ClaireLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/claire-perfil.png")));
+		ClaireLabel.setIcon(get.getIcon("character/claire-perfil.png"));
 		ClaireLabel.setOpaque(true);
 		ClaireLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		ClaireLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -284,7 +143,7 @@ public class ChangeSkin extends JPanel {
 		LuffyRadio.setBounds(498, 177, 95, 23);
 		
 		LuffyLabel = new JLabel("");
-		LuffyLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/luffy-perfil.png")));
+		LuffyLabel.setIcon(get.getIcon("character/luffy-perfil.png"));
 		LuffyLabel.setOpaque(true);
 		LuffyLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		LuffyLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -293,7 +152,7 @@ public class ChangeSkin extends JPanel {
 		
 		
 		JillLabel = new JLabel("");
-		JillLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/jill-perfil.png")));
+		JillLabel.setIcon(get.getIcon("character/jill-perfil.png"));
 		JillLabel.setOpaque(true);
 		JillLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		JillLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -311,7 +170,7 @@ public class ChangeSkin extends JPanel {
 		
 		
 		BluePenLabel = new JLabel("");
-		BluePenLabel.setIcon(new ImageIcon(ChangeSkin.class.getResource("/character/blue-perfil.png")));
+		BluePenLabel.setIcon(get.getIcon("character/blue-perfil.png"));
 		BluePenLabel.setOpaque(true);
 		BluePenLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		BluePenLabel.setHorizontalAlignment(SwingConstants.CENTER);
