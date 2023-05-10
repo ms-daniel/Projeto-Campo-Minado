@@ -138,11 +138,12 @@ public class MenuConnect{
 						JOptionPane.showMessageDialog(null, "IP ou Porta indisponiveis", "Error", JOptionPane.ERROR_MESSAGE);
 					}else {
 						JOptionPane.showMessageDialog(null, "Introduzido com sucesso!", "Aberto (la ele)", JOptionPane.PLAIN_MESSAGE);
+						Menu.ChangeComponentsTo(Components.LOBBY);
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "IP ou Porta estao vazios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				Menu.ChangeComponentsTo(Components.LOBBY);
+				
 			}
 		});
 		
