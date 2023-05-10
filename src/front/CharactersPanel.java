@@ -10,6 +10,8 @@ import assets.TMove;
 import back.ImagesChange;
 import back.MapMove;
 import config.Config;
+import server.ServerInterface;
+import server.TPlays;
 
 public class CharactersPanel extends JPanel {
 	private ImagesChange get = new ImagesChange();
@@ -31,9 +33,7 @@ public class CharactersPanel extends JPanel {
 		setFocusable(false);
 		this.mapsMove = maps;
 		
-		//add other players
-		AddOtherPlayer("MJ", "luffy", 270, 235);
-		mapsMove.AddCharacterToMap(character2);
+		AddPlayers();
 		
 		TMove moveChar = new TMove(character2);
 				
@@ -87,4 +87,21 @@ public class CharactersPanel extends JPanel {
     private int MapToArray(int xy) {
     	return ((-xy + 270)/45);
     }
+
+	private void AddPlayers(){
+		String[] allInfos = ServerInterface.infos.split(":");
+		for (String playeString : allInfos) {
+			String[] infos = playeString.split(";");
+			/*
+			 * infos[0] == nome do jogador
+			 * infos[1] == skin do jogador
+			 * infos[2] == posicao x
+			 * infos[3] == posicao y
+			 */
+			if(!(ServerInterface.playerName.equals(infos[0]))){
+				AddOtherPlayer(infos[0], infos[1], Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
+				mapsMove.AddCharacterToMap(character2);
+			}
+		}
+	}
 }

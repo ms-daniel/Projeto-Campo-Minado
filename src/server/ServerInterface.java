@@ -18,6 +18,8 @@ public class ServerInterface {
     private static DataOutputStream outToServer;
     private static BufferedReader inFromServer;
     private static TPlays board;
+    public static String infos;
+    public static String playerName;
 
     public static String startServer(String ip, int port){
         server = new Server();

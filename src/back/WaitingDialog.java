@@ -123,10 +123,13 @@ public class WaitingDialog extends JDialog {
 	private void waitPlayes(Menu Menu){
 		Thread thread = new Thread(new Runnable() {
 			public void run() {
+				String bombsAndInfos;
 				String bombs;
 				try {
-					bombs = ServerInterface.sandNameAndSkin(PlayerName, skin);
-					System.out.println(bombs);
+					bombsAndInfos = ServerInterface.sandNameAndSkin(PlayerName, skin);
+					bombs = bombsAndInfos.split("#")[0];
+					ServerInterface.infos = bombsAndInfos.split("#")[1];
+					ServerInterface.playerName = PlayerName;
 					me.dispose();
 					Menu.ChangeComponentsTo(Components.PLAYGAME);
 				} catch (IOException e) {
