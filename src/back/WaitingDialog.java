@@ -36,8 +36,12 @@ public class WaitingDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public WaitingDialog(Menu Menu) {
-		PlayerName = JOptionPane.showInputDialog(this, "Nome do jogador: ");
-
+		StringBuilder PN = Menu.getPlayerNameSB();
+		PN.delete(0, PN.length());
+		PN.append(JOptionPane.showInputDialog(this, "Nome do jogador: "));
+		
+		PlayerName = PN.toString();
+		
 		setTitle("Aguardando");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -102,6 +106,12 @@ public class WaitingDialog extends JDialog {
 					public void mousePressed(MouseEvent e) {
 						me.dispose();
 						//TODO cancelar conexao com servidor
+						try {
+							ServerInterface.closeConnection();
+							ServerInterface.closeServer();
+						}catch(IOException e1) {
+							
+						}
 						Menu.ChangeComponentsTo(Components.MENU);
 						
 					}
@@ -118,7 +128,7 @@ public class WaitingDialog extends JDialog {
 					bombs = ServerInterface.sandNameAndSkin(PlayerName, skin);
 					System.out.println(bombs);
 					me.dispose();
-					Menu.ChangeComponentsTo(Components.MENU);
+					Menu.ChangeComponentsTo(Components.PLAYGAME);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
