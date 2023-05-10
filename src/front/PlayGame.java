@@ -22,7 +22,7 @@ import javax.swing.Timer;
 
 import assets.Character;
 import assets.SecundaryCharacter;
-import assets.testMove;
+import assets.TMove;
 import back.ImagesChange;
 import back.MapMove;
 import config.Config;
@@ -132,6 +132,11 @@ public class PlayGame extends JPanel implements KeyListener {
 		CharactersPanel panel = new CharactersPanel(mapsMove);
 		panel.setBounds(0, 0, 630, 630);
 		add(panel,0);
+
+		/* testes servidor */
+		System.out.println(ServerInterface.startServer(Config.ip, Config.port));
+		ServerInterface.connectPlayer(Config.ip, Config.port);
+		/* fim testes servidor */
 	}
 	
 	@Override
@@ -192,7 +197,7 @@ public class PlayGame extends JPanel implements KeyListener {
 		        	validMove = true;
 	        	}
 	      
-	        	validKey = true; 
+	        	validKey = true;
 	        }
 	        else if((key == KeyEvent.VK_UP) ||
 	        	   (key == KeyEvent.VK_W)) {
@@ -213,6 +218,15 @@ public class PlayGame extends JPanel implements KeyListener {
 	        //to start the moves in map and timer
 	        if(validKey) {
 	        	if(validMove) {
+					/* Server */
+					try {
+						ServerInterface.sandPlay(character.getCoordenateX(), character.getCoordenateY());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					/* Fim Server */
+
 	        		mapThread = new Thread(mapsMove);
 	        		mapThread.start();
 	        	}       	
