@@ -117,7 +117,29 @@ public class Character extends Thread{
 		this.pause = pause;
 	}
 	
-	//Get e Set para posicao
+	//Get e Set
+	public void setPlayerName(String name) {
+		this.PlayerName = name.toUpperCase();
+		
+		this.adjusteNameLabel = 23 - (this.PlayerName.length()*4);
+		
+		this.PlayerNameLabel.setText(this.PlayerName);
+		this.PlayerNameLabel.setBounds(0, 0, this.PlayerName.length()*8, 9);
+	}
+	
+	public String getPlayerName() {
+		return this.PlayerName;
+	}
+	
+	public void setSkin(String SkinName) {
+		this.SkinName = SkinName;
+		
+		SkinImages = ImageToIcon(get.GetSkinImages(SkinName));
+		
+		this.skin = SkinImages[0][0];
+		this.Skinlabel.setIcon(skin);
+	}
+	
 	public void setCoordenateX(int x) {
 		this.CoordenateX = x;
 	}
