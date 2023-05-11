@@ -140,12 +140,12 @@ public class Character extends Thread{
 		this.Skinlabel.setIcon(skin);
 	}
 	
-	public void setCoordenateX(int x) {
-		this.CoordenateX = x;
+	public void incrementCoordenateX(int x) {
+		this.CoordenateX += x;
 	}
 	
-	public void setCoordenateY(int y) {
-		this.CoordenateY = y;
+	public void incrementCoordenateY(int y) {
+		this.CoordenateY += y;
 	}
 	
 	public int getCoordenateX() {

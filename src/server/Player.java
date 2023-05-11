@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 public class Player {
     private String name;
     private String skin;
-    private int x = 270;
-    private int y = 235;
+    private int x = 2;
+    private int y = 44;
 
     private Pattern regex = Pattern.compile("\\d+");
 

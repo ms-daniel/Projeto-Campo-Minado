@@ -1,5 +1,7 @@
 package front;
 
+import java.util.Arrays;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -19,6 +21,7 @@ public class CharactersPanel extends JPanel {
 	private MapMove mapsMove;
 	//testes
 	private SecundaryCharacter character;
+	private Character MainCharacter;
 	private JLabel LabelCharacter;
 	private JLabel PlayerNameLabel;
 	//=========================
@@ -28,8 +31,10 @@ public class CharactersPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CharactersPanel(MapMove maps) {
+	public CharactersPanel(MapMove maps, Character charac) {
 		setOpaque(false);
+		
+		this.MainCharacter = charac;
 		
 		JLabel mapT = new JLabel();
 		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
@@ -54,15 +59,17 @@ public class CharactersPanel extends JPanel {
      * @param y: coordenate y for player position
      */
     public void AddOtherPlayer(String PlayerName, String SkinName, int x, int y) {
+    	setLayout(null);
+    	
     	LabelCharacter = new JLabel();
 		PlayerNameLabel = new JLabel();
     	
     	character = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter, PlayerNameLabel);
 		character.Locale(x, y);
-		setLayout(null);
-	
+		
 		add(PlayerNameLabel);
 		add(LabelCharacter);
+		
     }
     
     /**
@@ -84,6 +91,17 @@ public class CharactersPanel extends JPanel {
     private int MapToArray(int xy) {
     	return ((-xy + 270)/45);
     }
+    
+    private int[] PositionAtCharacter(int x, int y) {
+    	int fX = x - MainCharacter.getCoordenateX();
+    	int fY = y - MainCharacter.getCoordenateY();
+    	
+    	int[] resul = new int[2];
+    	resul[0] = (fX * 45) + 270;
+    	resul[1] = (fY * 45) + 235;
+
+    	return resul;
+    }
 
 	private void AddPlayers(){
 		String[] allInfos = ServerInterface.infos.split(":");
@@ -92,11 +110,14 @@ public class CharactersPanel extends JPanel {
 			/*
 			 * infos[0] == nome do jogador
 			 * infos[1] == skin do jogador
-			 * infos[2] == posicao x
-			 * infos[3] == posicao y
+			 * infos[2] == posicao x 3
+			 * infos[3] == posicao y 44
 			 */
 			if(!(ServerInterface.playerName.equals(infos[0]))){
-				AddOtherPlayer(infos[0], infos[1], Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
+
+				int[] position = PositionAtCharacter(Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
+
+				AddOtherPlayer(infos[0], infos[1], position[0], position[1]);
 				mapsMove.AddCharacterToMap(character);
 			}
 		}

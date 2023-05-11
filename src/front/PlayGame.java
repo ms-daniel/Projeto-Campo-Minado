@@ -113,16 +113,18 @@ public class PlayGame extends JPanel implements KeyListener {
 		character = new Character(PlayerName, SkinName, LabelCharacter, PlayerNameLabel);
 		character.Locale(270, 235);
 		
-		character.setCoordenateX(MapToArray(map.getX()));
-		character.setCoordenateY(MapToArray(map.getY()));
+		character.incrementCoordenateX(MapToArray(map.getX()));
+		character.incrementCoordenateY(MapToArray(map.getY()));
 		
 		PlayerPosition[0] = character.getCoordenateY();
 		PlayerPosition[1] = character.getCoordenateX();
 		
+//		System.out.println("Y: "+ PlayerPosition[0] + "\nX: " + PlayerPosition[1]);
+		
 		add(PlayerNameLabel, 0);
 		add(LabelCharacter, 0);
 		
-		CharactersPanel panel = new CharactersPanel(mapsMove);
+		CharactersPanel panel = new CharactersPanel(mapsMove, character);
 		panel.setBounds(0, 0, 630, 630);
 		add(panel,0);
 	}
@@ -137,8 +139,6 @@ public class PlayGame extends JPanel implements KeyListener {
     	Integer key = e.getKeyCode();
     	boolean validKey = false; 
     	boolean validMove = false;
-    	
-    	System.out.println("daniel key ");
 
     	if(!timer.isRunning()) {
 	        // Verifique se a tecla pressionada é a tecla desejada
@@ -147,7 +147,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	character.MoveTo(3);
 	        	
 	        	if(Walls[ PlayerPosition[0] ][ PlayerPosition[1]+1 ] != 1) {
-	        		character.setCoordenateX(1);
+	        		character.incrementCoordenateX(1);
 		        	PlayerPosition[1]++;
 		        	
 		        	//move o mapa
@@ -162,7 +162,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	character.MoveTo(2);
 	        	
 	        	if(Walls[ PlayerPosition[0] ][ PlayerPosition[1]-1 ] != 1) {
-		        	character.setCoordenateX(-1);
+		        	character.incrementCoordenateX(-1);
 		        	PlayerPosition[1]--;
 	        	
 		        	//move o mapa
@@ -177,7 +177,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	character.MoveTo(1);
 	        	
 	        	if(Walls[ PlayerPosition[0]+1 ][ PlayerPosition[1] ] != 1) {
-		        	character.setCoordenateY(1);
+		        	character.incrementCoordenateY(1);
 		        	PlayerPosition[0]++;
 		        		        	
 		        	//move o mapa
@@ -192,7 +192,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	        	   (key == KeyEvent.VK_W)) {
 	        	character.MoveTo(4);
 	        	if(Walls[ PlayerPosition[0]-1 ][ PlayerPosition[1] ] != 1) {
-		        	character.setCoordenateY(-1);
+		        	character.incrementCoordenateY(-1);
 		        	PlayerPosition[0]--;
 		        	
 		        	//move o mapa
@@ -216,6 +216,8 @@ public class PlayGame extends JPanel implements KeyListener {
 					}
 					/* Fim Server */
 
+//					System.out.println("X: " + character.getCoordenateX() + "\nY: " + character.getCoordenateY());
+					
 	        		mapThread = new Thread(mapsMove);
 	        		mapThread.start();
 	        	}       	
@@ -228,7 +230,6 @@ public class PlayGame extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         // Implemente o método keyReleased se necessário
-    	System.out.println("daniel");
     }
 //    /**
 //     * Introduce another player in the map
