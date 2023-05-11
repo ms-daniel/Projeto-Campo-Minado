@@ -139,7 +139,7 @@ public class Character extends Thread{
 		this.skin = SkinImages[0][0];
 		this.Skinlabel.setIcon(skin);
 	}
-	
+
 	public void incrementCoordenateX(int x) {
 		this.CoordenateX += x;
 	}

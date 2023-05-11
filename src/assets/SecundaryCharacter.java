@@ -12,17 +12,12 @@ public class SecundaryCharacter extends Character{
 	private int toX = 0;
 	private int toY = 0;
 	
-	private Socket connection;
-	
-	private BufferedReader inFromServer;
-	private InputStream toServer;
-	
 	public SecundaryCharacter(String name, String SkinName, JLabel SkinLabel, JLabel PlayerName) {
 		super(name, SkinName, SkinLabel, PlayerName);
 	}
 	
 	@Override
-	public void run() {
+	public synchronized void run() {
 		// TODO Criar movimentação feita pelo servidor
 
 		Move();
@@ -39,57 +34,67 @@ public class SecundaryCharacter extends Character{
 		//verifica se irá pra esquerda/direita ou cima/baixo
 		if(x != this.CoordenateX) {
 			if(x > this.CoordenateX)
-				toX += 45;
+				toX = 45;
 			else
-				toX += -45;
+				toX = -45;
 		}
 		else {
 			if(y > this.CoordenateY)
-				toY += 45;
+				toY = 45;
 			else
-				toY += -45;
+				toY = -45;
 		}
 		
 		this.CoordenateX = x;
 		this.CoordenateY = y;
 		
+//		System.out.println("Antes de mover");
+		
 		new Thread(this).start();
 	}
 	
-	protected void Move() {
+	protected synchronized void Move() {
 		int increment = 1;
 		int auxX = toX, auxY = toY;
 		int position = 0;
 		boolean isX = false;
-		
-		
-		
+
 		if(toX < 0 || toY < 0)
 			increment = -1;
 		
+		System.out.println("toX: " + toX + "\n\ntoY: "+ toY);
 		
-		while((Math.abs(auxX) > 0) || (Math.abs(auxY) > 0)) {
-			if(auxX != 0) {
-				IncrementLocale(increment, 0);
-				auxX += (increment*-1);
-				
-				isX = true;
-			}
-			else if(auxY != 0) {
-				IncrementLocale(0, increment);
-				auxY += (increment*-1);
-			}
-			WaitAFeelTime(10);
-		}
+//		while((Math.abs(auxX) > 0) || (Math.abs(auxY) > 0)) {
+//			if(auxX != 0) {
+//				IncrementLocale(increment, 0);
+//				auxX += (increment*-1);
+//				
+//				isX = true;
+//			}
+//			else if(auxY != 0) {
+//				IncrementLocale(0, increment);
+//				auxY += (increment*-1);
+//			}
+//			WaitAFeelTime(10);
+//		}
 
 		this.Locale(toX, toY);
 		
-		if(isX)
+		if(toX != 0)
 			toX = 0;
 		else
 			toY = 0;
 
 	}
+	
+	public void setCoordenateX(int x){
+		this.CoordenateX = x;
+	}
+	
+	public void setCoordenateY(int y){
+		this.CoordenateY = y;
+	}
+	
 	
 	@Override
 	public void WaitAFeelTime(long time){
@@ -108,6 +113,7 @@ public class SecundaryCharacter extends Character{
 	 */
 	public void IncrementLocale(int x, int y) {
 		this.Skinlabel.setLocation(Skinlabel.getX() + x, Skinlabel.getY() + y);
+		
 		this.PlayerNameLabel.setLocation(Skinlabel.getX() + adjusteNameLabel, Skinlabel.getY() - 12);
 	}
 }

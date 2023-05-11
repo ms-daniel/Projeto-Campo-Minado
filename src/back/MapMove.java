@@ -80,11 +80,13 @@ public class MapMove implements Runnable {
 		for(int i = 1; Math.abs(i) < 46; i+=increment) {
 			if(y == 0) {
 				MoveAllCharacters(increment, 0);
+				
 				map.setLocation(map.getX() + increment, map.getY());
 				if(mapT != null)
 					mapT.setLocation(mapT.getX() + increment, mapT.getY());
 			}else {
 				MoveAllCharacters(0, increment);
+				
 				map.setLocation(map.getX(), map.getY() + increment);
 				if(mapT != null)
 					mapT.setLocation(mapT.getX(), mapT.getY() + increment);	

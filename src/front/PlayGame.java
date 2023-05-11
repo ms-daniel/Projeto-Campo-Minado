@@ -135,7 +135,7 @@ public class PlayGame extends JPanel implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public synchronized void keyPressed(KeyEvent e) {
     	Integer key = e.getKeyCode();
     	boolean validKey = false; 
     	boolean validMove = false;
@@ -210,13 +210,12 @@ public class PlayGame extends JPanel implements KeyListener {
 					/* Server */
 					try {
 						ServerInterface.sandPlay(character.getCoordenateX(), character.getCoordenateY());
+						
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					/* Fim Server */
-
-//					System.out.println("X: " + character.getCoordenateX() + "\nY: " + character.getCoordenateY());
 					
 	        		mapThread = new Thread(mapsMove);
 	        		mapThread.start();
@@ -231,25 +230,7 @@ public class PlayGame extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         // Implemente o método keyReleased se necessário
     }
-//    /**
-//     * Introduce another player in the map
-//     * @param PlayerName: player name
-//     * @param SkinName: name of skin used by the player
-//     * @param x: coordenate x for player position
-//     * @param y: coordenate y for player position
-//     */
-//    public void AddOtherPlayer(String PlayerName, String SkinName, int x, int y) {
-//    	LabelCharacter2 = new JLabel();
-//		PlayerName2 = new JLabel();
-//    	
-//    	character2 = new SecundaryCharacter(PlayerName, SkinName, LabelCharacter2, PlayerName2, null);
-//		character2.Locale(x, y);
-//		//character2.start(); 
-//		
-//		add(PlayerName2, 2);
-//		add(LabelCharacter2, 3);
-//    }
-//    
+  
     /**
      * Calcula o x/y da matriz para o mapa
      * especifica

@@ -118,6 +118,10 @@ public class CharactersPanel extends JPanel {
 				int[] position = PositionAtCharacter(Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
 
 				AddOtherPlayer(infos[0], infos[1], position[0], position[1]);
+				
+				character.setCoordenateX(Integer.parseInt(infos[2]));
+				character.setCoordenateY(Integer.parseInt(infos[3]));
+				
 				mapsMove.AddCharacterToMap(character);
 			}
 		}
