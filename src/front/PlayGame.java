@@ -26,6 +26,7 @@ import assets.TMove;
 import back.ImagesChange;
 import back.MapMove;
 import config.Config;
+import front.Menu.Components;
 import server.ServerInterface;
 
 import javax.swing.JButton;
@@ -38,6 +39,8 @@ import java.util.Arrays;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -72,6 +75,7 @@ public class PlayGame extends JPanel implements KeyListener {
 	private int[][] matrizMap = Config.matrizMap1;
 	
 	private Thread mapThread;
+	private PlayGame me = this;
 	
 	/**
 	 * Create the panel.
@@ -90,23 +94,18 @@ public class PlayGame extends JPanel implements KeyListener {
 		setBackground(new Color(0, 0, 0));
 		setBounds(new Rectangle(0, 0, 630, 630));
 		setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		setLayout(null);
+		setLayout(null); 
+		
 		addKeyListener(this);//permite que seja identificada teclas pressionadas no panel
-		setFocusable(true); //so funciona com essa opcao ativada
 
-		mapT = new JLabel();
-		mapT.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
-		mapT.setIcon(get.getIcon("maps/map 1/", "mapa 1", ".png"));
-//		mapT.setIcon(get.getIcon("maps/map 1/", "map 1 submap", ".png"));
-		add(mapT,0);
+		setFocusable(true); //so funciona com essa opcao ativada
 		
 		map = new JLabel();
 		map.setBounds(Config.mapPositionX, Config.mapPositionY, 2250, 2250);
 		map.setIcon(get.getIcon("maps/map 1/map 1.jpg"));
-		add(map,1);
+		add(map);
 	
-		mapsMove.setMaps(map, mapT);
-		
+		mapsMove.setMaps(map, null);
 		
 		LabelCharacter = new JLabel();
 		PlayerNameLabel = new JLabel();
@@ -120,31 +119,27 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerPosition[0] = character.getCoordenateY();
 		PlayerPosition[1] = character.getCoordenateX();
 		
-		add(PlayerNameLabel, 1);
-		add(LabelCharacter, 1);
+		add(PlayerNameLabel, 0);
+		add(LabelCharacter, 0);
 		
 		CharactersPanel panel = new CharactersPanel(mapsMove);
 		panel.setBounds(0, 0, 630, 630);
 		add(panel,0);
-
-		/* testes servidor */
-//		System.out.println(ServerInterface.startServer(Config.ip, Config.port));
-//		ServerInterface.connectPlayer(Config.ip, Config.port);
-		/* fim testes servidor */
 	}
 	
 	@Override
-    public synchronized void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e) {
         // Implemente o método keyTyped se necessário
     }
 
     @Override
-    public synchronized void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
     	Integer key = e.getKeyCode();
     	boolean validKey = false; 
     	boolean validMove = false;
     	
-    	
+    	System.out.println("daniel key ");
+
     	if(!timer.isRunning()) {
 	        // Verifique se a tecla pressionada é a tecla desejada
 	        if ((key == KeyEvent.VK_RIGHT) ||
@@ -231,8 +226,9 @@ public class PlayGame extends JPanel implements KeyListener {
     }
 
     @Override
-    public synchronized void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {
         // Implemente o método keyReleased se necessário
+    	System.out.println("daniel");
     }
 //    /**
 //     * Introduce another player in the map

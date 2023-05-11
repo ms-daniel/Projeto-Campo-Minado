@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
 	    MENU, PLAYGAME
 	}
 	
-	private JPanel contentPane;
+	private JPanel contentPane = new JPanel();
 	private MapMove mapsMove = new MapMove();
 	private Menu Menu;
 	private PlayGame play;
@@ -52,25 +52,29 @@ public class MainWindow extends JFrame {
 		this.Menu = new Menu(this);
 
 		ChangeTo(Panels.MENU);
-
+		
 	}
 	
 	public void ChangeTo(Panels panels) {
+		
 		switch(panels) {
 			case MENU:
 				contentPane = this.Menu;
 				break;
 			case PLAYGAME:
 				this.play = new PlayGame(mapsMove, Menu.getSkinName(), Menu.getPlayerName());
+				
 				contentPane = this.play;
+				
 				break;
 			default:
 				break;
 		}
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 		setContentPane(contentPane);
+		contentPane.requestFocus();
 		this.repaint();
 		this.revalidate();
-		contentPane.setFocusable(true);
 	}
 }

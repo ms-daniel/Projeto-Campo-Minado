@@ -54,7 +54,7 @@ public class MenuConnect{
 		PortLabel.setBounds(130, 346, 200, 55);
 		
 		
-		PortText = new JTextField(Config.port);
+		PortText = new JTextField(Integer.toString( (Config.port)));
 		PortText.setFont(new Font("Unispace", Font.PLAIN, 24));
 		PortText.setHorizontalAlignment(SwingConstants.LEFT);
 		PortText.setColumns(10);

@@ -37,7 +37,8 @@ public class CharactersPanel extends JPanel {
 		add(mapT,0);
 		
 		this.mapsMove = maps;
-		
+		maps.setSecondMap(mapT);
+
 		AddPlayers();
 		
 		TMove moveChar = new TMove(character);

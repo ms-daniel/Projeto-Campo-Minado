@@ -39,6 +39,10 @@ public class MapMove implements Runnable {
         this.mapT = mapT;
 	}
 	
+	public void setSecondMap(JLabel mapT) {
+		this.mapT = mapT;
+	}
+	
 	/**
 	 * Tells where the map should be moved and whether it's a negative (up) or positive (down) move
 	 * @param x: x position
