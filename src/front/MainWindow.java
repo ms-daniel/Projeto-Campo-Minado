@@ -43,7 +43,7 @@ public class MainWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MainWindow() {
-		setIconImage(new ImageIcon("resources/icons/icon-game.png").getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/icons/icon-game.png")));
 		setTitle("Campo Minado");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 646, 669);
@@ -52,7 +52,6 @@ public class MainWindow extends JFrame {
 		this.Menu = new Menu(this);
 
 		ChangeTo(Panels.MENU);
-		
 	}
 	
 	public void ChangeTo(Panels panels) {

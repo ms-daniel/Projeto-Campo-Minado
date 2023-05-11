@@ -48,8 +48,6 @@ public class SecundaryCharacter extends Character{
 		this.CoordenateX = x;
 		this.CoordenateY = y;
 		
-//		System.out.println("Antes de mover");
-		
 		new Thread(this).start();
 	}
 	
@@ -61,8 +59,6 @@ public class SecundaryCharacter extends Character{
 
 		if(toX < 0 || toY < 0)
 			increment = -1;
-		
-		System.out.println("toX: " + toX + "\n\ntoY: "+ toY);
 		
 //		while((Math.abs(auxX) > 0) || (Math.abs(auxY) > 0)) {
 //			if(auxX != 0) {

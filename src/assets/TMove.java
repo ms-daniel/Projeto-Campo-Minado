@@ -27,7 +27,7 @@ public class TMove extends Thread{
             while(true){
                 receberPlays();
 				Move();
-                System.out.println(getCurrentInfos());
+//                System.out.println(getCurrentInfos());
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -51,13 +51,7 @@ public class TMove extends Thread{
 			 */
 			if(character.PlayerName.equals(infos[0].toUpperCase()) && (character.getCoordenateX() != Integer.parseInt(infos[2]) 
 					|| character.getCoordenateY() != Integer.parseInt(infos[3]))){
-//				System.out.println("Xc: " + character.getCoordenateX());
-//				System.out.println("Yc: " + character.getCoordenateY());
-//				
-//				System.out.println("X: " + Integer.parseInt(infos[2]));
-//				System.out.println("Y: " + Integer.parseInt(infos[3]));
-//				
-//				System.out.println("entrou");
+
 				this.character.ToMove(Integer.parseInt(infos[2]), Integer.parseInt(infos[3]));
 				this.character.WaitAFeelTime(1000);
 				

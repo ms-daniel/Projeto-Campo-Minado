@@ -58,7 +58,6 @@ public class ChangeSkin extends JPanel {
 		BabyRadio.setToolTipText("baby");
 		BabyRadio.setHorizontalAlignment(SwingConstants.CENTER);
 		BabyRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
-//		BabyRadio.setOpaque(false);
 		BabyRadio.setBounds(42, 177, 95, 23);
 		
 		
@@ -82,7 +81,7 @@ public class ChangeSkin extends JPanel {
 		ChangeSkinButton.setBounds(350, 550, 200, 42);
 		
 		panelCharacter = new JLabel("");
-		panelCharacter.setIcon(get.getIcon("/icons/painelChangeSkin.png"));
+		panelCharacter.setIcon(get.getIcon("icons/painelChangeSkin.png"));
 		panelCharacter.setBackground(new Color(0, 0, 0));
 		panelCharacter.setBounds(12, 150, 606, 404);
 		
@@ -90,7 +89,6 @@ public class ChangeSkin extends JPanel {
 		ClaireRadio.setBorder(null);
 		ClaireRadio.setToolTipText("claire-redfield");
 		ClaireRadio.setMargin(new Insets(0, 0, 0, 0));
-//		ClaireRadio.setOpaque(false);
 		ClaireRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
 		ClaireRadio.setHorizontalAlignment(SwingConstants.CENTER);
 		ClaireRadio.setBounds(156, 177, 95, 23);
@@ -100,7 +98,6 @@ public class ChangeSkin extends JPanel {
 		GreenDRadio.setToolTipText("green-dragon");
 		GreenDRadio.setBorder(null);
 		GreenDRadio.setMargin(new Insets(0, 0, 0, 0));
-//		GreenDRadio.setOpaque(false);
 		GreenDRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
 		GreenDRadio.setHorizontalAlignment(SwingConstants.CENTER);
 		GreenDRadio.setBounds(270, 177, 95, 23);
@@ -124,7 +121,6 @@ public class ChangeSkin extends JPanel {
 		ClaireLabel.setBounds(156, 177, 95, 127);
 		
 		JillRadio = new JRadioButton("Jill Valentine");
-//		JillRadio.setOpaque(false);
 		JillRadio.setToolTipText("jill-valentine");
 		JillRadio.setMargin(new Insets(0, 0, 0, 0));
 		JillRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -134,7 +130,6 @@ public class ChangeSkin extends JPanel {
 		
 		
 		LuffyRadio = new JRadioButton("M D Luffy");
-//		LuffyRadio.setOpaque(false);
 		LuffyRadio.setToolTipText("luffy");
 		LuffyRadio.setMargin(new Insets(0, 0, 0, 0));
 		LuffyRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -160,7 +155,6 @@ public class ChangeSkin extends JPanel {
 		JillLabel.setBounds(384, 177, 95, 127);
 		
 		BluePenRadio = new JRadioButton("Blue Pen");
-//		BluePenRadio.setOpaque(false);
 		BluePenRadio.setToolTipText("blue-pen");
 		BluePenRadio.setMargin(new Insets(0, 0, 0, 0));
 		BluePenRadio.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -251,10 +245,7 @@ public class ChangeSkin extends JPanel {
 				SkinName.delete(0, SkinName.length());
 				SkinName.append(VerifySelected());
 				
-				System.out.println("Nome novo: " + SkinName);
-				
 				JOptionPane.showMessageDialog(null, "Skin selecionada!","Skin", JOptionPane.INFORMATION_MESSAGE );
-				//Menu.ChangeComponentsTo(Components.MENU);
 			}
 		});
 	}

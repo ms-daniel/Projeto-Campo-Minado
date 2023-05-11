@@ -119,8 +119,6 @@ public class PlayGame extends JPanel implements KeyListener {
 		PlayerPosition[0] = character.getCoordenateY();
 		PlayerPosition[1] = character.getCoordenateX();
 		
-//		System.out.println("Y: "+ PlayerPosition[0] + "\nX: " + PlayerPosition[1]);
-		
 		add(PlayerNameLabel, 0);
 		add(LabelCharacter, 0);
 		
