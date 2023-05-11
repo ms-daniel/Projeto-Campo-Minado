@@ -27,7 +27,7 @@ public class TMove extends Thread{
             while(true){
                 receberPlays();
 				Move();
-                //System.out.println(getCurrentInfos());
+                System.out.println(getCurrentInfos());
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
